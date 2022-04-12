@@ -1,0 +1,47 @@
+.main-links {
+  font-family: Noto Sans,Arial,sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  min-height: 32px;
+  min-width: 32px;
+  padding: 4px 16px;
+  border-radius: 9999px;
+}
+
+.navbar-cont {
+  flex: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 80;
+  margin-top: 0;
+  height: 48px;
+  
+  border: 1px solid black;
+  border-radius: 4px;
+}
+
+
+.main-navbar {
+  align-items: center;
+  display: inline-flex;
+  box-sizing: border-box;
+  padding: 0 20px;
+  flex-grow: 1;
+}
+
+
+#login-btn {
+  border: 1px solid lightskyblue;
+  color: lightskyblue;
+  width: 120px;
+}
+
+
+#signup-btn {
+  border: 1px solid lightskyblue;
+  color: #FFF;
+  background-color: lightskyblue;
+  width: 120px;
+}
