@@ -1,19 +1,38 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import * as data_funcs from '../../store/data_store';
 
 const Create_Community_Form = () => {
+
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   const [communityName, setCommunityName] = useState('');
   const [communityImage, setCommunityImage] = useState('');
   const [communityInfo, setCommunityInfo] = useState('');
   const [communityMemberTitle, setCommunityMemberTitle] = useState('');
-
+  const [errors, setErrors] = useState([]);
 
   const createCommunity = async (e) => {
 
     e.preventDefault()
 
-    //const data = await 
+    const community = {
+      'name': communityName,
+      'title': communityMemberTitle,
+      'image': communityImage,
+      'info': communityInfo
+    }
+
+    const data = await dispatch(data_funcs.create_community(community));
+
+    if (data) {
+      setErrors(data);
+    }
+
+    history.push('/');
+    
 
   };
 
@@ -23,6 +42,11 @@ const Create_Community_Form = () => {
     <div className='com-form-cont'>
 
       <form onSubmit={createCommunity}>
+        <div>
+          {errors.map((error, ind) => (
+            <div key={ind}>{error}</div>
+          ))}
+        </div>
 
         <div>
           <label htmlFor='name'>Community Name</label>
@@ -61,9 +85,9 @@ const Create_Community_Form = () => {
         </div>
 
         <div>
-          <label htmlFor='member-title'>Community Member Title</label>
+          <label htmlFor='title'>Community Member Title</label>
           <input
-            name='member-title'
+            name='title'
             type='text'
             placeholder='What do you call your members?'
             value={communityMemberTitle}

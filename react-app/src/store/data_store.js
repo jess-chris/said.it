@@ -1,9 +1,9 @@
 // Community 
 
-const GET_COMMUNITIES = 'posting/GET_COMMUNITIES';
-const GET_CURRENT_COMMUNITY = 'posting/GET_CURRENT_COMMUNITY';
-const CREATE_COMMUNITY = 'posting/CREATE_COMMUNITY';
-const DELETE_COMMUNITY = 'posting/DELETE_COMMUNITY';
+const GET_COMMUNITIES = 'data_store/GET_COMMUNITIES';
+//const GET_CURRENT_COMMUNITY = 'data_store/GET_CURRENT_COMMUNITY';
+const CREATE_COMMUNITY = 'data_store/CREATE_COMMUNITY';
+//const DELETE_COMMUNITY = 'data_store/DELETE_COMMUNITY';
 
 
 
@@ -22,10 +22,10 @@ const add_community = (community) => ({
 });
 
 
-const del_community = (community_id) => ({
-  type: DELETE_COMMUNITY,
-  community_id: community_id
-})
+// const del_community = (community_id) => ({
+//   type: DELETE_COMMUNITY,
+//   community_id: community_id
+// })
 
 
 
@@ -46,7 +46,7 @@ export const get_communities = () => async (dispatch) => {
 
 export const create_community = (community) => async (dispatch) => {
 
-  const res = await fetch('/api/community/new', {
+  const res = await fetch('/api/communities/new', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -55,10 +55,15 @@ export const create_community = (community) => async (dispatch) => {
   });
 
   if (res.ok) {
-    const community = await res.json();
-    dispatch(add_community(community));
+    const data = await res.json();
+    dispatch(add_community(data));
+  } else if (res.status < 500) {
+    const data = await res.json();
+    if (data.errors) {
+      return data.errors;
+    }
   } else {
-    return 'ERROR';
+    return ['An error occurred. Please try again.']
   }
 };
 
@@ -66,7 +71,7 @@ export const create_community = (community) => async (dispatch) => {
 
 
 
-export default function reducer(state = {all_communities: [], current_community: [], current_post: []}, action) {
+export default function reducer(state = {all_communities: {}, current_community: {}, current_post: {}}, action) {
 
   const newState = { ...state }
 
@@ -74,13 +79,13 @@ export default function reducer(state = {all_communities: [], current_community:
 
     case GET_COMMUNITIES:
 
-      console.log(action)
-
       action.communities.forEach((community) => newState.all_communities[community.id] = community);
       return newState;
 
 
     case CREATE_COMMUNITY:
+      newState.all_communities[action.community.id] = action.community;
+      return newState;
 
     //case DELETE_COMMUNITY:
 

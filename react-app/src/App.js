@@ -9,7 +9,10 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
 
+import * as dataActions from './store/data_store';
+
 import HomePage from './components/HomePage/HomePage';
+import CreateCommunityForm from './components/Communities/CreateCommunityForm';
 
 
 function App() {
@@ -19,6 +22,7 @@ function App() {
   useEffect(() => {
     (async() => {
       await dispatch(authenticate());
+      await dispatch(dataActions.get_communities());
       setLoaded(true);
     })();
   }, [dispatch]);
@@ -47,6 +51,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
+        </ProtectedRoute>
+        <ProtectedRoute path='/communities/new' exact={true}>
+          <CreateCommunityForm />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

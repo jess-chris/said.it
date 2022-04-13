@@ -6,8 +6,8 @@ class Community(db.Model):
   
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(40), nullable=False, unique=True)
-  owner = db.Column(db.String, db.ForeignKey('users.id'), nullable=False)
-  members = db.Column(db.Integer, nullable=False)
+  owner = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+  members = db.Column(db.Integer, default=1, nullable=False)
   member_title = db.Column(db.String(30), nullable=False)
   community_image = db.Column(db.String)
   community_info = db.Column(db.Text, nullable=False)
