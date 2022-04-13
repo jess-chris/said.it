@@ -1,9 +1,9 @@
 // Community 
 
 const GET_COMMUNITIES = 'data_store/GET_COMMUNITIES';
-const GET_CURRENT_COMMUNITY = 'data_store/GET_CURRENT_COMMUNITY';
+//const GET_CURRENT_COMMUNITY = 'data_store/GET_CURRENT_COMMUNITY';
 const CREATE_COMMUNITY = 'data_store/CREATE_COMMUNITY';
-const DELETE_COMMUNITY = 'data_store/DELETE_COMMUNITY';
+//const DELETE_COMMUNITY = 'data_store/DELETE_COMMUNITY';
 
 
 
@@ -22,10 +22,10 @@ const add_community = (community) => ({
 });
 
 
-const del_community = (community_id) => ({
-  type: DELETE_COMMUNITY,
-  community_id: community_id
-})
+// const del_community = (community_id) => ({
+//   type: DELETE_COMMUNITY,
+//   community_id: community_id
+// })
 
 
 

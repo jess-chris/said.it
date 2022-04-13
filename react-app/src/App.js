@@ -12,7 +12,7 @@ import { authenticate } from './store/session';
 import * as dataActions from './store/data_store';
 
 import HomePage from './components/HomePage/HomePage';
-import Create_Community_Form from './components/Communities/Create_Community_Form';
+import CreateCommunityForm from './components/Communities/CreateCommunityForm';
 
 
 function App() {
@@ -53,7 +53,7 @@ function App() {
           <User />
         </ProtectedRoute>
         <ProtectedRoute path='/communities/new' exact={true}>
-          <Create_Community_Form />
+          <CreateCommunityForm />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>
