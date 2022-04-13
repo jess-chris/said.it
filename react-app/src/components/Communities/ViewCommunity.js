@@ -41,7 +41,7 @@ return (
     <div className='main-com-cont'>
 
       <div className='com-menu-bar'>
-        <h1>Welcome to /s/{community?.name}</h1>
+        <h1>Welcome to s/{community?.name}</h1>
         {userId && userId === community?.owner && (
         <div id='com-btns'>
           <EditCommunityForm />
