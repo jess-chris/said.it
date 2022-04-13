@@ -1,21 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { get_communities } from "../../store/posting";
 
 import './HomePage.css'
 
 const HomePage = () => {
 
-  const dispatch = useDispatch();
-  const communityObj = useSelector(state => state.posting.all_communities)
+  //const dispatch = useDispatch();
+  const communityObj = useSelector(state => state.data_store.all_communities)
   const communities = Object.values(communityObj);
   
-  useEffect(() => {
-    dispatch(get_communities(communities));
-  }, [dispatch]);
-  
+  // useEffect(() => {
+  //   dispatch(get_communities(communities));
+  // }, [dispatch]);
 
-  console.log(communities)
 
 
   return (
@@ -35,19 +32,28 @@ const HomePage = () => {
 
           <div className="single-post">
 
-            <p>testing aaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+            <p>{`/s/${communities[0]?.name}`}</p>
+            <p>post data</p>
+            <p>post data</p>
+            <p>post data</p>
 
           </div>
 
           <div className="single-post">
 
-            <p>testing aaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+            <p>{`/s/${communities[0]?.name}`}</p>
+            <p>post data</p>
+            <p>post data</p>
+            <p>post data</p>
 
           </div>
 
           <div className="single-post">
 
-            <p>testing aaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+            <p>{`/s/${communities[0]?.name}`}</p>
+            <p>post data</p>
+            <p>post data</p>
+            <p>post data</p>
 
           </div>
 

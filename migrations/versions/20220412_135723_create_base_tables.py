@@ -21,12 +21,13 @@ def upgrade():
     op.create_table('communities',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=40), nullable=False),
-    sa.Column('owner', sa.String(), nullable=False),
+    sa.Column('owner', sa.Integer(), nullable=False),
     sa.Column('members', sa.Integer(), nullable=False),
     sa.Column('member_title', sa.String(length=30), nullable=False),
     sa.Column('community_image', sa.String(), nullable=True),
     sa.Column('community_info', sa.Text(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
+    sa.ForeignKeyConstraint(['owner'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('name')
     )
