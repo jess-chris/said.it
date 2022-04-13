@@ -1,7 +1,6 @@
 // Community 
 
 const GET_COMMUNITIES = 'data_store/GET_COMMUNITIES';
-//const GET_CURRENT_COMMUNITY = 'data_store/GET_CURRENT_COMMUNITY';
 const CREATE_COMMUNITY = 'data_store/CREATE_COMMUNITY';
 const EDIT_COMMUNITY = 'data_store/EDIT_COMMUNITY';
 const DELETE_COMMUNITY = 'data_store/DELETE_COMMUNITY';

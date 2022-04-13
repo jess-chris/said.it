@@ -1,6 +1,6 @@
-form {
+/* form {
   margin-top: 50px;
-}
+} */
 
 
 
@@ -32,6 +32,7 @@ form {
 .main-navbar {
   align-items: center;
   display: inline-flex;
+  flex-direction: row;
   box-sizing: border-box;
   padding: 0 20px;
   flex-grow: 1;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from 'react-router-dom';
@@ -13,7 +13,6 @@ const EditCommunityForm = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const { name } = useParams();
-  const userId = useSelector(state => state.session.user.id);
   const community = useSelector(state => state.data_store.all_communities[name]);
   
   
@@ -52,7 +51,7 @@ const EditCommunityForm = () => {
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>Edit</button>
+      <button className='main-links' onClick={() => setShowModal(true)}>Edit</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <div className='com-form-cont'>

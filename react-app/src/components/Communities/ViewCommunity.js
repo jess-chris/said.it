@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import * as data_funcs from '../../store/data_store';
@@ -34,15 +34,21 @@ const handleDelete = (e) => {
 return (
   <div className='community-page'>
 
+    <div className='com-header-cont'>
+      <span className='com-header'></span>
+    </div>
+
     <div className='main-com-cont'>
 
-      <h1>Welcome to /s/{community?.name}</h1>
-      {userId && userId === community?.owner && (
-      <>
-        <EditCommunityForm />
-        <button onClick={handleDelete}>Delete</button>
-      </>
-      )}
+      <div className='com-menu-bar'>
+        <h1>Welcome to /s/{community?.name}</h1>
+        {userId && userId === community?.owner && (
+        <div id='com-btns'>
+          <EditCommunityForm />
+          <button className='main-links' onClick={handleDelete}>Delete</button>
+        </div>
+        )}
+      </div>
 
     </div>
 
