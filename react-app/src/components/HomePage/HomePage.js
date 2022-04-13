@@ -43,7 +43,7 @@ const HomePage = () => {
 
           <div className="single-post">
 
-            <p>{`/s/${communities[0]?.name}`}</p>
+            <p>{`s/${communities[0]?.name}`}</p>
             <p>post data</p>
             <p>post data</p>
             <p>post data</p>
@@ -52,7 +52,7 @@ const HomePage = () => {
 
           <div className="single-post">
 
-            <p>{`/s/${communities[0]?.name}`}</p>
+            <p>{`s/${communities[0]?.name}`}</p>
             <p>post data</p>
             <p>post data</p>
             <p>post data</p>
@@ -61,7 +61,7 @@ const HomePage = () => {
 
           <div className="single-post">
 
-            <p>{`/s/${communities[0]?.name}`}</p>
+            <p>{`s/${communities[0]?.name}`}</p>
             <p>post data</p>
             <p>post data</p>
             <p>post data</p>
@@ -87,7 +87,7 @@ const HomePage = () => {
               {loaded && communities?.map((community) => {
                 return(
                   <li className="top-com-list" key={community?.name}>
-                      <NavLink to={`/s/${community?.name}`}>{community?.name}</NavLink>
+                      <NavLink to={`s/${community?.name}`}>{community?.name}</NavLink>
                   </li>
 
                 )

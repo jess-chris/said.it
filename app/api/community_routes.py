@@ -49,7 +49,7 @@ def edit_community():
   
   old_name = community.name
   
-  if form.validate_on_submit() and community.id == current_user.id:
+  if form.validate_on_submit() and community.owner == current_user.id:
     community.name=form.data['name'],
     community.member_title=form.data['title'],
     community.community_image=form.data['image'],
