@@ -12,6 +12,7 @@ class Post(db.Model):
   created_at = db.Column(db.DateTime, default=datetime.now(), nullable=False)
   updated_at = db.Column(db.DateTime, default=datetime.now(), nullable=False)
   
+  comments = db.relationship('Comment', backref='comments', cascade='all, delete')
   
   def to_dict(self):
     return {
@@ -20,6 +21,7 @@ class Post(db.Model):
       'user_id': self.user_id,
       'content': self.content,
       'vote_score': self.vote_score,
+      'comments': [comment.to_dict for comment in self.comments],
       'created_at': self.created_at,
       'updated_at': self.updated_at
     }

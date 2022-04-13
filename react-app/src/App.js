@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
@@ -13,7 +13,7 @@ import * as dataActions from './store/data_store';
 
 import HomePage from './components/HomePage/HomePage';
 import CreateCommunityForm from './components/Communities/CreateCommunityForm';
-
+import ViewCommunity from './components/Communities/ViewCommunity';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -45,6 +45,9 @@ function App() {
         </Route>
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
+        </Route>
+        <Route path='/s/:name' exact={true}>
+          <ViewCommunity />
         </Route>
         <ProtectedRoute path='/users' exact={true} >
           <UsersList/>

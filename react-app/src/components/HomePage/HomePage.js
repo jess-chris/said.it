@@ -1,20 +1,30 @@
-import React from "react";
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from "react-router-dom";
+
+import * as dataActions from '../../store/data_store';
 
 import './HomePage.css'
 
 const HomePage = () => {
 
-  //const dispatch = useDispatch();
+  const [loaded, setLoaded] = useState(false);
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    (async() => {
+      await dispatch(dataActions.get_communities());
+      setLoaded(true);
+    })();
+  }, [dispatch]);
   const communityObj = useSelector(state => state.data_store.all_communities)
   const communities = Object.values(communityObj);
+
+  if (!loaded) {
+    return null;
+  }
   
-  // useEffect(() => {
-  //   dispatch(get_communities(communities));
-  // }, [dispatch]);
-
-
+  
 
   return (
 
@@ -72,11 +82,11 @@ const HomePage = () => {
 
             <div id="banner">Top Communities</div>
 
-            <ol style={{"list-style": "none"}}>
+            <ol style={{"listStyle": "none"}}>
 
-              {communities?.map((community) => {
+              {loaded && communities?.map((community) => {
                 return(
-                  <li className="top-com-list" key={community?.id}>
+                  <li className="top-com-list" key={community?.name}>
                       <NavLink to={`/s/${community?.name}`}>{community?.name}</NavLink>
                   </li>
 

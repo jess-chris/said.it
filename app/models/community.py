@@ -13,6 +13,7 @@ class Community(db.Model):
   community_info = db.Column(db.Text, nullable=False)
   created_at = db.Column(db.DateTime, default=datetime.now(), nullable=False)
   
+  posts = db.relationship('Post', backref='posts', cascade='all, delete')
   
   def to_dict(self):
     return {
@@ -23,5 +24,6 @@ class Community(db.Model):
       'member_title': self.member_title,
       'community_image': self.community_image,
       'community_info': self.community_info,
+      'posts': [post.to_dict for post in self.posts],
       'created_at': self.created_at
     }
