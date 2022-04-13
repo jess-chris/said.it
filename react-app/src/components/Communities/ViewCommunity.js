@@ -28,6 +28,18 @@ const handleDelete = (e) => {
   history.push('/');
 };
 
+let sessionLinks;
+
+if (userId === community?.owner) {
+
+  sessionLinks = (
+    <div id='com-btns'>
+      <EditCommunityForm />
+      <button className='main-links' onClick={handleDelete}>Delete</button>
+    </div>
+    );
+
+}
 
 
 
@@ -42,12 +54,7 @@ return (
 
       <div className='com-menu-bar'>
         <h1>Welcome to s/{community?.name}</h1>
-        {userId && userId === community?.owner && (
-        <div id='com-btns'>
-          <EditCommunityForm />
-          <button className='main-links' onClick={handleDelete}>Delete</button>
-        </div>
-        )}
+        {sessionLinks && sessionLinks}
       </div>
 
     </div>
