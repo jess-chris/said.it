@@ -39,15 +39,15 @@ form {
 
 
 #login-btn {
-  border: 1px solid lightskyblue;
-  color: lightskyblue;
+  border: 1px solid #0079D3;
+  color: #0079D3;
   width: 120px;
 }
 
 
 #signup-btn {
-  border: 1px solid lightskyblue;
+  border: 1px solid #0079D3;
   color: #FFF;
-  background-color: lightskyblue;
+  background-color: #0079D3;
   width: 120px;
 }
