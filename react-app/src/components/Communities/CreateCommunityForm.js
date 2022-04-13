@@ -96,7 +96,7 @@ const Create_Community_Form = () => {
           />
         </div>
 
-        <button type='submit'>Create</button>
+        <button className='main-links' type='submit'>Create</button>
 
       </form>
 

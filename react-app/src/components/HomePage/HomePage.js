@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from "react-router-dom";
 
 import * as dataActions from '../../store/data_store';
+import CreatePostForm from "../Posts/CreatePostForm";
 
 import './HomePage.css'
 
@@ -110,7 +111,7 @@ const HomePage = () => {
 
               <div id="create-links">
 
-                <button style={{"backgroundColor": "#0079D3", "color": "#FFF", "borderColor": "#0079D3"}} className="main-links">Create Post</button>
+                <CreatePostForm />
                 <NavLink to='/communities/new'>
                   <button style={{"backgroundColor": "#FFF", "color": "#0079D3", "borderColor": "#0079D3"}} className="main-links">Create Community</button>
                 </NavLink>

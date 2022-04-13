@@ -111,7 +111,7 @@ const EditCommunityForm = () => {
                 />
               </div>
 
-              <button type='submit'>Submit</button>
+              <button className='main-links' type='submit'>Submit</button>
 
             </form>
           </div>
