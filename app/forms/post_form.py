@@ -5,4 +5,5 @@ from wtforms.validators import DataRequired, ValidationError
 
 
 class PostForm(FlaskForm):
-  content = TextAreaField('content', validators=[DataRequired()])
+  title = TextAreaField('title', validators=[DataRequired()])
+  content = TextAreaField('content')

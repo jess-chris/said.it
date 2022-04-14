@@ -23,11 +23,12 @@
 }
 
 #modal-content {
-  height: 60vh;
-  width: 60vw;
+  height: 40vh;
+  width: 40vw;
   background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   opacity: 1;
+  border-radius: 4px;
 }

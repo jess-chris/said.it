@@ -11,6 +11,7 @@ const EditPostForm = ({ post }) => {
 
   const [showModal, setShowModal] = useState(false);
   const [errors, setErrors] = useState([]);
+  const [title, setTitle] = useState(post?.title);
   const [content, setContent] = useState(post?.content);
 
   const editPost = async (e) => {
@@ -19,6 +20,7 @@ const EditPostForm = ({ post }) => {
   
     const updated_post = {
       'id': post.id,
+      'title': title,
       'content': content
     };
 
@@ -60,6 +62,18 @@ const EditPostForm = ({ post }) => {
               {errors.map((error, ind) => (
                 <div key={ind}>{error}</div>
               ))}
+            </div>
+            <div>
+              <label htmlFor='title'></label>
+              <textarea
+                name='content'
+                rows='2'
+                cols='75'
+                placeholder='Title'
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                required
+              />
             </div>
             <div>
               <label htmlFor='content'></label>

@@ -14,6 +14,10 @@ a {
   text-decoration: none;
 }
 
+textarea {
+  resize: none;
+}
+
 
 
 .main-cont {
