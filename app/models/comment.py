@@ -6,6 +6,7 @@ class Comment(db.Model):
   
   id = db.Column(db.Integer, primary_key=True)
   user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+  user_name = db.Column(db.String, db.ForeignKey('users.username'), nullable=False)
   post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
   comment_id = db.Column(db.Integer)
   content = db.Column(db.Text, nullable=False)
@@ -17,6 +18,7 @@ class Comment(db.Model):
     return {
       'id': self.id,
       'user_id': self.user_id,
+      'user_name': self.user_name,
       'post_id': self.post_id,
       'comment_id': self.comment_id,
       'content': self.content,

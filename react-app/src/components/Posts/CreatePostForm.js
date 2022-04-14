@@ -16,7 +16,7 @@ const CreatePostForm = () => {
   const [communityName, setCommunityName] = useState('');
 
   const userId = useSelector(state => state.session.user?.id);
-  const community = useSelector(state => state.data_store?.all_communities[communityName]);
+  const community = useSelector(state => state.data_store?.all_communities[communityName.toLowerCase()]);
 
   const createPost = async (e) => {
 

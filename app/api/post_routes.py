@@ -29,7 +29,8 @@ def new_post():
     post = Post(
       community_id=community_id,
       content=form.data['content'],
-      user_id=current_user.id
+      user_id=current_user.id,
+      user_name=current_user.username
     )
     
     db.session.add(post)
@@ -64,7 +65,7 @@ def edit_post():
 @post_routes.route('/delete', methods=['DELETE'])
 def delete_post():
   
-  post_id = request.json['post_id']
+  post_id = request.json['id']
   
   post = Post.query.get(post_id)
   

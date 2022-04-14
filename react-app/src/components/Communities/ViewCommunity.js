@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import * as data_funcs from '../../store/data_store';
+import EditPostForm from '../Posts/EditPostForm';
 
 import './Community.css';
 import EditCommunityForm from './EditCommunityForm';
@@ -10,6 +11,9 @@ const ViewCommunity = () => {
 
 const dispatch = useDispatch();
 const [loaded, setLoaded] = useState(false);
+const [content, setContent] = useState('');
+const [postTitle, setPostTitle] = useState('');
+const [errors, setErrors] = useState([]);
 const history = useHistory();
 const { name } = useParams();
 
@@ -22,7 +26,7 @@ useEffect(() => {
 
 
 const userId = useSelector(state => state.session.user.id);
-const community = useSelector(state => state.data_store.all_communities[name]);
+const community = useSelector(state => state.data_store.all_communities[name.toLowerCase()]);
 
 if (!loaded) {
   return null;
@@ -40,8 +44,31 @@ const handleDelete = (e) => {
   history.push('/');
 };
 
-let sessionLinks;
+const handlePost = async (e) => {
 
+  e.preventDefault();
+
+  const post = {
+    'name': community.name,
+    'community': community.id,
+    'userId': userId,
+    'content': content
+  };
+
+  const data = await dispatch(data_funcs.create_post(post));
+
+  if (data) {
+    setErrors(data);
+  } else {
+    setContent('');
+    await dispatch(data_funcs.get_communities());
+  }
+
+
+};
+
+
+let sessionLinks;
 if (userId === community?.owner) {
 
   sessionLinks = (
@@ -73,8 +100,76 @@ return (
 
     <div className='com-content'>
 
-    </div>
+      <div className='com-post-cont'>
 
+        <div className="create-post-cont">
+          <div className='create-post-top'>
+            <h3>Create Post</h3>
+          </div>
+          <div className='create-post-body'>
+            <div className='create-post-title'>
+              <div>
+                <textarea 
+                  name='title'
+                  placeholder='Title (TODO)'
+                  disabled={true}
+                />
+              </div>
+            </div>
+
+            <div className='create-post-content'>
+              <div>
+                <textarea 
+                  id='textPost'
+                  name='content'
+                  placeholder='Text'
+                  value={content}
+                  onChange={(e) => setContent(e.target.value)}
+                  required
+                />
+              </div>
+            </div>
+
+            <div className='create-post-bar'>
+
+              <div id='post-btn'>
+                <button onClick={handlePost} className='main-links' type='submit'>Post</button>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+        <div className="post-cont">
+
+
+          {loaded && community?.posts?.map((post) => {
+            return (
+              <div key={post?.id} className="single-post">
+                <p>Posted by u/{post?.user_name}</p>
+                <p>{post?.content}</p>
+                {userId === post?.user_id && (
+                <div id='com-btns'>
+                  <EditPostForm post={post} />
+                </div>
+                )}
+              </div>
+            )
+          })}
+
+        </div>
+      </div>
+
+      <div className='side-page-cont'>
+
+          <div className='side-page'>
+            <p>{community?.community_info}</p>
+
+          </div>
+
+      </div>
+    </div>
   </div>
 )
 

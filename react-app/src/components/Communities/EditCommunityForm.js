@@ -13,7 +13,7 @@ const EditCommunityForm = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const { name } = useParams();
-  const community = useSelector(state => state.data_store.all_communities[name]);
+  const community = useSelector(state => state.data_store.all_communities[name.toLowerCase()]);
   
   
   

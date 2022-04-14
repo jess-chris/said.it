@@ -24,6 +24,7 @@ def new_community():
     community = Community(
       name=form.data['name'],
       owner=current_user.id,
+      owner_username=current_user.username,
       member_title=form.data['title'],
       community_image=form.data['image'],
       community_info=form.data['info']

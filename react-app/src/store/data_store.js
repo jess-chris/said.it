@@ -158,8 +158,7 @@ export const edit_post = (post) => async (dispatch) => {
   });
 
   if (res.ok) {
-    const post = await res.json();
-    return post;
+    await res.json();
   } else if (res.status < 500) {
     const data = await res.json();
     if (data.errors) {
@@ -196,7 +195,7 @@ export default function reducer(state = {all_communities: {}, current_community:
   switch(action.type) {
 
     case GET_COMMUNITIES:
-      action.communities.forEach((community) => newState.all_communities[community.name] = community);
+      action.communities.forEach((community) => newState.all_communities[community.name.toLowerCase()] = community);
       return newState;
 
     case CREATE_COMMUNITY:
