@@ -45,9 +45,8 @@ const HomePage = () => {
           {loaded && communities?.map((community) => {
             return community?.posts?.map((post) => {
               return (
-                <div className="single-post">
-                  <p>{`s/${community?.name}`}</p>
-                  <p>Posted by u/{post?.user_name}</p>
+                <div key={post?.id} className="single-post">
+                  <p><span className="bold-text">{`s/${community?.name}`}</span> • <span className="light-text">Posted by u/{post?.user_name}</span></p>
                   <p>{post?.title}</p>
                   <p>{post?.content}</p>
                 </div>

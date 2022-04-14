@@ -10,12 +10,36 @@ div {
   display: block;
 }
 
+p {
+  font-family: Noto Sans,Arial,sans-serif;
+}
+
 a {
   text-decoration: none;
 }
 
+a, button {
+  font-family: Noto Sans Bold,Arial,sans-serif;
+}
+
 textarea {
   resize: none;
+}
+
+.bold-text {
+  font-weight: bold;
+  font-family: IBM Plex Sans Bold,Arial,sans-serif;
+}
+
+.light-text {
+  font-weight: 100;
+  font-size: small;
+  font-family: IBM Plex Sans,Arial,sans-serif;
+  opacity: 0.7;
+}
+
+.medium-text {
+  font-family: IBM Plex Sans Medium,Arial,sans-serif;
 }
 
 

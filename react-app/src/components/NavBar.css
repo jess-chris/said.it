@@ -30,11 +30,12 @@
 
 
 .main-navbar {
-  align-items: center;
+  align-items: baseline;
   display: inline-flex;
   flex-direction: row;
   box-sizing: border-box;
   padding: 0 20px;
+  width: 100%;
   flex-grow: 1;
 }
 
@@ -51,4 +52,15 @@
   color: #FFF;
   background-color: #0079D3;
   width: 120px;
+}
+
+
+.auth-links {
+  align-items: baseline;
+  display: inline-flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  padding: 20px;
+  min-width: 200px;
+  flex-grow: 1;
 }
