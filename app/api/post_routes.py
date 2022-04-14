@@ -22,13 +22,14 @@ def new_post():
   
   form = PostForm()
   form['csrf_token'].data = request.cookies['csrf_token']
+  community_id = request.json['community']
   
   if form.validate_on_submit():
+    
     post = Post(
-      community_id=form.data['community'],
+      community_id=community_id,
       content=form.data['content'],
-      user_id=current_user.id,
-      post_id=form.data['post_id']
+      user_id=current_user.id
     )
     
     db.session.add(post)

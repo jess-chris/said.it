@@ -1,28 +1,50 @@
 import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import * as data_funcs from '../../store/data_store';
 
 const CreatePostForm = () => {
 
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   const [showModal, setShowModal] = useState(false);
   const [errors, setErrors] = useState([]);
   const [content, setContent] = useState('');
-  const [community, setCommunity] = useState('');
+  const [communityName, setCommunityName] = useState('');
 
-  const userId = useSelector(state => state.session.user.id);
-  const communityObj = useSelector(state => state.data_store.all_communities)
-  const communities = Object.values(communityObj);
+  const userId = useSelector(state => state.session.user?.id);
+  const community = useSelector(state => state.data_store?.all_communities[communityName]);
 
   const createPost = async (e) => {
 
     e.preventDefault();
+  
+    let id;
+
+    try {
+      id = community.id;
+    } catch {
+      return setErrors(['Community does not exist']);
+    }
 
     const post = {
-
+      'name': communityName,
+      'community': id,
+      'userId': userId,
+      'content': content
     };
+
+    const data = await dispatch(data_funcs.create_post(post));
+
+    if (data) {
+      setErrors(data);
+    } else {
+      history.push(`/s/${communityName}`);
+    }
+
   }
 
   return (
@@ -38,13 +60,13 @@ const CreatePostForm = () => {
               ))}
             </div>
             <div>
-              <label htmlFor='community'>Community Name</label>
+              <label htmlFor='name'>Community Name</label>
               <input
                 name='name'
                 type='text'
                 placeholder='Which community do you want to post to?'
-                value={community}
-                onChange={(e) => setCommunity(e.target.value)}
+                value={communityName}
+                onChange={(e) => setCommunityName(e.target.value)}
                 required
               />
             </div>

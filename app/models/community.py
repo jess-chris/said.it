@@ -24,6 +24,6 @@ class Community(db.Model):
       'member_title': self.member_title,
       'community_image': self.community_image,
       'community_info': self.community_info,
-      'posts': [post.to_dict for post in self.posts],
+      'posts': [post.to_dict() for post in self.posts],
       'created_at': self.created_at
     }

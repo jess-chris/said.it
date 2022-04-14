@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from "react-router-dom";
 
-import * as dataActions from '../../store/data_store';
+import * as data_funcs from '../../store/data_store';
 import CreatePostForm from "../Posts/CreatePostForm";
 
 import './HomePage.css'
@@ -14,10 +14,12 @@ const HomePage = () => {
   
   useEffect(() => {
     (async() => {
-      await dispatch(dataActions.get_communities());
+      await dispatch(data_funcs.get_communities());
       setLoaded(true);
     })();
   }, [dispatch]);
+
+  
   const communityObj = useSelector(state => state.data_store.all_communities)
   const communities = Object.values(communityObj);
 
@@ -25,8 +27,6 @@ const HomePage = () => {
     return null;
   }
   
-  
-
   return (
 
     <div className="main-cont">

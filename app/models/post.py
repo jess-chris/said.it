@@ -21,7 +21,7 @@ class Post(db.Model):
       'user_id': self.user_id,
       'content': self.content,
       'vote_score': self.vote_score,
-      'comments': [comment.to_dict for comment in self.comments],
+      'comments': [comment.to_dict() for comment in self.comments],
       'created_at': self.created_at,
       'updated_at': self.updated_at
     }

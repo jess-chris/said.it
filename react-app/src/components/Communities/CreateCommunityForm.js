@@ -29,10 +29,9 @@ const Create_Community_Form = () => {
 
     if (data) {
       setErrors(data);
+    } else {
+      history.push('/');
     }
-
-    history.push('/');
-    
 
   };
 
