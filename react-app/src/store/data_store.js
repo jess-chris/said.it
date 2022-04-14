@@ -35,6 +35,9 @@ const ed_community = (community, old) => ({
 
 
 
+
+// Communities
+
 export const get_communities = () => async (dispatch) => {
 
   const res = await fetch('/api/communities/')
@@ -110,7 +113,7 @@ export const delete_community = (community_id) => async (dispatch) => {
   });
 
   if (res.ok) {
-    const community = await res.json()
+    const community = await res.json();
     await dispatch(del_community(community));
     return community;
   }
@@ -118,6 +121,70 @@ export const delete_community = (community_id) => async (dispatch) => {
 };
 
 
+
+// Posts
+
+export const create_post = (post) => async (dispatch) => {
+
+  const res = await fetch('/api/posts/new', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(post)
+  });
+
+  if (res.ok) {
+    await res.json();
+  } else if (res.status < 500) {
+    const data = await res.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ['An error occurred. Please try again.']
+  }
+};
+
+
+export const edit_post = (post) => async (dispatch) => {
+
+  const res = await fetch('/api/posts/edit', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(post)
+  });
+
+  if (res.ok) {
+    await res.json();
+  } else if (res.status < 500) {
+    const data = await res.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ['An error occurred. Please try again.'];
+  }
+};
+
+
+export const delete_post = (post_id) => async (dispatch) => {
+
+  const res = await fetch('/api/posts/delete', {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(post_id)
+  });
+
+  if (res.ok) {
+    const post = await res.json();
+    return post;
+  } 
+};
 
 
 
@@ -128,7 +195,7 @@ export default function reducer(state = {all_communities: {}, current_community:
   switch(action.type) {
 
     case GET_COMMUNITIES:
-      action.communities.forEach((community) => newState.all_communities[community.name] = community);
+      action.communities.forEach((community) => newState.all_communities[community.name.toLowerCase()] = community);
       return newState;
 
     case CREATE_COMMUNITY:

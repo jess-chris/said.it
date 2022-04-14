@@ -1,6 +1,6 @@
 from crypt import methods
 from flask import Blueprint, jsonify, session, request
-from app.models import community, db, Community
+from app.models import db, Community
 from app.forms import CommunityForm
 from flask_login import current_user
 from .auth_routes import validation_errors_to_error_messages
@@ -24,6 +24,7 @@ def new_community():
     community = Community(
       name=form.data['name'],
       owner=current_user.id,
+      owner_username=current_user.username,
       member_title=form.data['title'],
       community_image=form.data['image'],
       community_info=form.data['info']

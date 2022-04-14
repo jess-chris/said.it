@@ -29,10 +29,9 @@ const Create_Community_Form = () => {
 
     if (data) {
       setErrors(data);
+    } else {
+      history.push('/');
     }
-
-    history.push('/');
-    
 
   };
 
@@ -96,7 +95,7 @@ const Create_Community_Form = () => {
           />
         </div>
 
-        <button type='submit'>Create</button>
+        <button className='main-links' type='submit'>Create</button>
 
       </form>
 
