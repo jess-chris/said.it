@@ -42,36 +42,19 @@ const HomePage = () => {
 
         <div>
 
-          <div className="single-post">
-
-            <p>{`s/${communities[0]?.name}`}</p>
-            <p>post data</p>
-            <p>post data</p>
-            <p>post data</p>
-
-          </div>
-
-          <div className="single-post">
-
-            <p>{`s/${communities[0]?.name}`}</p>
-            <p>post data</p>
-            <p>post data</p>
-            <p>post data</p>
-
-          </div>
-
-          <div className="single-post">
-
-            <p>{`s/${communities[0]?.name}`}</p>
-            <p>post data</p>
-            <p>post data</p>
-            <p>post data</p>
-
-          </div>
-
+          {loaded && communities?.map((community) => {
+            return community?.posts?.map((post) => {
+              return (
+                <div className="single-post">
+                  <p>{`s/${community?.name}`}</p>
+                  <p>Posted by u/{post?.user_name}</p>
+                  <p>{post?.content}</p>
+                </div>
+              )
+            })
+          })}
 
         </div>
-
 
       </div>
 

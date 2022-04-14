@@ -12,7 +12,7 @@ const ViewCommunity = () => {
 const dispatch = useDispatch();
 const [loaded, setLoaded] = useState(false);
 const [content, setContent] = useState('');
-const [postTitle, setPostTitle] = useState('');
+//const [postTitle, setPostTitle] = useState('');
 const [errors, setErrors] = useState([]);
 const history = useHistory();
 const { name } = useParams();
@@ -105,6 +105,11 @@ return (
         <div className="create-post-cont">
           <div className='create-post-top'>
             <h3>Create Post</h3>
+          </div>
+          <div>
+            {errors.map((error, ind) => (
+              <div key={ind}>{error}</div>
+            ))}
           </div>
           <div className='create-post-body'>
             <div className='create-post-title'>
