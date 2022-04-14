@@ -4,6 +4,7 @@ body {
   border: 0;
   font: inherit;
   vertical-align: baseline;
+  background-color: #DAE0E6;
 }
 
 div {
@@ -12,6 +13,10 @@ div {
 
 p {
   font-family: Noto Sans,Arial,sans-serif;
+  font-size: 14px;
+  line-height: 21px;
+  font-weight: 400;
+  word-wrap: break-word;
 }
 
 a {
@@ -28,6 +33,9 @@ textarea {
 
 .bold-text {
   font-weight: bold;
+  font-size: 12px;
+  line-height: 20px;
+  color: #1c1c1c;
   font-family: IBM Plex Sans Bold,Arial,sans-serif;
 }
 
@@ -62,12 +70,14 @@ textarea {
 }
 
 
+
 .single-post {
   border: 1px solid black;
   margin-bottom: 10px;
   overflow: hidden;
   position: relative;
   cursor: pointer;
+  background-color: #fff;
 }
 
 .single-post:hover {
@@ -92,6 +102,7 @@ textarea {
   display: flex;
   flex-direction: column;
   height: 100%;
+  background-color: #fff;
 }
 
 .side-header {
@@ -104,7 +115,7 @@ textarea {
 
 .post-cont-topbar {
   align-items: center;
-  border: 1px solid #ccc;
+  border: 1px solid black;
   border-radius: 4px;
   box-sizing: border-box;
 
@@ -113,6 +124,8 @@ textarea {
   justify-content: flex-start;
   margin-bottom: 16px;
   padding: 10px 12px;
+
+  background-color: #fff;
 }
 
 .top-com-list {
@@ -124,11 +137,46 @@ textarea {
   border-bottom: thin solid #CCC;
 }
 
+
 .personal-home-cont {
   padding: 12px;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
+  background-color: #fff;
+}
+
+.p-home-banner {
+  background-image: url('https://www.redditstatic.com/desktop2x/img/id-cards/home-banner@2x.png');
+  background-size: cover;
+
+  width: 100%;
+  background-position-y: center;
+  background-position-x: center; 
+  background-repeat: no-repeat;
+  border-radius: 4px;
+  height: 34px;
+}
+
+.p-home-header {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  width: 100%;
+}
+
+.p-home-header > p {
+  margin-left: 10px;
+  margin-top: 30px;
+}
+
+#p-home-moogle {
+  background: url('https://www.redditstatic.com/desktop2x/img/id-cards/snoo-home@2x.png');
+  background-size: 40px 68px;
+  height: 68px;
+  width: 40px;
+
+
 }
 
 
@@ -141,11 +189,22 @@ textarea {
 .main-spacer {
   margin-top: 16px;
   width: 312px;
+  background-color: #fff;
 }
 
 #banner {
   height: 64px;
   text-align: center;
+  background-color: #ff4500;
+  opacity: 0.7;
+  width: 100%;
+
+}
+
+#banner > h2 {
+  padding: 5px;
+  padding-left: 100px;
+  position: absolute;
 }
 
 

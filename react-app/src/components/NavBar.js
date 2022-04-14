@@ -14,8 +14,8 @@ const NavBar = () => {
 
       <div className='main-navbar navbar-items'>
           <div>
-            <NavLink className='main-links' to='/' exact={true} activeClassName='active'>
-              Home
+            <NavLink className='main-links bold-text' style={{'fontSize': '12px'}} to='/' exact={true} activeClassName='active'>
+              Said.it
             </NavLink>
           </div>
 

@@ -33,11 +33,9 @@ function ProfileButton() {
     <div className="user-profile">
       <button className="user-profile-btn main-links" onClick={openMenu}>
         <div className="drop-down-menu">
-          <i className="fas fa-user-circle" />
+          <i className="fas fa-user-circle" />   {user.username}
           {showMenu && (
             <ul style={{'listStyle': 'none'}} className="profile-dropdown">
-              <li>{user.username}</li>
-              <li>{user.email}</li>
               <li>
                 <button className="main-links" onClick={onLogout}>Log Out</button>
               </li>

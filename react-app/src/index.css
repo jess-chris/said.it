@@ -35,11 +35,12 @@
   justify-content: left;
 
   width: 100px;
+  height: 100px;
 }
 
 .user-profile-btn {
   display: flex;
-  flex-direction: row;
+  flex-flow: nowrap;
   align-items: center;
   text-align: left;
   width: 100%;
