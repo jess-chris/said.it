@@ -35,9 +35,9 @@ const HomePage = () => {
       <div className="post-cont">
 
         <div className="post-cont-topbar">
-          <button>Test</button>
-          <button>Test</button>
-          <button>Test</button>
+          <button className="main-links">Test</button>
+          <button className="main-links">Test</button>
+          <button className="main-links">Test</button>
         </div>
 
         <div>
@@ -45,9 +45,8 @@ const HomePage = () => {
           {loaded && communities?.map((community) => {
             return community?.posts?.map((post) => {
               return (
-                <div className="single-post">
-                  <p>{`s/${community?.name}`}</p>
-                  <p>Posted by u/{post?.user_name}</p>
+                <div key={post?.id} className="single-post">
+                  <p><span className="bold-text">{`s/${community?.name}`}</span> • <span className="light-text">Posted by u/{post?.user_name}</span></p>
                   <p>{post?.title}</p>
                   <p>{post?.content}</p>
                 </div>
@@ -65,14 +64,16 @@ const HomePage = () => {
 
           <div className='side-header'>
 
-            <div id="banner">Top Communities</div>
+            <div id="banner">
+              <h2 className="bold-text" style={{'color': '#fff'}}>Top Communities</h2>
+            </div>
 
             <ol style={{"listStyle": "none"}}>
 
               {loaded && communities?.map((community) => {
                 return(
                   <li className="top-com-list" key={community?.name}>
-                      <NavLink to={`s/${community?.name}`}>{community?.name}</NavLink>
+                      <NavLink className='bold-text' to={`s/${community?.name}`}>s/{community?.name}</NavLink>
                   </li>
 
                 )
@@ -86,12 +87,18 @@ const HomePage = () => {
 
           <div className="side-header">
 
+            <div className="p-home-banner"></div>
+
             <div className="personal-home-cont">
 
+              <div className="p-home-header">
+                <div id="p-home-moogle"></div>
+                <p className="bold-text">Home</p>
+              </div>
 
-              <div>Home</div>
-
-              <div>Your personal Saidit frontpage. Come here to check in with your favorite communities.</div>
+              <div>
+                <p>Your personal Saidit frontpage. Come here to check in with your favorite communities.</p>
+              </div>
 
               <div id="create-links">
 
