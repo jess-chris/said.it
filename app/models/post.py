@@ -8,7 +8,8 @@ class Post(db.Model):
   community_id = db.Column(db.Integer, db.ForeignKey('communities.id'), nullable=False)
   user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
   user_name = db.Column(db.String, db.ForeignKey('users.username'), nullable=False)
-  content = db.Column(db.Text, nullable=False)
+  title = db.Column(db.Text, nullable=False)
+  content = db.Column(db.Text)
   vote_score = db.Column(db.Integer, default=0, nullable=False)
   created_at = db.Column(db.DateTime, default=datetime.now(), nullable=False)
   updated_at = db.Column(db.DateTime, default=datetime.now(), nullable=False)
@@ -21,6 +22,7 @@ class Post(db.Model):
       'community_id': self.community_id,
       'user_id': self.user_id,
       'user_name': self.user_name,
+      'title': self.title,
       'content': self.content,
       'vote_score': self.vote_score,
       'comments': [comment.to_dict() for comment in self.comments],

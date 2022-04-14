@@ -12,7 +12,7 @@ const ViewCommunity = () => {
 const dispatch = useDispatch();
 const [loaded, setLoaded] = useState(false);
 const [content, setContent] = useState('');
-//const [postTitle, setPostTitle] = useState('');
+const [postTitle, setPostTitle] = useState('');
 const [errors, setErrors] = useState([]);
 const history = useHistory();
 const { name } = useParams();
@@ -52,6 +52,7 @@ const handlePost = async (e) => {
     'name': community.name,
     'community': community.id,
     'userId': userId,
+    'title': postTitle,
     'content': content
   };
 
@@ -116,8 +117,10 @@ return (
               <div>
                 <textarea 
                   name='title'
-                  placeholder='Title (TODO)'
-                  disabled={true}
+                  placeholder='Title'
+                  value={postTitle}
+                  onChange={(e) => setPostTitle(e.target.value)}
+                  required
                 />
               </div>
             </div>
@@ -130,7 +133,6 @@ return (
                   placeholder='Text'
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
-                  required
                 />
               </div>
             </div>
@@ -153,6 +155,7 @@ return (
             return (
               <div key={post?.id} className="single-post">
                 <p>Posted by u/{post?.user_name}</p>
+                <p>{post?.title}</p>
                 <p>{post?.content}</p>
                 {userId === post?.user_id && (
                 <div id='com-btns'>

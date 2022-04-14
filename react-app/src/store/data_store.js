@@ -199,17 +199,17 @@ export default function reducer(state = {all_communities: {}, current_community:
       return newState;
 
     case CREATE_COMMUNITY:
-      newState.all_communities[action.community.name] = action.community;
+      newState.all_communities[action.community.name.toLowerCase()] = action.community;
       return newState;
 
     case EDIT_COMMUNITY:
-      newState.all_communities[action.old] = action.community;
-      newState.all_communities[action.community.name] = newState.all_communities[action.old]
+      newState.all_communities[action.old.toLowerCase()] = action.community;
+      newState.all_communities[action.community.name.toLowerCase()] = newState.all_communities[action.old]
       delete newState.all_communities[action.old]
       return newState;
 
     case DELETE_COMMUNITY:
-      delete newState.all_communities[action.community.name];
+      delete newState.all_communities[action.community.name.toLowerCase()];
       return newState;
 
     default:

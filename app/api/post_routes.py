@@ -28,6 +28,7 @@ def new_post():
     
     post = Post(
       community_id=community_id,
+      title=form.data['title'],
       content=form.data['content'],
       user_id=current_user.id,
       user_name=current_user.username
@@ -53,6 +54,7 @@ def edit_post():
   post = Post.query.get(post_id)
   
   if form.validate_on_submit() and post.user_id == current_user.id:
+    post.title=form.data['title'],
     post.content=form.data['content']
     
     db.session.add(post)

@@ -13,6 +13,7 @@ const CreatePostForm = () => {
   const [showModal, setShowModal] = useState(false);
   const [errors, setErrors] = useState([]);
   const [content, setContent] = useState('');
+  const [title, setTitle] = useState('');
   const [communityName, setCommunityName] = useState('');
 
   const userId = useSelector(state => state.session.user?.id);
@@ -34,7 +35,8 @@ const CreatePostForm = () => {
       'name': communityName,
       'community': id,
       'userId': userId,
-      'content': content
+      'content': content,
+      'title': title
     };
 
     const data = await dispatch(data_funcs.create_post(post));
@@ -60,13 +62,26 @@ const CreatePostForm = () => {
               ))}
             </div>
             <div>
-              <label htmlFor='name'>Community Name</label>
-              <input
+              <label htmlFor='name'></label>
+              <textarea
                 name='name'
-                type='text'
+                rows='1'
+                cols='40'
                 placeholder='Which community do you want to post to?'
                 value={communityName}
                 onChange={(e) => setCommunityName(e.target.value)}
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor='title'></label>
+              <textarea
+                name='content'
+                rows='2'
+                cols='75'
+                placeholder='Title'
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
                 required
               />
             </div>
@@ -76,10 +91,9 @@ const CreatePostForm = () => {
                 name='content'
                 rows='15'
                 cols='75'
-                placeholder='Content goes here'
+                placeholder='Text (optional)'
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
-                required
               />
             </div>
             <button className='main-links' type='submit'>Submit</button>

@@ -48,6 +48,7 @@ const HomePage = () => {
                 <div className="single-post">
                   <p>{`s/${community?.name}`}</p>
                   <p>Posted by u/{post?.user_name}</p>
+                  <p>{post?.title}</p>
                   <p>{post?.content}</p>
                 </div>
               )
