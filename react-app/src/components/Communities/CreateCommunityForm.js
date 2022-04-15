@@ -90,14 +90,14 @@ const Create_Community_Form = () => {
             <input
               name='title'
               type='text'
-              placeholder='What do you call your members?'
+              placeholder='Title for your users'
               value={communityMemberTitle}
               onChange={(e) => setCommunityMemberTitle(e.target.value)}
               required
             />
           </div>
 
-          <button className='main-links' type='submit'>Create</button>
+          <button className='main-links btn-style' type='submit'>Create</button>
 
         </form>
 

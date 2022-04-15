@@ -28,7 +28,7 @@
 }
 
 .profile-dropdown-cont {
-  margin-top: 20px;
+  margin-top: 10px;
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -71,4 +71,30 @@
   height: 30px;
   width: 100%;
   border-bottom: 1px solid gray;
+}
+
+
+.post-form-cont {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+
+.post-form {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  margin-bottom: 5px;
+  align-content: center;
+  align-items: center;
+}
+
+.post-input {
+  width: 100%;
+  padding: 22px 12px 10px;
+  border: 1px solid rgba(0,0,0,.1);
+  margin-bottom: 10px;
 }

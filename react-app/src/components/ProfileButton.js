@@ -45,6 +45,7 @@ function ProfileButton() {
             </div>
           )}
         </div>
+        <i class="fa-solid fa-chevron-down"></i>
       </button>
     </div>
   );

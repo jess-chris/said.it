@@ -49,7 +49,9 @@ const LoginForm = ({value}) => {
 
   return (
     <>
+      {!value && (
       <button onClick={() => setShowModal(true)} className='main-links' id='login-btn'>Login</button>
+      )}
       {showModal && (
       <Modal onClose={handleClose}>
         <div className='auth-cont'>
