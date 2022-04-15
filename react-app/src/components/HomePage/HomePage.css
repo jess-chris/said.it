@@ -200,8 +200,9 @@ textarea {
 #banner {
   height: 64px;
   text-align: center;
-  background-color: #ff4500;
-  opacity: 0.7;
+  /* background-color: #ff4500; */
+  background-image: url('https://www.redditstatic.com/desktop2x/img/id-cards/home-banner@2x.png');
+  /* opacity: 0.7; */
   width: 100%;
 
 }
