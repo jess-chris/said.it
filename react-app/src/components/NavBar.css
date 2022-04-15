@@ -59,10 +59,11 @@
 
 .auth-links {
   align-items: baseline;
-  display: inline-flex;
+  display: flex;
   flex-direction: row;
   box-sizing: border-box;
-  padding: 20px;
-  min-width: 200px;
+  gap: 5px;
+  /* padding: 20px; */
+  min-width: 250px;
   flex-grow: 1;
 }

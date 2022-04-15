@@ -47,8 +47,8 @@ const HomePage = () => {
               return (
                 <div key={post?.id} className="single-post">
                   <p><span className="bold-text">{`s/${community?.name}`}</span> • <span className="light-text">Posted by u/{post?.user_name}</span></p>
-                  <p>{post?.title}</p>
-                  <p>{post?.content}</p>
+                  <p className="medium-text" style={{'fontWeight': 'bold'}}>{post?.title}</p>
+                  <p className="light-text">{post?.content}</p>
                 </div>
               )
             })

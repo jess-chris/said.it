@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux';
 
 import './NavBar.css';
 import ProfileButton from './ProfileButton';
+import LoginForm from './auth/LoginForm';
+import SignUpForm from './auth/SignUpForm';
 
 const NavBar = () => {
 
@@ -14,7 +16,7 @@ const NavBar = () => {
 
       <div className='main-navbar navbar-items'>
           <div>
-            <NavLink className='main-links bold-text' style={{'fontSize': '12px'}} to='/' exact={true} activeClassName='active'>
+            <NavLink className='main-links bold-text' style={{'fontSize': '18px'}} to='/' exact={true} activeClassName='active'>
               Said.it
             </NavLink>
           </div>
@@ -29,14 +31,10 @@ const NavBar = () => {
       {!user && (
       <div className='navbar-items auth-links'>
         <div>
-          <NavLink className='main-links' id='login-btn' to='/login' exact={true} activeClassName='active'>
-            Login
-          </NavLink>
+          <LoginForm />
         </div>
         <div>
-          <NavLink className='main-links' id='signup-btn' to='/sign-up' exact={true} activeClassName='active'>
-            Sign Up
-          </NavLink>
+          <SignUpForm />
         </div>
       </div>
       )}

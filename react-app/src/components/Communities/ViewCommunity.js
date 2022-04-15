@@ -25,7 +25,7 @@ useEffect(() => {
 }, [dispatch]);
 
 
-const userId = useSelector(state => state.session.user.id);
+const userId = useSelector(state => state.session.user?.id);
 const community = useSelector(state => state.data_store.all_communities[name.toLowerCase()]);
 
 if (!loaded) {
@@ -93,7 +93,7 @@ return (
     <div className='main-com-cont'>
 
       <div className='com-menu-bar'>
-        <h1>Welcome to s/{community?.name}</h1>
+        <h1 className='bold-text' style={{'fontSize': '18px'}}>s/{community?.name}</h1>
         {sessionLinks && sessionLinks}
       </div>
 
@@ -105,7 +105,7 @@ return (
 
         <div className="create-post-cont">
           <div className='create-post-top'>
-            <h3>Create Post</h3>
+            <h3 className='bold-text'>Create Post</h3>
           </div>
           <div>
             {errors.map((error, ind) => (
@@ -154,9 +154,9 @@ return (
           {loaded && community?.posts?.map((post) => {
             return (
               <div key={post?.id} className="single-post">
-                <p>Posted by u/{post?.user_name}</p>
-                <p>{post?.title}</p>
-                <p>{post?.content}</p>
+                <p className='light-text'>Posted by u/{post?.user_name}</p>
+                <p className="medium-text" style={{'fontWeight': 'bold'}}>{post?.title}</p>
+                <p className="light-text">{post?.content}</p>
                 {userId === post?.user_id && (
                 <div id='com-btns'>
                   <EditPostForm post={post} />

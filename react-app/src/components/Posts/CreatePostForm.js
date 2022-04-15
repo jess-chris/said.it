@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
 
 import * as data_funcs from '../../store/data_store';
+import LoginForm from '../auth/LoginForm';
 
 const CreatePostForm = () => {
 
@@ -46,12 +47,21 @@ const CreatePostForm = () => {
     } else {
       history.push(`/s/${communityName}`);
     }
-
+  }
+  
+  const handleLogin = (e) => {
+      e.preventDefault()
+      return (
+      <>
+        <LoginForm />
+      </>
+    )
   }
 
+  
   return (
     <>
-      <button onClick={() => userId ? setShowModal(true) : setShowModal(false)} style={{"backgroundColor": "#0079D3", "color": "#FFF", "borderColor": "#0079D3"}} className="main-links">Create Post</button>
+      <button onClick={() => userId ? setShowModal(true) : handleLogin} style={{"backgroundColor": "#0079D3", "color": "#FFF", "borderColor": "#0079D3"}} className="main-links">Create Post</button>
       {showModal && (
       <Modal onClose={() => setShowModal(false)}>
         <div className='post-form-cont'>
