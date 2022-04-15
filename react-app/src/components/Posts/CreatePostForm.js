@@ -48,24 +48,15 @@ const CreatePostForm = () => {
       history.push(`/s/${communityName}`);
     }
   }
-  
-  const handleLogin = (e) => {
-      e.preventDefault()
-      return (
-      <>
-        <LoginForm />
-      </>
-    )
-  }
 
   
   return (
     <>
-      <button onClick={() => userId ? setShowModal(true) : handleLogin} style={{"backgroundColor": "#0079D3", "color": "#FFF", "borderColor": "#0079D3"}} className="main-links">Create Post</button>
-      {showModal && (
+      <button onClick={() => setShowModal(true)} style={{"backgroundColor": "#0079D3", "color": "#FFF", "borderColor": "#0079D3"}} className="main-links">Create Post</button>
+      {showModal && userId && (
       <Modal onClose={() => setShowModal(false)}>
         <div className='post-form-cont'>
-          <form onSubmit={createPost}>
+          <form className='post-form' onSubmit={createPost}>
             <div>
               {errors.map((error, ind) => (
                 <div key={ind}>{error}</div>
@@ -75,9 +66,10 @@ const CreatePostForm = () => {
               <label htmlFor='name'></label>
               <textarea
                 name='name'
+                className='post-input'
                 rows='1'
                 cols='40'
-                placeholder='Which community do you want to post to?'
+                placeholder='Community name'
                 value={communityName}
                 onChange={(e) => setCommunityName(e.target.value)}
                 required
@@ -87,6 +79,7 @@ const CreatePostForm = () => {
               <label htmlFor='title'></label>
               <textarea
                 name='content'
+                className='post-input'
                 rows='2'
                 cols='75'
                 placeholder='Title'
@@ -99,6 +92,7 @@ const CreatePostForm = () => {
               <label htmlFor='content'></label>
               <textarea
                 name='content'
+                className='post-input'
                 rows='15'
                 cols='75'
                 placeholder='Text (optional)'
@@ -106,10 +100,13 @@ const CreatePostForm = () => {
                 onChange={(e) => setContent(e.target.value)}
               />
             </div>
-            <button className='main-links' type='submit'>Submit</button>
+            <button className='main-links btn-style' type='submit'>Submit</button>
           </form>
         </div>
       </Modal>
+      )}
+      {showModal && !userId && (
+      <LoginForm value={true}/>  
       )}
     </>
   )

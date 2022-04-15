@@ -14,6 +14,7 @@ const Create_Community_Form = () => {
   const [communityMemberTitle, setCommunityMemberTitle] = useState('');
   const [errors, setErrors] = useState([]);
 
+
   const createCommunity = async (e) => {
 
     e.preventDefault()
@@ -38,69 +39,71 @@ const Create_Community_Form = () => {
 
 
   return (
-    <div className='com-form-cont'>
+    <>
+      <div className='com-form-cont'>
 
-      <form onSubmit={createCommunity}>
-        <div>
-          {errors.map((error, ind) => (
-            <div key={ind}>{error}</div>
-          ))}
-        </div>
+        <form onSubmit={createCommunity}>
+          <div>
+            {errors.map((error, ind) => (
+              <div key={ind}>{error}</div>
+            ))}
+          </div>
 
-        <div>
-          <label htmlFor='name'>Community Name</label>
-          <input
-            name='name'
-            type='text'
-            placeholder='What is it for?'
-            value={communityName}
-            onChange={(e) => setCommunityName(e.target.value)}
-            required
-          />
-        </div>
+          <div>
+            <label htmlFor='name'>Community Name</label>
+            <input
+              name='name'
+              type='text'
+              placeholder='What is it for?'
+              value={communityName}
+              onChange={(e) => setCommunityName(e.target.value)}
+              required
+            />
+          </div>
 
-        <div>
-          <label htmlFor='image'>Community Image</label>
-          <input
-            name='image'
-            type='text'
-            placeholder='Optional image for your community'
-            value={communityImage}
-            onChange={(e) => setCommunityImage(e.target.value)}
-          />
-        </div>
+          <div>
+            <label htmlFor='image'>Community Image</label>
+            <input
+              name='image'
+              type='text'
+              placeholder='Optional image for your community'
+              value={communityImage}
+              onChange={(e) => setCommunityImage(e.target.value)}
+            />
+          </div>
 
-        <div>
-          <label htmlFor='info'>Community Info</label>
-          <textarea
-            name='info'
-            rows='15'
-            cols='75'
-            placeholder='Let people know what your community is about'
-            value={communityInfo}
-            onChange={(e) => setCommunityInfo(e.target.value)}
-            required
-          />
-        </div>
+          <div>
+            <label htmlFor='info'>Community Info</label>
+            <textarea
+              name='info'
+              rows='15'
+              cols='75'
+              placeholder='Let people know what your community is about'
+              value={communityInfo}
+              onChange={(e) => setCommunityInfo(e.target.value)}
+              required
+            />
+          </div>
 
-        <div>
-          <label htmlFor='title'>Community Member Title</label>
-          <input
-            name='title'
-            type='text'
-            placeholder='What do you call your members?'
-            value={communityMemberTitle}
-            onChange={(e) => setCommunityMemberTitle(e.target.value)}
-            required
-          />
-        </div>
+          <div>
+            <label htmlFor='title'>Community Member Title</label>
+            <input
+              name='title'
+              type='text'
+              placeholder='Title for your users'
+              value={communityMemberTitle}
+              onChange={(e) => setCommunityMemberTitle(e.target.value)}
+              required
+            />
+          </div>
 
-        <button className='main-links' type='submit'>Create</button>
+          <button className='main-links btn-style' type='submit'>Create</button>
 
-      </form>
+        </form>
 
 
-    </div>
+      </div>
+    </>
   )
 
 };

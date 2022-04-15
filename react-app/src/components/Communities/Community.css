@@ -1,17 +1,27 @@
-.community-page, .com-form-cont {
+.community-page {
+  transition: margin-top .3s ease;
+  /* /* padding-top: 48px;
+  margin-top: 48px; */
+  /* padding: 8px 16px;
+   min-height: calc(100vh - 48px);  */
+  display: flex;
+  flex-direction: column;
+} 
+
+.com-form-cont {
   transition: margin-top .3s ease;
   padding-top: 48px;
-  margin-top: 48px;
+  margin-top: 48px; 
   padding: 8px 16px;
-  /* min-height: calc(100vh - 48px); */
   display: flex;
   flex-direction: column;
 }
 
 
-
 .main-com-cont {
+  padding: 8px 16px;
   display: flex;
+  flex-direction: column;
   text-align: center;
   justify-content: center;
   background-color: #fff;
@@ -20,9 +30,12 @@
 
 .com-header {
   display: flex;
-  background: rgb(51, 168, 255);
+  background-image: url('https://www.redditstatic.com/desktop2x/img/id-cards/home-banner@2x.png');
+  background-size: cover;
   height: 64px;
   border-radius: 5px;
+  padding-top: 48px;
+  margin-top: 48px; 
 }
 
 .com-menu-bar {
@@ -49,8 +62,13 @@
   margin-bottom: 15px;
   border-radius: 5px;
   width: 100%;
-  border: 1px solid black;
+  border: 1px solid #fff;
   background-color: #fff;
+}
+
+.create-post-cont:hover {
+  border: 1px solid gray;
+  z-index: 1;
 }
 
 .create-post-top {
@@ -106,6 +124,6 @@
 }
 
 
-.side-page-cont {
-  /* margin-top: 0; */
+.community-info {
+  text-align: center;
 }

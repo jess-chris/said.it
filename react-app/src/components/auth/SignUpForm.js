@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
-import { useDispatch } from 'react-redux'
-// import { Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux'
+import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
 
 const SignUpForm = () => {
@@ -11,7 +11,7 @@ const SignUpForm = () => {
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const [showModal, setShowModal] = useState(false);
-  // const user = useSelector(state => state.session.user);
+  const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
   const onSignUp = async (e) => {
@@ -40,9 +40,9 @@ const SignUpForm = () => {
     setRepeatPassword(e.target.value);
   };
 
-  // if (user) {
-  //   return <Redirect to='/' />;
-  // }
+  if (user) {
+    return <Redirect to='/' />;
+  }
 
   return (
     <>

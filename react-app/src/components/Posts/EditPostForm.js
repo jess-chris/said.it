@@ -52,8 +52,8 @@ const EditPostForm = ({ post }) => {
 
   return (
     <>
-      <button onClick={() => setShowModal(true)} className="main-links">Edit Post</button>
-      <button className='main-links' onClick={handleDelete}>Delete</button>
+      <button onClick={() => setShowModal(true)} className="main-links btn-style">Edit</button>
+      <button className='main-links btn-style' onClick={handleDelete}>Delete</button>
       {showModal && (
       <Modal onClose={() => setShowModal(false)}>
         <div className='post-form-cont'>

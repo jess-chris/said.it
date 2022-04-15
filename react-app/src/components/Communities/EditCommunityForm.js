@@ -51,7 +51,7 @@ const EditCommunityForm = () => {
 
   return (
     <>
-      <button className='main-links' onClick={() => setShowModal(true)}>Edit</button>
+      <button className='main-links btn-style' onClick={() => setShowModal(true)}>Edit</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <div className='com-form-cont'>
