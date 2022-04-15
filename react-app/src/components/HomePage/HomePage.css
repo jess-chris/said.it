@@ -48,6 +48,10 @@ textarea {
 
 .medium-text {
   font-family: IBM Plex Sans Medium,Arial,sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  color: #1a1a1b;
 }
 
 
@@ -94,6 +98,7 @@ textarea {
   width: 312px;
 
   border: 1px solid black;
+  border-radius: 4px;
 }
 
 

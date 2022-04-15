@@ -1,7 +1,51 @@
-.auth-forms {
+/* .auth-forms {
   margin-top: 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+} */
+
+.auth-forms {
+  width: 280px;
+  margin-bottom: 5px;
+}
+
+
+.auth-cont {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+
+.auth-content {
+  margin-left: 20px;
+}
+
+
+.auth-side-banner {
+  width: 130px;
+  height: 650px;
+  background-image: url(https://www.redditstatic.com/accountmanager/bbb584033aa89e39bad69436c504c9bd.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+.auth-input {
+  outline: 0;
+  width: 100%;
+  height: 48px;
+  padding: 22px 12px 10px;
+  border: 1px solid rgba(0,0,0,.1);
+  margin-bottom: 10px;
+}
+
+
+
+.login-btn {
+  border: 1px solid #0079D3;
+  color: #FFF;
+  background-color: #0079D3;
+  width: 100%
 }
