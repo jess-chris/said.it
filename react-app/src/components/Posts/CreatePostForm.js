@@ -61,8 +61,8 @@ const CreatePostForm = () => {
   
   return (
     <>
-      <button onClick={() => userId ? setShowModal(true) : handleLogin} style={{"backgroundColor": "#0079D3", "color": "#FFF", "borderColor": "#0079D3"}} className="main-links">Create Post</button>
-      {showModal && (
+      <button onClick={() => setShowModal(true)} style={{"backgroundColor": "#0079D3", "color": "#FFF", "borderColor": "#0079D3"}} className="main-links">Create Post</button>
+      {showModal && userId && (
       <Modal onClose={() => setShowModal(false)}>
         <div className='post-form-cont'>
           <form onSubmit={createPost}>
@@ -110,6 +110,9 @@ const CreatePostForm = () => {
           </form>
         </div>
       </Modal>
+      )}
+      {showModal && !userId && (
+      <LoginForm value={true}/>  
       )}
     </>
   )

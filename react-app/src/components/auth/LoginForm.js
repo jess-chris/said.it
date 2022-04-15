@@ -1,18 +1,24 @@
 import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
-import { useDispatch } from 'react-redux';
-// import { Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect, useHistory } from 'react-router-dom';
 import { login } from '../../store/session';
 
 import './Auth.css';
 
-const LoginForm = () => {
+const LoginForm = ({value}) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [showModal, setShowModal] = useState(false);
-  // const user = useSelector(state => state.session.user);
-  const dispatch = useDispatch();
+  const [showModal, setShowModal] = useState(value ? true : false);
+  const path = window.location.pathname;
+  const user = useSelector(state => state.session.user)
+
+  if (path === '/login' && user) {
+    return <Redirect to='/' />;
+  }
 
   const onLogin = async (e) => {
     e.preventDefault();
@@ -30,15 +36,22 @@ const LoginForm = () => {
     setPassword(e.target.value);
   };
 
-  // if (user) {
-  //   return <Redirect to='/' />;
-  // }
+  const handleClose = () => {
+
+    if (path === '/login') {
+      setShowModal(false);
+      history.push('/');
+    } else {
+      setShowModal(false);
+    }
+
+  }
 
   return (
     <>
       <button onClick={() => setShowModal(true)} className='main-links' id='login-btn'>Login</button>
       {showModal && (
-      <Modal onClose={() => setShowModal(false)}>
+      <Modal onClose={handleClose}>
         <div className='auth-cont'>
           <div className='auth-side-banner'></div>
           <div className='auth-content'>

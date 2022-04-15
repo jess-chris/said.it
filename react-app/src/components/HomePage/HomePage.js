@@ -40,13 +40,15 @@ const HomePage = () => {
           <button className="main-links">Test</button>
         </div>
 
-        <div>
+        <div className="medium-text">Popular posts</div>
+
+        <div style={{'paddingTop': '20px'}}>
 
           {loaded && communities?.map((community) => {
             return community?.posts?.map((post) => {
               return (
                 <div key={post?.id} className="single-post">
-                  <p><span className="bold-text">{`s/${community?.name}`}</span> • <span className="light-text">Posted by u/{post?.user_name}</span></p>
+                  <p><NavLink to={`/s/${community?.name}`}><span className="bold-text">{`s/${community?.name}`}</span></NavLink> • <span className="light-text">Posted by u/{post?.user_name}</span></p>
                   <p className="medium-text" style={{'fontWeight': 'bold'}}>{post?.title}</p>
                   <p className="light-text">{post?.content}</p>
                 </div>
@@ -65,7 +67,7 @@ const HomePage = () => {
           <div className='side-header'>
 
             <div id="banner">
-              <h2 className="bold-text" style={{'color': '#fff'}}>Top Communities</h2>
+              <h2 className="bold-text" style={{'color': '#fff', 'fontSize': '16px'}}>Top Communities</h2>
             </div>
 
             <ol style={{"listStyle": "none"}}>

@@ -75,7 +75,7 @@ if (userId === community?.owner) {
   sessionLinks = (
     <div id='com-btns'>
       <EditCommunityForm />
-      <button className='main-links' onClick={handleDelete}>Delete</button>
+      <button className='main-links btn-style' onClick={handleDelete}>Delete</button>
     </div>
     );
 
@@ -86,8 +86,8 @@ if (userId === community?.owner) {
 return (
   <div className='community-page'>
 
+    <span className='com-header'></span>
     <div className='com-header-cont'>
-      <span className='com-header'></span>
     </div>
 
     <div className='main-com-cont'>
@@ -140,7 +140,7 @@ return (
             <div className='create-post-bar'>
 
               <div id='post-btn'>
-                <button onClick={handlePost} className='main-links' type='submit'>Post</button>
+                <button onClick={handlePost} className='main-links btn-style' type='submit'>Post</button>
               </div>
 
             </div>
@@ -172,8 +172,11 @@ return (
       <div className='side-page-cont'>
 
           <div className='side-page'>
-            <p>{community?.community_info}</p>
 
+            <div className='side-header'>
+            <h2 className="bold-text community-info" style={{'fontSize': '16px'}}>Community Info:</h2>
+              <p className='bold-text community-info'>{community?.community_info}</p>
+            </div>
           </div>
 
       </div>

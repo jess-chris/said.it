@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import React, { useState, useEffect, useSelector } from 'react';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
@@ -18,6 +18,7 @@ import ViewCommunity from './components/Communities/ViewCommunity';
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
+  //const userId = useSelector(state => state.session.user)
 
   useEffect(() => {
     (async() => {
@@ -27,9 +28,11 @@ function App() {
     })();
   }, [dispatch]);
 
+
   if (!loaded) {
     return null;
   }
+
 
   return (
     <BrowserRouter>
@@ -41,7 +44,7 @@ function App() {
           <HomePage />
         </Route>
         <Route path='/login' exact={true}>
-          <LoginForm />
+          <LoginForm value={true} />
         </Route>
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
@@ -49,15 +52,18 @@ function App() {
         <Route path='/s/:name' exact={true}>
           <ViewCommunity />
         </Route>
+        <ProtectedRoute path='/communities/new' exact={true}>
+          <CreateCommunityForm />
+        </ProtectedRoute>
         <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute>
-        <ProtectedRoute path='/communities/new' exact={true}>
-          <CreateCommunityForm />
-        </ProtectedRoute>
+        <Route path=''>
+          <Redirect to='/' />
+        </Route>
       </Switch>
     </BrowserRouter>
   );
