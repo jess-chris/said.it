@@ -32,20 +32,20 @@ function ProfileButton() {
   return (
     <div className="user-profile">
       <button className="user-profile-btn" onClick={openMenu}>
-      <i class="fa-solid fa-user"></i>
+      <i style={{'color': 'tomato'}} className="fa-brands fa-reddit fa-lg"></i>
         <div className="drop-down-menu">
           {user.username}
           {showMenu && (
             <div className="profile-dropdown-cont">
               <div className="profile-dropdown">
                 <div className="profile-btn-item" onClick={onLogout}>Log Out</div>
-                <div className="profile-btn-item">Test</div>
-                <div className="profile-btn-item">Test</div>
+                <a href='https://www.linkedin.com/in/jesse-christensen-204801232/'><div className="profile-btn-item">LinkedIn</div></a>
+                <a href='https://github.com/jess-chris'><div className="profile-btn-item">GitHub</div></a>
               </div>
             </div>
           )}
         </div>
-        <i class="fa-solid fa-chevron-down"></i>
+        <i className="fa-solid fa-chevron-down"></i>
       </button>
     </div>
   );

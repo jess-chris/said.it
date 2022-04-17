@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import * as data_funcs from '../../store/data_store';
 import EditPostForm from '../Posts/EditPostForm';
+import EditCommunityForm from './EditCommunityForm';
 
 import './Community.css';
-import EditCommunityForm from './EditCommunityForm';
 
 const ViewCommunity = () => {
 
@@ -47,7 +47,6 @@ const handleDelete = (e) => {
 const handlePost = async (e) => {
 
   e.preventDefault();
-
   const post = {
     'name': community.name,
     'community': community.id,
@@ -55,16 +54,13 @@ const handlePost = async (e) => {
     'title': postTitle,
     'content': content
   };
-
   const data = await dispatch(data_funcs.create_post(post));
-
   if (data) {
     setErrors(data);
   } else {
     setContent('');
     await dispatch(data_funcs.get_communities());
   }
-
 
 };
 
@@ -103,50 +99,54 @@ return (
 
       <div className='com-post-cont'>
 
-        <div className="create-post-cont">
-          <div className='create-post-top'>
-            <h3 className='bold-text'>Create Post</h3>
-          </div>
-          <div>
-            {errors.map((error, ind) => (
-              <div key={ind}>{error}</div>
-            ))}
-          </div>
-          <div className='create-post-body'>
-            <div className='create-post-title'>
-              <div>
-                <textarea 
-                  name='title'
-                  placeholder='Title'
-                  value={postTitle}
-                  onChange={(e) => setPostTitle(e.target.value)}
-                  required
-                />
-              </div>
+          {userId && userId && (
+          <>
+          <div className="create-post-cont">
+            <div className='create-post-top'>
+              <h3 className='bold-text'>Create Post</h3>
             </div>
-
-            <div className='create-post-content'>
-              <div>
-                <textarea 
-                  id='textPost'
-                  name='content'
-                  placeholder='Text'
-                  value={content}
-                  onChange={(e) => setContent(e.target.value)}
-                />
-              </div>
+            <div>
+              {errors.map((error, ind) => (
+                <div key={ind}>{error}</div>
+              ))}
             </div>
-
-            <div className='create-post-bar'>
-
-              <div id='post-btn'>
-                <button onClick={handlePost} className='main-links btn-style' type='submit'>Post</button>
+            <div className='create-post-body'>
+              <div className='create-post-title'>
+                <div>
+                  <textarea 
+                    name='title'
+                    placeholder='Title'
+                    value={postTitle}
+                    onChange={(e) => setPostTitle(e.target.value)}
+                    required
+                  />
+                </div>
               </div>
 
-            </div>
+              <div className='create-post-content'>
+                <div>
+                  <textarea 
+                    id='textPost'
+                    name='content'
+                    placeholder='Text (optional)'
+                    value={content}
+                    onChange={(e) => setContent(e.target.value)}
+                  />
+                </div>
+              </div>
 
+              <div className='create-post-bar'>
+
+                <div id='post-btn'>
+                  <button onClick={handlePost} className='main-links btn-style' type='submit'>Post</button>
+                </div>
+
+              </div>
+
+            </div>
           </div>
-        </div>
+          </>
+          )}
 
         <div className="post-cont">
 

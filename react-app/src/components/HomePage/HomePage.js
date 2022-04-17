@@ -35,12 +35,11 @@ const HomePage = () => {
       <div className="post-cont">
 
         <div className="post-cont-topbar">
-          <button className="main-links">Test</button>
-          <button className="main-links">Test</button>
-          <button className="main-links">Test</button>
+          <button className="post-links light-text btn-style"><i className="fa-solid fa-burst fa-lg"></i>  New</button>
+          <button className="post-links light-text btn-style"><i className="fa-solid fa-arrow-up-from-bracket fa-lg"></i>  Top</button>
         </div>
 
-        <div className="medium-text">Popular posts</div>
+        <div className="medium-text" style={{'fontWeight':'bold', 'opacity':'0.7'}}>Popular posts</div>
 
         <div style={{'paddingTop': '20px'}}>
 

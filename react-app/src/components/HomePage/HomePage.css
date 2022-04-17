@@ -19,7 +19,12 @@ p {
   word-wrap: break-word;
 }
 
-a, .bold-text a {
+a {
+  color: #1a1a1b;
+}
+
+a, .bold-text a,
+.profile-dropdown a {
   text-decoration: none;
 }
 
@@ -64,6 +69,17 @@ textarea {
   justify-content: center;
   margin: 0 auto;
   margin-top: 10px;
+}
+
+.post-links {
+  background: #fff;
+  border: none;
+  color: gray;
+
+  ---fa-counter-background-color: black;
+}
+
+.post-links i {
 }
 
 
