@@ -32,7 +32,7 @@ function ProfileButton() {
   return (
     <div className="user-profile">
       <button className="user-profile-btn" onClick={openMenu}>
-      <i style={{'color': 'tomato'}} className="fa-brands fa-reddit fa-lg"></i>
+      <i style={{'color': '#0079D3'}} className="fa-brands fa-reddit fa-lg"></i>
         <div className="drop-down-menu">
           {user.username}
           {showMenu && (

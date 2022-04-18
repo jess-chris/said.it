@@ -14,6 +14,8 @@ import * as dataActions from './store/data_store';
 import HomePage from './components/HomePage/HomePage';
 import CreateCommunityForm from './components/Communities/CreateCommunityForm';
 import ViewCommunity from './components/Communities/ViewCommunity';
+import CreatePostForm from './components/Posts/CreatePostForm';
+import ViewPost from './components/Posts/ViewPost';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -51,6 +53,9 @@ function App() {
         </Route>
         <Route path='/s/:name' exact={true}>
           <ViewCommunity />
+        </Route>
+        <Route path='/s/:name/:id/:title' exact={true}>
+          <ViewPost />
         </Route>
         <ProtectedRoute path='/communities/new' exact={true}>
           <CreateCommunityForm />

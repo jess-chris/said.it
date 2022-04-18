@@ -17,7 +17,7 @@ const NavBar = () => {
 
 
         <NavLink className='main-logo' to='/' exact={true} activeClassName='active'>
-          <img src='./said_it.png'></img>
+          <img src='/said_it.png'></img>
         </NavLink>
 
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 import * as data_funcs from '../../store/data_store';
 import CreatePostForm from "../Posts/CreatePostForm";
@@ -11,7 +11,9 @@ const HomePage = () => {
 
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
+  const location = useLocation().pathname;
   
+
   useEffect(() => {
     (async() => {
       await dispatch(data_funcs.get_communities());
@@ -46,11 +48,17 @@ const HomePage = () => {
           {loaded && communities?.map((community) => {
             return community?.posts?.map((post) => {
               return (
-                <div key={post?.id} className="single-post">
-                  <p><NavLink to={`/s/${community?.name}`}><span className="bold-text">{`s/${community?.name}`}</span></NavLink> • <span className="light-text">Posted by u/{post?.user_name}</span></p>
-                  <p className="medium-text" style={{'fontWeight': 'bold'}}>{post?.title}</p>
-                  <p className="light-text">{post?.content}</p>
-                </div>
+                <>
+                  <div key={post?.id} className="single-post">
+                    <p><NavLink to={`/s/${community?.name}`}><span className="bold-text">{`s/${community?.name}`}</span></NavLink> • <span className="light-text">Posted by u/{post?.user_name}</span></p>
+                    <NavLink to={{pathname: `/s/${community?.name}/${post?.id}/${post?.title.replaceAll(' ', '_')}`, state:{location}}}>
+                    <p className="medium-text" style={{'fontWeight': 'bold'}}>{post?.title}</p>
+                    <div className="text-post-content">
+                      <p className="light-text">{post?.content}</p>
+                    </div>
+                    </NavLink>
+                  </div>
+                </>
               )
             })
           })}
@@ -114,6 +122,21 @@ const HomePage = () => {
 
 
           </div>
+
+          <div className="main-spacer"></div>
+
+          <div className='side-header'>
+              <div className='bold-text com-banner' style={{'justifyContent':'center'}}>
+                Technologies Used & Links
+              </div>
+              <ul className='light-text'>
+                <li>React</li>
+                <li>Redux</li>
+                <li>Python</li>
+                <li>Flask SQLAlchemy</li>
+                <li>PostgreSQL</li>
+              </ul>
+            </div>
 
 
         </div>

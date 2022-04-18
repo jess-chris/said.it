@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams, NavLink, useLocation } from 'react-router-dom';
 import * as data_funcs from '../../store/data_store';
 import EditPostForm from '../Posts/EditPostForm';
 import EditCommunityForm from './EditCommunityForm';
@@ -15,6 +15,7 @@ const [content, setContent] = useState('');
 const [postTitle, setPostTitle] = useState('');
 const [errors, setErrors] = useState([]);
 const history = useHistory();
+const location = useLocation().pathname;
 const { name } = useParams();
 
 useEffect(() => {
@@ -153,16 +154,20 @@ return (
 
           {loaded && community?.posts?.map((post) => {
             return (
-              <div key={post?.id} className="single-post">
-                <p className='light-text'>Posted by u/{post?.user_name}</p>
-                <p className="medium-text" style={{'fontWeight': 'bold'}}>{post?.title}</p>
-                <p className="light-text">{post?.content}</p>
-                {userId === post?.user_id && (
-                <div id='com-btns'>
-                  <EditPostForm post={post} />
+              <>
+                <div key={post?.id} className="single-post">
+                  <NavLink to={{pathname: `/s/${community?.name}/${post?.id}/${post?.title.replaceAll(' ', '_')}`, state:{location}}}>
+                  <p className='light-text'>Posted by u/{post?.user_name}</p>
+                  <p className="medium-text" style={{'fontWeight': 'bold'}}>{post?.title}</p>
+                  <p className="light-text">{post?.content}</p>
+                  </NavLink>
+                  {userId === post?.user_id && (
+                  <div id='com-btns'>
+                    <EditPostForm post={post} />
+                  </div>
+                  )}
                 </div>
-                )}
-              </div>
+              </>
             )
           })}
 
@@ -174,7 +179,9 @@ return (
           <div className='side-page'>
 
             <div className='side-header'>
-            <h2 className="bold-text community-info" style={{'fontSize': '16px'}}>Community Info:</h2>
+              <div className='bold-text com-banner'>
+                About Community
+              </div>
               <p className='bold-text community-info'>{community?.community_info}</p>
             </div>
           </div>
