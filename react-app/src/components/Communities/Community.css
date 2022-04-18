@@ -125,5 +125,82 @@
 
 
 .community-info {
-  text-align: center;
+  padding-left: 1rem;
+  height: 100%;
+  font-size: 13px;
+}
+
+
+.com-banner {
+  display: flex;
+  background: #2B303A;
+  height: 44px;
+  border-radius: 3px 3px 0 0;
+  padding-left: 8px;
+  align-items: center;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  border-radius: 4px;
+}
+
+
+
+.side-post-modal {
+  margin-left: 150px;
+  margin-top: 0;
+}
+
+.modal-post-cont {
+  justify-content: center;
+}
+
+
+.comment-cont {
+  position: relative;
+  margin: 24px 40px 24px 48px;
+  max-width: 650px;
+  padding: 0;
+}
+
+.new-comment-cont {
+  border: 1px solid #EDEFF1;
+  border-radius: 4px;
+  width: 100%;
+
+}
+
+.new-comment-footer {
+  display: flex;
+  justify-content: right;
+  background: #EDEFF1;
+}
+
+.new-comment-content textarea {
+  border-radius: 4px;
+  resize: none;
+  height: 50px;
+  width: 85%;
+  padding: 8px 68px 8px 16px;
+  outline: none;
+  border-color: none;
+}
+
+.user-comments {
+  margin-top: 16px;
+  background: transparent;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  margin-left: -23px;
+  position: relative;
+  padding: 8px 0 0 8px;
+}
+
+
+.comment-form-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

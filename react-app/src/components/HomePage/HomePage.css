@@ -19,7 +19,12 @@ p {
   word-wrap: break-word;
 }
 
-a, .bold-text a {
+a {
+  color: #1a1a1b;
+}
+
+a, .bold-text a,
+.profile-dropdown a {
   text-decoration: none;
 }
 
@@ -66,6 +71,17 @@ textarea {
   margin-top: 10px;
 }
 
+.post-links {
+  background: #fff;
+  border: none;
+  color: gray;
+
+  ---fa-counter-background-color: black;
+}
+
+.post-links i {
+}
+
 
 .post-cont {
   min-height: 1000px;
@@ -84,9 +100,46 @@ textarea {
   background-color: #fff;
 }
 
+.single-post-view {
+  border: 1px solid #fff;
+  margin-bottom: 10px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  background-color: #fff;
+}
+
 .single-post:hover {
   border: 1px solid gray;
   z-index: 1;
+}
+
+.text-post-content {
+  max-height: 250px;
+  word-break: break-word;
+  background: #fff;
+  display: block;
+  -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent);
+}
+
+.text-post-content p {
+  /* display: block;
+    position: absolute;
+    height: 80px;
+    width: 200px;    
+    right: 0;
+    background: linear-gradient(to right, rgba(255,255,255,.6) 30%,rgba(255,255,255,1) 100%);
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(255,255,255,.6)), color-stop(100%,rgba(255,255,255,1)));
+    background: -webkit-linear-gradient(left, rgba(255,255,255,.6) 30%,rgba(255,255,255,1) 100%);
+    top: 0; */
+}
+
+.text-post-view {
+  line-height: 21px;
+  padding-bottom: 1px;
+  margin-bottom: -1px;
+  padding-left: 15px;
+  overflow: auto;
 }
 
 
@@ -114,6 +167,10 @@ textarea {
   word-wrap: break-word;
   /* border: 1px solid black; */
   padding: 0;
+}
+
+.side-header ol {
+  padding-top: 50px;
 }
 
 .post-cont-topbar {
@@ -199,16 +256,18 @@ textarea {
   height: 64px;
   text-align: center;
   /* background-color: #ff4500; */
-  background-image: url('https://www.redditstatic.com/desktop2x/img/id-cards/home-banner@2x.png');
-   opacity: 0.9; 
+  background: #2B303A;
+  max-width: 312px;
   width: 100%;
-
+  position: absolute
 }
 
 #banner > h2 {
   padding: 5px;
-  padding-left: 100px;
-  position: absolute;
+  /* padding-left: 100px; */
+  display: flex;
+  justify-content: center;
+  /* position: absolute; */
 }
 
 

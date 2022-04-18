@@ -42,6 +42,7 @@ const EditCommunityForm = () => {
       setErrors(data);
     }
 
+
     setShowModal(false);
     history.push(`/s/${communityName}`);
     

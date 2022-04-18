@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 
 import * as data_funcs from '../../store/data_store';
-import LoginForm from '../auth/LoginForm';
+
 
 const CreatePostForm = () => {
 
@@ -106,7 +106,7 @@ const CreatePostForm = () => {
       </Modal>
       )}
       {showModal && !userId && (
-      <LoginForm value={true}/>  
+      <Redirect to='/login' />
       )}
     </>
   )

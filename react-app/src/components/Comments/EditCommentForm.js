@@ -6,29 +6,27 @@ import * as data_funcs from '../../store/data_store';
 import { useHistory, useParams } from 'react-router-dom';
 
 
-const EditPostForm = ({ post }) => {
+const EditCommentForm = ({ comment }) => {
 
   const dispatch = useDispatch();
   const history = useHistory();
 
   const [showModal, setShowModal] = useState(false);
   const [errors, setErrors] = useState([]);
-  const [title, setTitle] = useState(post?.title);
-  const [content, setContent] = useState(post?.content);
+  const [content, setContent] = useState(comment?.content);
 
-  const {name} = useParams();
+  const {name, id, title} = useParams();
 
-  const editPost = async (e) => {
+  const editComment = async (e) => {
 
     e.preventDefault();
   
-    const updated_post = {
-      'id': post.id,
-      'title': title,
+    const updated_comment = {
+      'commentId': comment.id,
       'content': content
     };
 
-    const data = await dispatch(data_funcs.edit_post(updated_post));
+    const data = await dispatch(data_funcs.edit_comment(updated_comment));
     await dispatch(data_funcs.get_communities());
 
     if (data) {
@@ -44,13 +42,12 @@ const EditPostForm = ({ post }) => {
     e.preventDefault()
 
     const toDelete = {
-      'id': post.id
+      'commentId': comment.id
     };
 
-    setShowModal(false)
-    history.push(`/s/${name}`);
-    await dispatch(data_funcs.delete_post(toDelete));
+    await dispatch(data_funcs.delete_comment(toDelete));
     await dispatch(data_funcs.get_communities());
+    history.push(`/s/${name}/${id}/${title}`);
   }
 
 
@@ -61,24 +58,13 @@ const EditPostForm = ({ post }) => {
       <button className='main-links btn-style' onClick={handleDelete}>Delete</button>
       {showModal && (
       <Modal onClose={() => setShowModal(false)}>
-        <div className='post-form-cont'>
-          <form onSubmit={editPost}>
+        <div className='main-spacer'></div>
+        <div className='comment-form-modal'>
+          <form onSubmit={editComment}>
             <div>
               {errors.map((error, ind) => (
                 <div key={ind}>{error}</div>
               ))}
-            </div>
-            <div>
-              <label htmlFor='title'></label>
-              <textarea
-                name='content'
-                rows='2'
-                cols='75'
-                placeholder='Title'
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                required
-              />
             </div>
             <div>
               <label htmlFor='content'></label>
@@ -89,6 +75,7 @@ const EditPostForm = ({ post }) => {
                 placeholder='Text (optional'
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
+                required
               />
             </div>
             <button className='main-links' type='submit'>Submit</button>
@@ -101,4 +88,4 @@ const EditPostForm = ({ post }) => {
 };
 
 
-export default EditPostForm;
+export default EditCommentForm;

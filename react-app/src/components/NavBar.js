@@ -12,38 +12,56 @@ const NavBar = () => {
   const user = useSelector(state => state.session.user)
 
   return (
-    <nav className='main-navbar'>
+    <>
+      <nav className='main-navbar'>
 
-      <div className='main-navbar navbar-items'>
-          <div>
-            <NavLink className='main-links bold-text' style={{'fontSize': '18px'}} to='/' exact={true} activeClassName='active'>
-              Said.it
-            </NavLink>
-          </div>
 
-          {/* <div>
-            <NavLink className='main-links' to='/users' exact={true} activeClassName='active'>
+        <NavLink className='main-logo' to='/' exact={true} activeClassName='active'>
+          <img src='/said_it.png'></img>
+        </NavLink>
+
+
+            {/* <div>
+              <NavLink className='main-links' to='/users' exact={true} activeClassName='active'>
               Users
-            </NavLink>
-          </div> */}
+              </NavLink>
+            </div> */}
 
-      </div>
-      {!user && (
-      <div className='navbar-items auth-links'>
-        <div>
-          <LoginForm />
+
+
+        <div className='search-bar-cont'>
+          <form className='search-bar'>
+            <div className='search-bar-input'>
+              <label  htmlFor='search'><i style={{'color':'grey', 'background':'#f6f7f8'}} className="fa-solid fa-magnifying-glass"></i></label>
+              <input
+                type='search'
+                name='search'
+                className='search-bar-input'
+                placeholder='Search Said.it'
+              />
+            </div>
+          </form>
         </div>
-        <div>
-          <SignUpForm />
+
+
+
+        {!user && (
+        <div className='navbar-items auth-links'>
+          <div>
+            <LoginForm />
+          </div>
+          <div>
+            <SignUpForm />
+          </div>
         </div>
-      </div>
-      )}
-      {user && user && (
-      <>
-        <ProfileButton />
-      </>
-      )}
-    </nav>
+        )}
+        {user && user && (
+        <>
+          <ProfileButton />
+        </>
+        )}
+      </nav>
+  </>
   );
 }
 

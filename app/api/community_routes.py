@@ -43,8 +43,8 @@ def edit_community():
   
   form = CommunityForm()
   form['csrf_token'].data = request.cookies['csrf_token']
-  
   community_id = request.json['id']
+  
   
   community = Community.query.get(community_id)
   

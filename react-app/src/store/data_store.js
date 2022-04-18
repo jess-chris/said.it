@@ -187,6 +187,70 @@ export const delete_post = (post_id) => async (dispatch) => {
 };
 
 
+// Comments
+
+export const create_comment = (comment) => async (dispatch) => {
+
+  const res = await fetch('/api/comments/new', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(comment)
+  });
+
+  if (res.ok) {
+    await res.json();
+  } else if (res.status < 500) {
+    const data = await res.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ['An error occurred. Please try again.']
+  }
+}
+
+
+export const edit_comment = (comment) => async (dispatch) => {
+
+  const res = await fetch('/api/comments/edit', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(comment)
+  });
+
+  if (res.ok) {
+    await res.json();
+  } else if (res.status < 500) {
+    const data = await res.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ['An error occurred. Please try again.']
+  }
+}
+
+
+export const delete_comment = (comment) => async (dispatch) => {
+
+  const res = await fetch('/api/comments/delete', {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(comment)
+  });
+
+  if (res.ok) {
+    const comment = await res.json();
+    return comment;
+  } 
+}
+
 
 export default function reducer(state = {all_communities: {}, current_community: {}, current_post: {}}, action) {
 
@@ -195,7 +259,18 @@ export default function reducer(state = {all_communities: {}, current_community:
   switch(action.type) {
 
     case GET_COMMUNITIES:
-      action.communities.forEach((community) => newState.all_communities[community.name.toLowerCase()] = community);
+      action.communities.forEach((community) => {
+      newState.all_communities[community.name.toLowerCase()] = community;
+
+      community.posts.forEach((post, ind) => {
+        if (post.id !== ind) {
+        newState.all_communities[community.name.toLowerCase()].posts[ind] = post;
+        newState.all_communities[community.name.toLowerCase()].posts[post.id] = newState.all_communities[community.name.toLowerCase()].posts[ind];
+        delete newState.all_communities[community.name.toLowerCase()].posts[ind];
+        }
+      });
+
+      });
       return newState;
 
     case CREATE_COMMUNITY:
@@ -203,9 +278,13 @@ export default function reducer(state = {all_communities: {}, current_community:
       return newState;
 
     case EDIT_COMMUNITY:
-      newState.all_communities[action.old.toLowerCase()] = action.community;
-      newState.all_communities[action.community.name.toLowerCase()] = newState.all_communities[action.old]
-      delete newState.all_communities[action.old]
+      if(action.old.toLowerCase() !== action.community.name.toLowerCase()) {
+        newState.all_communities[action.old.toLowerCase()] = action.community;
+        newState.all_communities[action.community.name.toLowerCase()] = newState.all_communities[action.old]
+        delete newState.all_communities[action.old]
+      } else {
+        newState.all_communities[action.community.name.toLowerCase()] = action.community;
+      }
       return newState;
 
     case DELETE_COMMUNITY:
