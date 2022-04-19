@@ -115,9 +115,9 @@ const ViewPost = () => {
       window.alert("Not authorized");
     }
 
-    const upArrow = document.getElementById(`up:${post}`);
-    const downArrow = document.getElementById(`down:${post}`);
-    const scoreCont = document.getElementById(`counter-${post}`)
+    const upArrow = document.getElementById(`post-up:${post}`);
+    const downArrow = document.getElementById(`post-down:${post}`);
+    const scoreCont = document.getElementById(`post-counter-${post}`)
 
 
     if (val === true) {
@@ -149,9 +149,9 @@ const ViewPost = () => {
       window.alert("Not authorized");
     }
 
-    const upArrow = document.getElementById(`up:${comment}`);
-    const downArrow = document.getElementById(`down:${comment}`);
-    const scoreCont = document.getElementById(`counter-${comment}`)
+    const upArrow = document.getElementById(`com-up:${comment}`);
+    const downArrow = document.getElementById(`com-down:${comment}`);
+    const scoreCont = document.getElementById(`comment-counter-${comment}`)
 
 
     if (val === true) {
@@ -207,13 +207,13 @@ const ViewPost = () => {
             <div className='post-wrap'>
               <div className="single-post-btn-bar">
 
-                <div className={`vote-cont-${post?.id}`}>
+                <div>
                   <svg onClick={() => handlePostVote(post?.id, true)} className="vote-buttons" id="upVoteButton" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path id={`up:${post?.id}`} d="M12 4 3 15h6v5h6v-5h6z" className="icon_svg-stroke icon_svg-fill" strokeWidth="1.5" stroke="#666" fill={user?.id && votes?.post_votes[post.id]?.vote_type === true ? '#ff4500' : 'none'} strokeLinejoin="round"></path>
+                    <path id={`post-up:${post?.id}`} d="M12 4 3 15h6v5h6v-5h6z" className="icon_svg-stroke icon_svg-fill" strokeWidth="1.5" stroke="#666" fill={user?.id && votes?.post_votes[post.id]?.vote_type === true ? '#ff4500' : 'none'} strokeLinejoin="round"></path>
                   </svg>
-                  <div id={`counter-${post?.id}`}>{post?.vote_score}</div>
+                  <div id={`post-counter-${post?.id}`}>{post?.vote_score}</div>
                   <svg onClick={() => handlePostVote(post?.id, false)} className="vote-buttons" id="downVoteButton" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path id={`down:${post?.id}`} d="m12 20 9-11h-6V4H9v5H3z" className="icon_svg-stroke icon_svg-fill" stroke="#666" fill={user?.id && votes?.post_votes[post.id]?.vote_type === false ? '#0079D3' : 'none'} strokeWidth="1.5" strokeLinejoin="round"></path>
+                    <path id={`post-down:${post?.id}`} d="m12 20 9-11h-6V4H9v5H3z" className="icon_svg-stroke icon_svg-fill" stroke="#666" fill={user?.id && votes?.post_votes[post.id]?.vote_type === false ? '#0079D3' : 'none'} strokeWidth="1.5" strokeLinejoin="round"></path>
                   </svg>
                 </div>
 
@@ -293,11 +293,11 @@ const ViewPost = () => {
                     <div className='user-comment-footer'>
                       <div className={`vote-cont-${comment?.id}`} style={{'display':'flex', 'flexDirection':'row', 'alignItems':'center'}}>
                         <svg onClick={() => handleCommentVote(comment?.id, true)} className="vote-buttons" id="upVoteButton" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path id={`up:${comment?.id}`} d="M12 4 3 15h6v5h6v-5h6z" className="icon_svg-stroke icon_svg-fill" strokeWidth="1.5" stroke="#666" fill={user?.id && votes?.comment_votes[comment.id]?.vote_type === true ? '#ff4500' : 'none'} strokeLinejoin="round"></path>
+                          <path id={`com-up:${comment?.id}`} d="M12 4 3 15h6v5h6v-5h6z" className="icon_svg-stroke icon_svg-fill" strokeWidth="1.5" stroke="#666" fill={user?.id && votes?.comment_votes[comment.id]?.vote_type === true ? '#ff4500' : 'none'} strokeLinejoin="round"></path>
                         </svg>
-                        <div id={`counter-${comment?.id}`}>{comment?.vote_score}</div>
+                        <div id={`comment-counter-${comment?.id}`}>{comment?.vote_score}</div>
                         <svg onClick={() => handleCommentVote(comment?.id, false)} className="vote-buttons" id="downVoteButton" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path id={`down:${comment?.id}`} d="m12 20 9-11h-6V4H9v5H3z" className="icon_svg-stroke icon_svg-fill" stroke="#666" fill={user?.id && votes?.comment_votes[comment.id]?.vote_type === false ? '#0079D3' : 'none'} strokeWidth="1.5" strokeLinejoin="round"></path>
+                          <path id={`com-down:${comment?.id}`} d="m12 20 9-11h-6V4H9v5H3z" className="icon_svg-stroke icon_svg-fill" stroke="#666" fill={user?.id && votes?.comment_votes[comment.id]?.vote_type === false ? '#0079D3' : 'none'} strokeWidth="1.5" strokeLinejoin="round"></path>
                         </svg>
                       </div>
                       <button onClick={saidItComment} style={{'background':'none', 'border':'none', 'color': 'grey'}}><i id={ind} className="fa-solid fa-volume-high"></i></button>
