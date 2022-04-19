@@ -25,7 +25,7 @@
 
 #modal-content {
   /* margin-top: 30rem; */
-  top: 5rem;
+  top: 4rem;
   position: fixed;
   height:fit-content;
   width: 850px;
@@ -35,4 +35,42 @@
   align-items: center; */
   opacity: 1;
   border-radius: 4px;
+}
+
+
+
+#new-com-modal {
+  top: 0;
+  background-color: white;
+  height:fit-content;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  max-width: 568px;
+  align-self: center;
+  position: relative;
+  opacity: 1;
+  border-radius: 4px;
+}
+
+
+
+#edit-post-modal {
+  top: 0;
+  background-color: white;
+  height:fit-content;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  max-width: 675px;
+  align-self: center;
+  position: relative;
+  opacity: 1;
+  border-radius: 4px;
+}
+
+.post-form-cont {
+  padding: 16px;
+  max-width: 600px;
+  max-height: 100%;
 }

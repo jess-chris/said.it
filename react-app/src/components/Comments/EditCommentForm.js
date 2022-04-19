@@ -57,28 +57,33 @@ const EditCommentForm = ({ comment }) => {
       <button onClick={() => setShowModal(true)} className="main-links btn-style">Edit</button>
       <button className='main-links btn-style' onClick={handleDelete}>Delete</button>
       {showModal && (
-      <Modal onClose={() => setShowModal(false)}>
-        <div className='main-spacer'></div>
-        <div className='comment-form-modal'>
+      <Modal onClose={() => setShowModal(false)} currentId={'new-com-modal'}>
+        <div className='edit-post-cont' style={{'width':'600px'}}>
+          <div className='create-post-top'>
+            <h3 className='bold-text'>Edit Comment</h3>
+          </div>
           <form onSubmit={editComment}>
             <div>
               {errors.map((error, ind) => (
                 <div key={ind}>{error}</div>
               ))}
             </div>
-            <div>
+            <div className='create-post-content'>
               <label htmlFor='content'></label>
               <textarea
                 name='content'
-                rows='15'
-                cols='75'
+                style={{'height':'200px'}}
                 placeholder='Text (optional'
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
                 required
               />
             </div>
-            <button className='main-links' type='submit'>Submit</button>
+            <div className='create-post-bar'>
+              <div id='post-btn'>
+                <button className='main-links btn-style' type='submit'>Submit</button>
+              </div>
+            </div>
           </form>
         </div>
       </Modal>

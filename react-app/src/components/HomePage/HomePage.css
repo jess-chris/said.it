@@ -98,6 +98,28 @@ textarea {
   position: relative;
   cursor: pointer;
   background-color: #fff;
+
+  display: flex;
+  flex-direction: row;
+  border-radius: 4px;
+}
+
+.single-post-footer {
+  /* display: flex; */
+  /* flex-direction: column; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  padding: 5px;
+  color: grey;
+  max-width: fit-content;
+}
+
+
+.single-post-footer:hover {
+  /* background: grey;
+  opacity: .5; */
 }
 
 .single-post-view {
@@ -107,6 +129,41 @@ textarea {
   position: relative;
   cursor: pointer;
   background-color: #fff;
+}
+
+.single-post-btn-bar {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-between;
+
+}
+.vote-cont {
+  display: flex;
+  flex-direction: column;
+
+}
+
+#upVoteButton:hover .icon_svg-stroke{
+
+  stroke: #ff4500;
+}
+
+
+#downVoteButton:hover .icon_svg-stroke{
+
+  stroke: #0079D3;
+}
+
+#said-it-btn:hover{
+  color: #ff4500;
+}
+
+.sound-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  align-content: flex-end;
 }
 
 .single-post:hover {
@@ -120,6 +177,8 @@ textarea {
   background: #fff;
   display: block;
   -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent);
+  mask-image: linear-gradient(180deg, #000 60%, transparent);
+  padding-right: 10px;
 }
 
 .text-post-content p {
@@ -157,6 +216,14 @@ textarea {
   display: flex;
   flex-direction: column;
   height: 100%;
+}
+
+.side-page-post-view {
+  width: inherit;
+  display: flex;
+  flex-direction: column;
+  max-height: 50%;
+  min-height: 50%;
 }
 
 .side-header {
@@ -259,7 +326,8 @@ textarea {
   background: #2B303A;
   max-width: 312px;
   width: 100%;
-  position: absolute
+  position: absolute;
+  border-radius: 4px;
 }
 
 #banner > h2 {
@@ -286,8 +354,9 @@ textarea {
 
 
 @media screen and (min-width: 640px) {
-  .single-post {
+  .single-post-content {
     border-radius: 4px;
     padding-left: 40px;
+    width: 100%;
   }
 }

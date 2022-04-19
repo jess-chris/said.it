@@ -1,4 +1,5 @@
 from .db import db
+from sqlalchemy import func
 
 class Post_Vote(db.Model):
   __tablename__ = 'post_votes'
@@ -7,3 +8,12 @@ class Post_Vote(db.Model):
   user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
   post_id = db.Column(db.Integer, db.ForeignKey('posts.id'), nullable=False)
   vote_type = db.Column(db.Boolean, nullable=False)
+  
+  def to_dict(self):
+    return {
+      'id': self.id,
+      'user_id': self.user_id,
+      'post_id': self.post_id,
+      'vote_type': self.vote_type
+    }
+    

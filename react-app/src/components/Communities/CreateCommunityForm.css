@@ -1,0 +1,9 @@
+#modal-content {
+  top: 0;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  max-width: 568px;
+  align-self: center;
+  position: relative;
+}

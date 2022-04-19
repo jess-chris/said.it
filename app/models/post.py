@@ -1,5 +1,6 @@
 from .db import db
 from datetime import datetime
+from sqlalchemy import func
 
 class Post(db.Model):
   __tablename__ = 'posts'
@@ -15,6 +16,19 @@ class Post(db.Model):
   updated_at = db.Column(db.DateTime, default=datetime.now(), nullable=False)
   
   comments = db.relationship('Comment', backref='comments', cascade='all, delete')
+  votes = db.relationship('Post_Vote', backref='post_votes', cascade='all, delete')
+  
+  @property
+  def score(self):
+    return self.vote_score
+  
+  # @score.setter
+  # def score(self):
+  #   upvotes = db.session.execute('select count(vote_type) from post_votes where vote_type=true').scalar()
+  #   downvotes = db.session.execute('select count(vote_type) from post_votes where vote_type=false').scalar()
+  #   self.vote_score = upvotes - downvotes      
+  
+  
   
   def to_dict(self):
     return {
@@ -24,8 +38,11 @@ class Post(db.Model):
       'user_name': self.user_name,
       'title': self.title,
       'content': self.content,
-      'vote_score': self.vote_score,
+      'vote_score': self.score,
+      'votes': {vote.user_id: vote.to_dict() for vote in self.votes},
       'comments': [comment.to_dict() for comment in self.comments],
       'created_at': self.created_at,
       'updated_at': self.updated_at
     }
+    
+    

@@ -9,23 +9,22 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
 
-import * as dataActions from './store/data_store';
+import * as data_funcs from './store/data_store';
 
 import HomePage from './components/HomePage/HomePage';
-import CreateCommunityForm from './components/Communities/CreateCommunityForm';
 import ViewCommunity from './components/Communities/ViewCommunity';
-import CreatePostForm from './components/Posts/CreatePostForm';
 import ViewPost from './components/Posts/ViewPost';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
-  //const userId = useSelector(state => state.session.user)
+  // const userId = useSelector(state => state.session.user)
 
   useEffect(() => {
     (async() => {
       await dispatch(authenticate());
-      await dispatch(dataActions.get_communities());
+      await dispatch(data_funcs.get_communities());
+      // await dispatch(data_funcs.get_user_votes(userId));
       setLoaded(true);
     })();
   }, [dispatch]);
@@ -57,9 +56,9 @@ function App() {
         <Route path='/s/:name/:id/:title' exact={true}>
           <ViewPost />
         </Route>
-        <ProtectedRoute path='/communities/new' exact={true}>
+        {/* <ProtectedRoute path='/communities/new' exact={true}>
           <CreateCommunityForm />
-        </ProtectedRoute>
+        </ProtectedRoute> */}
         <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
         </ProtectedRoute>
