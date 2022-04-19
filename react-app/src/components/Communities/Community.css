@@ -9,14 +9,80 @@
 } 
 
 .com-form-cont {
-  transition: margin-top .3s ease;
+  /* transition: margin-top .3s ease;
   padding-top: 48px;
   margin-top: 48px; 
   padding: 8px 16px;
   display: flex;
-  flex-direction: column;
+  flex-direction: column; */
+  padding: 16px;
+  max-width: 500px;
+  max-height: 100%;
 }
 
+.com-form-header-cont {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1px solid #CCC;
+  line-height: 20px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.com-form-header {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.com-form-name {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  border-bottom: 1px solid #CCC;
+  margin-bottom: 10px;
+}
+
+.com-form-name input {
+  max-height: 37px;
+  width: 100%;
+  padding: 4px 24px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  outline: none;
+  border: 1px solid #ccc;
+}
+
+.com-name-input {
+  align-items: flex-start;
+}
+
+.com-form-btn-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+
+
+#com-create-btn {
+  width: 100%;
+  max-width: 160px;
+  background: #0079D3;
+  color: #FFF;
+  fill: #FFF;
+  border: none;
+}
+
+#com-cancel-btn {
+  width: 100%;
+  max-width: 80px;
+  background: #FFF;
+  color: #0079D3;
+  fill: #0079D3;
+  border: 1px solid #0079D3;
+}
 
 .main-com-cont {
   padding: 8px 16px;
@@ -58,7 +124,9 @@
 }
 
 
-.create-post-cont {
+
+.create-post-cont,
+.edit-post-cont {
   margin-bottom: 15px;
   border-radius: 5px;
   width: 100%;
@@ -95,7 +163,8 @@
   border: 1px solid #ccc;
 }
 
-.create-post-cont {
+.create-post-cont,
+.edit-post-cont {
   outline: currentcolor none medium;
   user-select: text;
   white-space: pre-wrap;
@@ -157,6 +226,12 @@
 }
 
 
+.post-wrap {
+  display: flex;
+  flex-direction: row;
+}
+
+
 .comment-cont {
   position: relative;
   margin: 24px 40px 24px 48px;
@@ -204,3 +279,27 @@
   justify-content: center;
   align-items: center;
 }
+
+
+.user-comment-footer {
+  display: flex;
+  flex-direction: row;
+  
+  height: 25px;
+}
+
+
+
+/* #modal-content {
+  /* margin-top: 30rem; 
+  top: 10rem;
+  position: fixed;
+  height:fit-content;
+  max-width: 850px;
+  background-color: white;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; 
+  opacity: 1;
+  border-radius: 4px;
+} */

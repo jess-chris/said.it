@@ -60,38 +60,53 @@ const EditPostForm = ({ post }) => {
       <button onClick={() => setShowModal(true)} className="main-links btn-style">Edit</button>
       <button className='main-links btn-style' onClick={handleDelete}>Delete</button>
       {showModal && (
-      <Modal onClose={() => setShowModal(false)}>
-        <div className='post-form-cont'>
+      <Modal onClose={() => setShowModal(false)} currentId={'new-com-modal'}>
+        <div className='create-post-cont'>
+          <div className='create-post-top'>
+            <h3 className='bold-text'>Edit Post</h3>
+          </div>
           <form onSubmit={editPost}>
             <div>
               {errors.map((error, ind) => (
                 <div key={ind}>{error}</div>
               ))}
             </div>
-            <div>
-              <label htmlFor='title'></label>
-              <textarea
-                name='content'
-                rows='2'
-                cols='75'
-                placeholder='Title'
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                required
-              />
+            <div className='create-post-body'>
+              <div className='create-post-title'>
+                <div>
+                  <label htmlFor='title'></label>
+                  <textarea
+                    name='content'
+                    rows='2'
+                    cols='75'
+                    placeholder='Title'
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    required
+                  />
+                </div>
+              </div>
             </div>
-            <div>
-              <label htmlFor='content'></label>
-              <textarea
-                name='content'
-                rows='15'
-                cols='75'
-                placeholder='Text (optional'
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-              />
+
+            <div className='create-post-content' style={{'padding':'10px'}}>
+              <div>
+                <label htmlFor='content'></label>
+                <textarea
+                  name='content'
+                  style={{'height':'200px'}}
+                  placeholder='Text (optional'
+                  value={content}
+                  onChange={(e) => setContent(e.target.value)}
+                />
+              </div>
             </div>
-            <button className='main-links' type='submit'>Submit</button>
+
+            <div className='create-post-bar'>
+              <div id='post-btn'>
+                <button className='main-links' type='submit'>Submit</button>
+              </div>
+            </div>
+
           </form>
         </div>
       </Modal>

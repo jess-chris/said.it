@@ -15,6 +15,13 @@ def posts():
   return {'posts': [post.to_dict() for post in posts]}
 
 
+@post_routes.route('/score/<int:post_id>')
+def post_score(post_id):
+  post = Post.query.get(post_id)
+  
+  return {'score': post.vote_score}
+
+
 
 
 @post_routes.route('/new', methods=['POST'])

@@ -1,7 +1,7 @@
 from crypt import methods
 from flask import Blueprint, jsonify, session, request
 from app.models import db, Community
-from app.forms import CommunityForm
+from app.forms import CommunityForm, EditCommunityForm
 from flask_login import current_user
 from .auth_routes import validation_errors_to_error_messages
 
@@ -25,7 +25,7 @@ def new_community():
       name=form.data['name'],
       owner=current_user.id,
       owner_username=current_user.username,
-      member_title=form.data['title'],
+      # member_title=form.data['title'],
       community_image=form.data['image'],
       community_info=form.data['info']
     )
@@ -41,7 +41,7 @@ def new_community():
 @community_routes.route('/edit', methods=['PUT'])
 def edit_community():
   
-  form = CommunityForm()
+  form = EditCommunityForm()
   form['csrf_token'].data = request.cookies['csrf_token']
   community_id = request.json['id']
   
@@ -52,7 +52,7 @@ def edit_community():
   
   if form.validate_on_submit() and community.owner == current_user.id:
     community.name=form.data['name'],
-    community.member_title=form.data['title'],
+    # community.member_title=form.data['title'],
     community.community_image=form.data['image'],
     community.community_info=form.data['info']
     

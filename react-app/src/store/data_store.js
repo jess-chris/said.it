@@ -5,8 +5,10 @@ const CREATE_COMMUNITY = 'data_store/CREATE_COMMUNITY';
 const EDIT_COMMUNITY = 'data_store/EDIT_COMMUNITY';
 const DELETE_COMMUNITY = 'data_store/DELETE_COMMUNITY';
 
-
-
+const GET_USER_POST_VOTES = 'data_store/GET_USER_POST_VOTES';
+const UPDATE_USER_POST_VOTES = 'data_store/UPDATE_USER_POST_VOTES';
+const GET_USER_COMMENT_VOTES = 'data_store/GET_USER_COMMENT_VOTES';
+const UPDATE_USER_COMMENT_VOTES = 'data_store/UPDATE_USER_POST_VOTES';
 
 
 const all_communities = (communities) => ({
@@ -33,6 +35,25 @@ const ed_community = (community, old) => ({
   old
 });
 
+const user_post_votes = (votes) => ({
+  type: GET_USER_POST_VOTES,
+  votes
+});
+
+const update_post_votes = (vote) => ({
+  type: UPDATE_USER_POST_VOTES,
+  vote
+});
+
+const user_comment_votes = (votes) => ({
+  type: GET_USER_COMMENT_VOTES,
+  votes
+});
+
+const update_comment_votes = (vote) => ({
+  type: UPDATE_USER_COMMENT_VOTES,
+  vote
+});
 
 
 
@@ -187,6 +208,20 @@ export const delete_post = (post_id) => async (dispatch) => {
 };
 
 
+export const current_comment_score = (commentId) => async dispatch => {
+
+  const res = await fetch(`/api/comments/score/${commentId}`, {
+    headers: {
+    'Content-Type': 'application/json'
+    },
+  });
+
+  if (res.ok) {
+    const score = await res.json()
+    return score;
+  }
+};
+
 // Comments
 
 export const create_comment = (comment) => async (dispatch) => {
@@ -249,10 +284,84 @@ export const delete_comment = (comment) => async (dispatch) => {
     const comment = await res.json();
     return comment;
   } 
-}
+};
+
+export const current_post_score = (postId) => async dispatch => {
+
+  const res = await fetch(`/api/posts/score/${postId}`, {
+    headers: {
+    'Content-Type': 'application/json'
+    },
+  });
+
+  if (res.ok) {
+    const score = await res.json()
+    return score;
+  }
+};
 
 
-export default function reducer(state = {all_communities: {}, current_community: {}, current_post: {}}, action) {
+
+// Votes
+
+export const get_user_votes = (userId) => async (dispatch) => {
+
+  if (!userId) return null;
+
+  const res = await fetch('/api/votes/post_vote')
+  if (res.ok) {
+    const votes = await res.json()
+    await dispatch(user_post_votes(votes));
+  } 
+
+  const res2 = await fetch('/api/votes/comment_vote')
+  if (res2.ok) {
+    const votes = await res2.json()
+    await dispatch(user_comment_votes(votes));
+  } 
+
+};
+
+
+export const post_vote = (vote) => async (dispatch) => {
+
+  const res = await fetch('/api/votes/post_vote', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(vote)
+  });
+
+  if (res.ok) {
+    const vote = await res.json();
+    await dispatch(update_post_votes(vote))
+  }
+
+};
+
+
+export const comment_vote = (vote) => async (dispatch) => {
+
+  const res = await fetch('/api/votes/comment_vote', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(vote)
+  });
+
+  if (res.ok) {
+    const vote = await res.json();
+    await dispatch(update_comment_votes(vote))
+  }
+
+};
+
+
+
+
+export default function reducer(state = {all_communities: {}, user_votes: {post_votes: {}, comment_votes: {}}}, action) {
 
   const newState = { ...state }
 
@@ -261,16 +370,29 @@ export default function reducer(state = {all_communities: {}, current_community:
     case GET_COMMUNITIES:
       action.communities.forEach((community) => {
       newState.all_communities[community.name.toLowerCase()] = community;
-
-      community.posts.forEach((post, ind) => {
-        if (post.id !== ind) {
-        newState.all_communities[community.name.toLowerCase()].posts[ind] = post;
-        newState.all_communities[community.name.toLowerCase()].posts[post.id] = newState.all_communities[community.name.toLowerCase()].posts[ind];
-        delete newState.all_communities[community.name.toLowerCase()].posts[ind];
-        }
+      
+      // community.posts.forEach((post, ind) => {
+      //     if (post.id !== ind) {
+      //       newState.all_communities[community.name.toLowerCase()].posts[ind] = post;
+      //       newState.all_communities[community.name.toLowerCase()].posts[post.id] = newState.all_communities[community.name.toLowerCase()].posts[ind];
+      //       delete newState.all_communities[community.name.toLowerCase()].posts[ind];
+      //       }
       });
-
-      });
+        
+        
+        
+        // community.post.comments.forEach((comment, cind) => {
+          //   if (comment.id !== cind) {
+            //     newState.all_communities[community.name.toLowerCase()].post.comments[cind] = comment;
+            //     newState.all_communities[community.name.toLowerCase()].post.comments[comment.id] = newState.all_communities[community.name.toLowerCase()].post.comments[cind];
+            //     delete newState.all_communities[community.name.toLowerCase()].post.comments[cind];
+            //   }
+            // });
+            
+            
+            // community.posts.comments.forEach(comment => console.log(comment))
+            
+      // });
       return newState;
 
     case CREATE_COMMUNITY:
@@ -289,6 +411,41 @@ export default function reducer(state = {all_communities: {}, current_community:
 
     case DELETE_COMMUNITY:
       delete newState.all_communities[action.community.name.toLowerCase()];
+      return newState;
+
+    case GET_USER_POST_VOTES:
+      action.votes.post_votes.forEach((vote) => {
+        newState.user_votes.post_votes[vote.post_id] = vote;
+      });
+  
+      return newState;
+
+    case UPDATE_USER_POST_VOTES:
+    
+
+      if (newState.user_votes[action.vote.post_id]?.vote_type === action.vote.vote_type) {
+        delete newState.user_votes[action.vote.post_id];
+      } else {
+        newState.user_votes[action.vote.post_id] = action.vote
+      }
+  
+      return newState;
+
+    case GET_USER_COMMENT_VOTES:
+      action.votes.comment_votes.forEach((vote) => {
+        newState.user_votes.comment_votes[vote.comment_id] = vote;
+      });
+  
+      return newState;
+
+    case UPDATE_USER_COMMENT_VOTES:
+  
+      if (newState.user_votes[action.vote.comment_id]?.vote_type === action.vote.vote_type) {
+        delete newState.user_votes[action.vote.comment_id];
+      } else {
+        newState.user_votes[action.vote.comment_id] = action.vote
+      }
+  
       return newState;
 
     default:

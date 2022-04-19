@@ -7,6 +7,12 @@ from .auth_routes import validation_errors_to_error_messages
 
 comment_routes = Blueprint('comments', __name__)
 
+@comment_routes.route('/score/<int:comment_id>')
+def comment_score(comment_id):
+  comment = Comment.query.get(comment_id)
+  
+  return {'score': comment.vote_score}
+
 @comment_routes.route('/new', methods=['POST'])
 def new_comment():
   

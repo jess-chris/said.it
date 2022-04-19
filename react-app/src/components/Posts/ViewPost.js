@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Modal } from '../../context/Modal';
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, Redirect, useParams, useLocation } from 'react-router-dom';
+import { useHistory, useParams, useLocation, NavLink } from 'react-router-dom';
 
 import EditPostForm from './EditPostForm';
-
+import LoginForm from '../auth/LoginForm';
+import SignUpForm from '../auth/SignUpForm';
 
 import * as data_funcs from '../../store/data_store';
 
@@ -18,26 +19,30 @@ const ViewPost = () => {
   const [prevLocation, ] = useState(location?.state?.location)
   
   const history = useHistory();
-  const { name, id, title } = useParams();
+  const { name, id } = useParams();
   const [loaded, setLoaded] = useState(false);
 
+  const user = useSelector(state => state.session?.user);
 
   useEffect(() => {
     (async() => {
       await dispatch(data_funcs.get_communities());
+      await dispatch(data_funcs.get_user_votes(user));
       setLoaded(true);
     })();
-  }, [dispatch]);
+  }, [dispatch, user]);
 
   const [errors, setErrors] = useState([]);
   const [showModal, setShowModal] = useState(true);
   const [newComment, setNewComment] = useState('');
-  const user = useSelector(state => state.session.user);
   const userId = useSelector(state => state.session.user?.id);
   const community = useSelector(state => state.data_store.all_communities[name.toLowerCase()]);
   const post = community?.posts[id];
   const comments = useSelector(state => state.data_store.all_communities[name.toLowerCase()]?.posts[id]?.comments)
+  // const postVotes = useSelector(state => state.data_store.user_votes.post_votes)
+  // const commentVotes = useSelector(state => state.data_store.user_votes.comment_votes)
 
+  const votes = useSelector(state => state.data_store.user_votes)
 
   if (!loaded) {
     return null;
@@ -77,6 +82,102 @@ const ViewPost = () => {
 
   }
 
+  const saidIt = (e) => {
+
+    e.preventDefault();
+
+    const voiceMessage = new SpeechSynthesisUtterance();
+    voiceMessage.text = community.posts[id].title;
+    window.speechSynthesis.speak(voiceMessage);
+
+
+    // console.log(name + ' ' + id)
+
+  };
+
+  const saidItComment = (e) => {
+
+    e.preventDefault();
+
+    const commentInd = e.target.id;
+    const voiceMessage = new SpeechSynthesisUtterance();
+    voiceMessage.text = community.posts[id].comments[commentInd]?.content;
+    window.speechSynthesis.speak(voiceMessage);
+
+
+    // console.log(name + ' ' + id)
+
+  };
+
+  const handlePostVote = async (post, val) => {
+
+    if (!user) {
+      window.alert("Not authorized");
+    }
+
+    const upArrow = document.getElementById(`up:${post}`);
+    const downArrow = document.getElementById(`down:${post}`);
+    const scoreCont = document.getElementById(`counter-${post}`)
+
+
+    if (val === true) {
+
+      upArrow.getAttribute('fill') === 'none' ? upArrow.setAttribute('fill', '#ff4500') : upArrow.setAttribute('fill', 'none');
+      if (downArrow.getAttribute('fill') !== 'none') downArrow.setAttribute('fill', 'none');
+
+
+    } else if (val === false) {
+
+      downArrow.getAttribute('fill') === 'none' ? downArrow.setAttribute('fill', '#0079D3') : downArrow.setAttribute('fill', 'none');
+      if (upArrow.getAttribute('fill') !== 'none') upArrow.setAttribute('fill', 'none');
+    }
+
+    const vote = {
+      userId: user.id,
+      postId: post,
+      voteType: val
+    };
+
+    await dispatch(data_funcs.post_vote(vote));
+    const {score} = await dispatch(data_funcs.current_post_score(post));
+    scoreCont.innerText = score;
+  };
+
+  const handleCommentVote = async (comment, val) => {
+
+    if (!user) {
+      window.alert("Not authorized");
+    }
+
+    const upArrow = document.getElementById(`up:${comment}`);
+    const downArrow = document.getElementById(`down:${comment}`);
+    const scoreCont = document.getElementById(`counter-${comment}`)
+
+
+    if (val === true) {
+
+      upArrow.getAttribute('fill') === 'none' ? upArrow.setAttribute('fill', '#ff4500') : upArrow.setAttribute('fill', 'none');
+      if (downArrow.getAttribute('fill') !== 'none') downArrow.setAttribute('fill', 'none');
+
+
+    } else if (val === false) {
+
+      downArrow.getAttribute('fill') === 'none' ? downArrow.setAttribute('fill', '#0079D3') : downArrow.setAttribute('fill', 'none');
+      if (upArrow.getAttribute('fill') !== 'none') upArrow.setAttribute('fill', 'none');
+    }
+
+    const vote = {
+      userId: user.id,
+      commentId: comment,
+      voteType: val
+    };
+
+    await dispatch(data_funcs.comment_vote(vote));
+    const {score} = await dispatch(data_funcs.current_comment_score(comment));
+    scoreCont.innerText = score;
+  };
+
+
 
   return (
     <>
@@ -101,74 +202,44 @@ const ViewPost = () => {
   
         <div className='com-post-cont'>
   
-            {/* {userId && userId && (
-            <>
-            <div className="create-post-cont">
-              <div className='create-post-top'>
-                <h3 className='bold-text'>Create Post</h3>
+          <div style={{'marginTop':'0'}} className="post-cont modal-post-cont">
+  
+            <div className='post-wrap'>
+              <div className="single-post-btn-bar">
+
+                <div className={`vote-cont-${post?.id}`}>
+                  <svg onClick={() => handlePostVote(post?.id, true)} className="vote-buttons" id="upVoteButton" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path id={`up:${post?.id}`} d="M12 4 3 15h6v5h6v-5h6z" className="icon_svg-stroke icon_svg-fill" strokeWidth="1.5" stroke="#666" fill={user?.id && votes?.post_votes[post.id]?.vote_type === true ? '#ff4500' : 'none'} strokeLinejoin="round"></path>
+                  </svg>
+                  <div id={`counter-${post?.id}`}>{post?.vote_score}</div>
+                  <svg onClick={() => handlePostVote(post?.id, false)} className="vote-buttons" id="downVoteButton" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path id={`down:${post?.id}`} d="m12 20 9-11h-6V4H9v5H3z" className="icon_svg-stroke icon_svg-fill" stroke="#666" fill={user?.id && votes?.post_votes[post.id]?.vote_type === false ? '#0079D3' : 'none'} strokeWidth="1.5" strokeLinejoin="round"></path>
+                  </svg>
+                </div>
+
+                <div></div>
+
+                <div className="sound-cont">
+                  <button onClick={saidIt} style={{'background':'none', 'border':'none', 'color': 'grey'}}><i className="fa-solid fa-volume-high"></i></button>
+                </div>
               </div>
-              <div>
-                {errors.map((error, ind) => (
-                  <div key={ind}>{error}</div>
-                ))}
-              </div>
-              <div className='create-post-body'>
-                <div className='create-post-title'>
-                  <div>
-                    <textarea 
-                      name='title'
-                      placeholder='Title'
-                      value={postTitle}
-                      onChange={(e) => setPostTitle(e.target.value)}
-                      required
-                    />
-                  </div>
+
+              <div key={post?.id} className="single-post-view text-post-view">
+              <div><NavLink to={`/s/${community?.name}`}><span className="bold-text">{`s/${community?.name}`}</span></NavLink> • <span className="light-text">Posted by u/{post?.user_name}</span></div>
+                <p className="medium-text" style={{'fontWeight': 'bold', 'fontSize': '16px'}}>{post?.title}</p>
+                <p className="medium-text text-post-view">{post?.content}</p>
+                {userId === post?.user_id && (
+                <div id='com-btns'>
+                  <EditPostForm post={post} />
                 </div>
-  
-                <div className='create-post-content'>
-                  <div>
-                    <textarea 
-                      id='textPost'
-                      name='content'
-                      placeholder='Text (optional)'
-                      value={content}
-                      onChange={(e) => setContent(e.target.value)}
-                    />
-                  </div>
-                </div>
-  
-                <div className='create-post-bar'>
-  
-                  <div id='post-btn'>
-                    <button onClick={handlePost} className='main-links btn-style' type='submit'>Post</button>
-                  </div>
-  
-                </div>
-  
+                )}
               </div>
             </div>
-            </>
-            )} */}
-  
-          <div className="post-cont modal-post-cont">
-  
-  
 
-            <div key={post?.id} className="single-post-view text-post-view">
-              <p className='light-text'>Posted by u/{post?.user_name}</p>
-              <p className="medium-text" style={{'fontWeight': 'bold', 'fontSize': '16px'}}>{post?.title}</p>
-              <p className="medium-text text-post-view">{post?.content}</p>
-              {userId === post?.user_id && (
-              <div id='com-btns'>
-                <EditPostForm post={post} />
-              </div>
-              )}
-            </div>
+            <div className='main-spacer' style={{'paddingTop':'40px'}}></div>
 
-            <div className='main-spacer'></div>
-
+            {user && user && (
             <div className='comment-cont'>
-
                 <div className='new-comment-head medium-text'>Comment as {user.username}</div>
                 <div className='new-comment-cont'>
                   <div>
@@ -188,14 +259,29 @@ const ViewPost = () => {
                     <button type='submit' className='main-links btn-style'>Comment</button>
                   </div>
                   </form>
-
+                  
                 </div>
-
             </div>
+            )}
+
+            {!userId && (
+            <>
+              <div style={{'marginLeft':'30px', 'border': '1px solid #ccc'}} className="create-post-cont">
+
+                <div className='post-placeholder'>
+                  <div style={{'fontWeight':'bold'}} className='light-text'>Log in or sign up to leave a comment</div>
+                  <div className='post-placeholder-btn'>
+                    <LoginForm />
+                    <SignUpForm />
+                  </div>
+                </div>
+              </div>
+           </>
+            )}
 
             <div className='comment-cont'>
 
-                  {loaded && comments?.map((comment) => {
+                  {loaded && comments?.map((comment, ind) => {
                     return(
                   <div key={comment?.id} className='user-comments'>
                     <div>
@@ -205,9 +291,19 @@ const ViewPost = () => {
                       <p className="medium-text" style={{'fontWeight': 'bold', 'marginLeft':'10px'}}>{comment?.content}</p>
                     </div>
                     <div className='user-comment-footer'>
-                    {userId === comment?.user_id && (
-                      <EditCommentForm comment={comment} />
-                    )}
+                      <div className={`vote-cont-${comment?.id}`} style={{'display':'flex', 'flexDirection':'row', 'alignItems':'center'}}>
+                        <svg onClick={() => handleCommentVote(comment?.id, true)} className="vote-buttons" id="upVoteButton" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path id={`up:${comment?.id}`} d="M12 4 3 15h6v5h6v-5h6z" className="icon_svg-stroke icon_svg-fill" strokeWidth="1.5" stroke="#666" fill={user?.id && votes?.comment_votes[comment.id]?.vote_type === true ? '#ff4500' : 'none'} strokeLinejoin="round"></path>
+                        </svg>
+                        <div id={`counter-${comment?.id}`}>{comment?.vote_score}</div>
+                        <svg onClick={() => handleCommentVote(comment?.id, false)} className="vote-buttons" id="downVoteButton" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path id={`down:${comment?.id}`} d="m12 20 9-11h-6V4H9v5H3z" className="icon_svg-stroke icon_svg-fill" stroke="#666" fill={user?.id && votes?.comment_votes[comment.id]?.vote_type === false ? '#0079D3' : 'none'} strokeWidth="1.5" strokeLinejoin="round"></path>
+                        </svg>
+                      </div>
+                      <button onClick={saidItComment} style={{'background':'none', 'border':'none', 'color': 'grey'}}><i id={ind} className="fa-solid fa-volume-high"></i></button>
+                      {userId === comment?.user_id && (
+                        <EditCommentForm comment={comment} />
+                      )}
                     </div>
                   </div>
                     )
@@ -222,7 +318,7 @@ const ViewPost = () => {
   
         <div className='side-page-cont side-post-modal'>
   
-          <div className='side-page'>
+          <div className='side-page-post-view'>
   
             <div className='side-header' style={{'position': 'fixed', 'width':'312px'}}>
               <div className='bold-text com-banner'>
@@ -230,8 +326,10 @@ const ViewPost = () => {
               </div>
               <p className='bold-text community-info'>{community?.community_info}</p>
             </div>
+          </div>
 
-            <div className='side-header' style={{'position': 'fixed', 'width':'312px', 'marginTop':'200px'}}>
+          <div className='side-page-post-view'>
+            <div className='side-header' style={{'position': 'fixed', 'width':'312px'}}>
               <div className='bold-text com-banner'>
                 Technologies Used & Links
               </div>
@@ -242,6 +340,11 @@ const ViewPost = () => {
                 <li>Flask SQLAlchemy</li>
                 <li>PostgreSQL</li>
               </ul>
+              <div style={{'textAlign':'center'}} className="light-text">Developed by Jesse Christensen</div>
+              <div style={{'display':'flex', 'flexDirection':'row', 'textAlign':'center'}}>
+                <a href='https://www.linkedin.com/in/jesse-christensen-204801232/'><div className="bold-text"><i className="fa-brands fa-linkedin"></i>  LinkedIn</div></a>
+                <a href='https://github.com/jess-chris'><div className="bold-text"><i className="fa-brands fa-github-square"></i>   GitHub</div></a>
+              </div>
             </div>
           </div>
   

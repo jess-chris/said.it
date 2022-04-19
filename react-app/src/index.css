@@ -1,3 +1,8 @@
+* {
+  font: inherit;
+}
+
+
 .user-profile-btn {
   display: flex;
   flex-flow: row nowrap;
@@ -98,3 +103,47 @@
   border: 1px solid rgba(0,0,0,.1);
   margin-bottom: 10px;
 }
+
+
+.menu-close {
+  width: 16px;
+  height: 16px;
+  fill: grey;
+}
+
+
+#prefix-text {
+  color: grey;
+  position: relative;
+  top: 22px;
+  left: 12px;
+}
+
+.create-post-cont {
+  margin-bottom: 15px;
+  border-radius: 5px;
+  width: 100%;
+  border: 1px solid #fff;
+  background-color: #fff;
+}
+
+
+
+.post-placeholder {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 50px;
+  justify-content: space-between;
+  margin-left: 15px;
+
+}
+
+
+.post-placeholder-btn {
+  display: flex;
+  flex-direction: row;
+  max-width: 200px;
+  gap: 5px;
+}
+
