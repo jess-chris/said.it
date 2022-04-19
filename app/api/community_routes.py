@@ -48,18 +48,18 @@ def edit_community():
   
   community = Community.query.get(community_id)
   
-  old_name = community.name
+  # old_name = community.name
   
   if form.validate_on_submit() and community.owner == current_user.id:
-    community.name=form.data['name'],
+    # community.name=form.data['name'],
     # community.member_title=form.data['title'],
     community.community_image=form.data['image'],
     community.community_info=form.data['info']
     
     db.session.add(community)
     db.session.commit()
-    return {'community': community.to_dict(), 'old': old_name}
-  
+    return {'community': community.to_dict()}
+    # return {'community': community.to_dict(), 'old': old_name}
   return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 

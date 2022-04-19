@@ -29,10 +29,9 @@ const del_community = (community) => ({
   community
 });
 
-const ed_community = (community, old) => ({
+const ed_community = (community) => ({
   type: EDIT_COMMUNITY,
-  community,
-  old
+  community
 });
 
 const user_post_votes = (votes) => ({
@@ -400,13 +399,13 @@ export default function reducer(state = {all_communities: {}, user_votes: {post_
       return newState;
 
     case EDIT_COMMUNITY:
-      if(action.old.toLowerCase() !== action.community.name.toLowerCase()) {
-        newState.all_communities[action.old.toLowerCase()] = action.community;
-        newState.all_communities[action.community.name.toLowerCase()] = newState.all_communities[action.old]
-        delete newState.all_communities[action.old]
-      } else {
+      // if(action.old.toLowerCase() !== action.community.name.toLowerCase()) {
+      //   newState.all_communities[action.old.toLowerCase()] = action.community;
+      //   newState.all_communities[action.community.name.toLowerCase()] = newState.all_communities[action.old]
+      //   delete newState.all_communities[action.old]
+      // } else {
         newState.all_communities[action.community.name.toLowerCase()] = action.community;
-      }
+      // }
       return newState;
 
     case DELETE_COMMUNITY:

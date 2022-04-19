@@ -16,7 +16,7 @@ const EditCommunityForm = ({value}) => {
   
   
   const [showModal, setShowModal] = useState(value ? true : false);
-  const [communityName, setCommunityName] = useState(community?.name);
+  const [communityName, ] = useState(community?.name);
   const [communityImage, setCommunityImage] = useState(community?.community_image);
   const [communityInfo, setCommunityInfo] = useState(community?.community_info);
   // const [communityMemberTitle, setCommunityMemberTitle] = useState(community?.member_title);
@@ -27,7 +27,7 @@ const EditCommunityForm = ({value}) => {
     e.preventDefault();
 
     const community = {
-      'name': communityName,
+      // 'name': communityName,
       // 'title': communityMemberTitle,
       'image': communityImage,
       'info': communityInfo,
@@ -68,16 +68,15 @@ const EditCommunityForm = ({value}) => {
             </div>
             <div className='com-form-name'>
               <label className='com-form-header' htmlFor='name'>Name</label>
-              <div style={{'marginBottom':'16px'}} className='light-text'>Community names are case sensitive for display only, they must be unique.</div>
+              <div style={{'marginBottom':'16px'}} className='light-text'>Community names are case sensitive for display only, they must be unique and cannot be changed.</div>
               <div className='com-form-name com-name-input'>
                 <span id='prefix-text'>s/</span>
                 <input
                   name='name'
                   type='text'
                   value={communityName}
-                  onChange={(e) => setCommunityName(e.target.value)}
                   maxLength='40'
-                  required
+                  disabled={true}
                 />
               </div>
               <div style={{'margin':'16px 0'}} className='light-text'>{40 - communityName.length} Characters remaining</div>

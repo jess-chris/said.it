@@ -91,12 +91,14 @@
   text-align: center;
   justify-content: center;
   background-color: #fff;
+  /* background: linear-gradient(75deg, #0078d377, rgb(81, 47, 143), #ff4400a1); */
   border-radius: 5px;
 }
 
 .com-header {
   display: flex;
-  background-image: url('https://www.redditstatic.com/desktop2x/img/id-cards/home-banner@2x.png');
+  /* background-image: url('https://www.redditstatic.com/desktop2x/img/id-cards/home-banner@2x.png'); */
+  background: linear-gradient(45deg, rgb(20, 19, 19), #2B303A, rgb(20, 19, 19));
   background-size: cover;
   height: 64px;
   border-radius: 5px;
@@ -109,6 +111,7 @@
   flex-flow: row;
   justify-content: space-around;
   align-items: center;
+  /* color: #fff; */
   width: 100%;
 }
 
@@ -203,6 +206,7 @@
 .com-banner {
   display: flex;
   background: #2B303A;
+  /* background: linear-gradient(45deg, #2B303A, rgb(32, 31, 109), #2B303A); */
   height: 44px;
   border-radius: 3px 3px 0 0;
   padding-left: 8px;
