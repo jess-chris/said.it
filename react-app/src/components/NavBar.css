@@ -24,10 +24,11 @@
   margin-top: 0;
   height: 48px;
   
-  border: 1px solid #fff;
+  border: 1px solid transparent;
   border-radius: 4px;
 
-  background-color: #fff;
+  background: #FFF;
+  /* background: linear-gradient(45deg, #2B303A, rgb(95, 95, 95), #2B303A); */
 
   justify-content: space-between;
   

@@ -54,9 +54,10 @@ useEffect(() => {
     setShowEdit(false);
   };
 
-  document.addEventListener('click', closeEdit);
+  const home = document.querySelector('.community-page');
+  home.addEventListener('click', closeEdit);
 
-  return () => document.removeEventListener("click", closeEdit);
+  return () => home.removeEventListener("click", closeEdit);
 }, [showEdit]);
 
 useEffect(() => {

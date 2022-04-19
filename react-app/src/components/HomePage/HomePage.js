@@ -18,8 +18,8 @@ const HomePage = () => {
   
   useEffect(() => {
     (async() => {
-      await dispatch(data_funcs.get_communities());
       await dispatch(data_funcs.get_user_votes(user));
+      await dispatch(data_funcs.get_communities());
       setLoaded(true);
     })();
   }, [dispatch, user]);

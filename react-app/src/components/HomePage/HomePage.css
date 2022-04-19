@@ -168,6 +168,7 @@ textarea {
 
 .single-post:hover {
   border: 1px solid gray;
+  box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, .5);
   z-index: 1;
 }
 
@@ -324,6 +325,7 @@ textarea {
   text-align: center;
   /* background-color: #ff4500; */
   background: #2B303A;
+  /* background: linear-gradient(45deg, #2B303A, rgb(95, 95, 95), #2B303A); */
   max-width: 312px;
   width: 100%;
   position: absolute;
