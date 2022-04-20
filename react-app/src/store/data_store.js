@@ -10,6 +10,7 @@ const UPDATE_USER_POST_VOTES = 'data_store/UPDATE_USER_POST_VOTES';
 const GET_USER_COMMENT_VOTES = 'data_store/GET_USER_COMMENT_VOTES';
 const UPDATE_USER_COMMENT_VOTES = 'data_store/UPDATE_USER_POST_VOTES';
 
+const REMOVE_SESSION = 'data_store/REMOVE_SESSION';
 
 const all_communities = (communities) => ({
   type: GET_COMMUNITIES,
@@ -52,6 +53,10 @@ const user_comment_votes = (votes) => ({
 const update_comment_votes = (vote) => ({
   type: UPDATE_USER_COMMENT_VOTES,
   vote
+});
+
+const remove_user_session = () => ({
+  type: REMOVE_SESSION
 });
 
 
@@ -358,6 +363,13 @@ export const comment_vote = (vote) => async (dispatch) => {
 };
 
 
+export const remove_session = () => async (dispatch) => {
+
+  await dispatch(remove_user_session());
+
+};
+
+
 
 
 export default function reducer(state = {all_communities: {}, user_votes: {post_votes: {}, comment_votes: {}}}, action) {
@@ -369,29 +381,9 @@ export default function reducer(state = {all_communities: {}, user_votes: {post_
     case GET_COMMUNITIES:
       action.communities.forEach((community) => {
       newState.all_communities[community.name.toLowerCase()] = community;
-      
-      // community.posts.forEach((post, ind) => {
-      //     if (post.id !== ind) {
-      //       newState.all_communities[community.name.toLowerCase()].posts[ind] = post;
-      //       newState.all_communities[community.name.toLowerCase()].posts[post.id] = newState.all_communities[community.name.toLowerCase()].posts[ind];
-      //       delete newState.all_communities[community.name.toLowerCase()].posts[ind];
-      //       }
+
       });
         
-        
-        
-        // community.post.comments.forEach((comment, cind) => {
-          //   if (comment.id !== cind) {
-            //     newState.all_communities[community.name.toLowerCase()].post.comments[cind] = comment;
-            //     newState.all_communities[community.name.toLowerCase()].post.comments[comment.id] = newState.all_communities[community.name.toLowerCase()].post.comments[cind];
-            //     delete newState.all_communities[community.name.toLowerCase()].post.comments[cind];
-            //   }
-            // });
-            
-            
-            // community.posts.comments.forEach(comment => console.log(comment))
-            
-      // });
       return newState;
 
     case CREATE_COMMUNITY:
@@ -399,13 +391,8 @@ export default function reducer(state = {all_communities: {}, user_votes: {post_
       return newState;
 
     case EDIT_COMMUNITY:
-      // if(action.old.toLowerCase() !== action.community.name.toLowerCase()) {
-      //   newState.all_communities[action.old.toLowerCase()] = action.community;
-      //   newState.all_communities[action.community.name.toLowerCase()] = newState.all_communities[action.old]
-      //   delete newState.all_communities[action.old]
-      // } else {
-        newState.all_communities[action.community.name.toLowerCase()] = action.community;
-      // }
+      newState.all_communities[action.community.name.toLowerCase()] = action.community;
+
       return newState;
 
     case DELETE_COMMUNITY:
@@ -413,9 +400,13 @@ export default function reducer(state = {all_communities: {}, user_votes: {post_
       return newState;
 
     case GET_USER_POST_VOTES:
+      const postVoteObj = {};
+      
       action.votes.post_votes.forEach((vote) => {
-        newState.user_votes.post_votes[vote.post_id] = vote;
+        postVoteObj[vote.post_id] = vote
       });
+
+      newState.user_votes.post_votes = postVoteObj;
   
       return newState;
 
@@ -431,9 +422,12 @@ export default function reducer(state = {all_communities: {}, user_votes: {post_
       return newState;
 
     case GET_USER_COMMENT_VOTES:
+      const commentVoteObj = {};
       action.votes.comment_votes.forEach((vote) => {
-        newState.user_votes.comment_votes[vote.comment_id] = vote;
+        commentVoteObj[vote.comment_id] = vote;
       });
+
+      newState.user_votes.comment_votes = commentVoteObj;
   
       return newState;
 
@@ -445,6 +439,14 @@ export default function reducer(state = {all_communities: {}, user_votes: {post_
         newState.user_votes[action.vote.comment_id] = action.vote
       }
   
+      return newState;
+
+    case REMOVE_SESSION:
+
+      const newUserVotes = {newPost: {}, newComment: {}};
+
+      newState.user_votes = newUserVotes;
+
       return newState;
 
     default:

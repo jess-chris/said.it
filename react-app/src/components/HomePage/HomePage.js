@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useHistory } from "react-router-dom";
 
 import * as data_funcs from '../../store/data_store';
 import CreateCommunityForm from "../Communities/CreateCommunityForm";
@@ -11,6 +11,7 @@ import './HomePage.css'
 const HomePage = () => {
 
   const dispatch = useDispatch();
+  const history = useHistory()
   const [loaded, setLoaded] = useState(false);
   const location = useLocation().pathname;
   
@@ -18,8 +19,8 @@ const HomePage = () => {
   
   useEffect(() => {
     (async() => {
-      await dispatch(data_funcs.get_user_votes(user));
       await dispatch(data_funcs.get_communities());
+      if (user) await dispatch(data_funcs.get_user_votes(user));
       setLoaded(true);
     })();
   }, [dispatch, user]);
@@ -49,7 +50,7 @@ const HomePage = () => {
   const handleVote = async (post, val) => {
 
     if (!user) {
-      window.alert("Not authorized");
+      return history.push('/login')
     }
 
     const upArrow = document.getElementById(`up:${post}`);
@@ -80,7 +81,6 @@ const HomePage = () => {
     scoreCont.innerText = score;
   };
 
-
   
   return (
 
@@ -106,13 +106,13 @@ const HomePage = () => {
                 <>
                   <div key={`key:${post.id}`} className="single-post">
                     <div className="single-post-btn-bar">
-                      <div className={`vote-cont-${post?.id}`}>
+                      <div className={`vote-cont-${post?.id}`} style={{'display': 'flex', 'flexDirection':'column', 'justifyContent': 'center', 'alignItems':'center'}}>
                         <svg onClick={() => handleVote(post?.id, true)} className="vote-buttons" id="upVoteButton" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path id={`up:${post?.id}`} d="M12 4 3 15h6v5h6v-5h6z" className="icon_svg-stroke icon_svg-fill" strokeWidth="1.5" stroke="#666" fill={user?.id && votes[post.id]?.vote_type === true ? '#ff4500' : 'none'} strokeLinejoin="round"></path>
+                          <path id={`up:${post?.id}`} d="M12 4 3 15h6v5h6v-5h6z" className="icon_svg-stroke icon_svg-fill" strokeWidth="1.5" stroke="#666" fill={votes !== undefined && post?.id in votes && votes[post?.id]?.vote_type === true ? '#ff4500' : 'none'} strokeLinejoin="round"></path>
                         </svg>
                         <div id={`counter-${post?.id}`}>{post?.vote_score}</div>
                         <svg onClick={() => handleVote(post?.id, false)} className="vote-buttons" id="downVoteButton" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path id={`down:${post?.id}`} d="m12 20 9-11h-6V4H9v5H3z" className="icon_svg-stroke icon_svg-fill" stroke="#666" fill={user?.id && votes[post.id]?.vote_type === false ? '#0079D3' : 'none'} strokeWidth="1.5" strokeLinejoin="round"></path>
+                          <path id={`down:${post?.id}`} d="m12 20 9-11h-6V4H9v5H3z" className="icon_svg-stroke icon_svg-fill" stroke="#666" fill={votes !== undefined && post?.id in votes && votes[post?.id]?.vote_type === false ? '#0079D3' : 'none'} strokeWidth="1.5" strokeLinejoin="round"></path>
                         </svg>
                       </div>
                       <div></div>

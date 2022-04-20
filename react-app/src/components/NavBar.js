@@ -17,7 +17,7 @@ const NavBar = () => {
 
 
         <NavLink className='main-logo' to='/' exact={true} activeClassName='active'>
-          <img alt='Said.it' src='/said_it.png'></img>
+          <img alt='Said.it' src='assets/said_it.png'></img>
         </NavLink>
 
 
@@ -30,7 +30,7 @@ const NavBar = () => {
 
 
         <div className='search-bar-cont'>
-          <form className='search-bar'>
+          {/* <form className='search-bar'>
             <div className='search-bar-input'>
               <label  htmlFor='search'><i style={{'color':'grey', 'background':'#f6f7f8'}} className="fa-solid fa-magnifying-glass"></i></label>
               <input
@@ -40,7 +40,7 @@ const NavBar = () => {
                 placeholder='Search Said.it'
               />
             </div>
-          </form>
+          </form> */}
         </div>
 
 

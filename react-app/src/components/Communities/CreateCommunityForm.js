@@ -66,7 +66,7 @@ const CreateCommunityForm = () => {
             </div>
             <div className='com-form-name'>
               <label className='com-form-header' htmlFor='name'>Name</label>
-              <div style={{'marginBottom':'16px'}} className='light-text'>Community names are case sensitive for display only, they must be unique.</div>
+              <div style={{'marginBottom':'16px'}} className='light-text'>Community names are case sensitive for display only, they must be unique and cannot be changed.</div>
               <div className='com-form-name com-name-input'>
                 <span id='prefix-text'>s/</span>
                 <input
