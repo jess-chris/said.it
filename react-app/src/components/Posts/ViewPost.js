@@ -112,7 +112,7 @@ const ViewPost = () => {
   const handlePostVote = async (post, val) => {
 
     if (!user) {
-      window.alert("Not authorized");
+      return history.push('/login');
     }
 
     const upArrow = document.getElementById(`post-up:${post}`);
@@ -146,7 +146,7 @@ const ViewPost = () => {
   const handleCommentVote = async (comment, val) => {
 
     if (!user) {
-      window.alert("Not authorized");
+      return history.push('/login');
     }
 
     const upArrow = document.getElementById(`com-up:${comment}`);
@@ -209,11 +209,11 @@ const ViewPost = () => {
 
                 <div>
                   <svg onClick={() => handlePostVote(post?.id, true)} className="vote-buttons" id="upVoteButton" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path id={`post-up:${post?.id}`} d="M12 4 3 15h6v5h6v-5h6z" className="icon_svg-stroke icon_svg-fill" strokeWidth="1.5" stroke="#666" fill={user?.id && votes?.post_votes[post.id]?.vote_type === true ? '#ff4500' : 'none'} strokeLinejoin="round"></path>
+                    <path id={`post-up:${post?.id}`} d="M12 4 3 15h6v5h6v-5h6z" className="icon_svg-stroke icon_svg-fill" strokeWidth="1.5" stroke="#666" fill={votes.post_votes !== undefined && post?.id in votes?.post_votes && votes?.post_votes[post.id]?.vote_type === true ? '#ff4500' : 'none'} strokeLinejoin="round"></path>
                   </svg>
                   <div id={`post-counter-${post?.id}`}>{post?.vote_score}</div>
                   <svg onClick={() => handlePostVote(post?.id, false)} className="vote-buttons" id="downVoteButton" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path id={`post-down:${post?.id}`} d="m12 20 9-11h-6V4H9v5H3z" className="icon_svg-stroke icon_svg-fill" stroke="#666" fill={user?.id && votes?.post_votes[post.id]?.vote_type === false ? '#0079D3' : 'none'} strokeWidth="1.5" strokeLinejoin="round"></path>
+                    <path id={`post-down:${post?.id}`} d="m12 20 9-11h-6V4H9v5H3z" className="icon_svg-stroke icon_svg-fill" stroke="#666" fill={votes.post_votes !== undefined && post?.id in votes?.post_votes && votes?.post_votes[post.id]?.vote_type === false ? '#0079D3' : 'none'} strokeWidth="1.5" strokeLinejoin="round"></path>
                   </svg>
                 </div>
 
@@ -293,11 +293,11 @@ const ViewPost = () => {
                     <div className='user-comment-footer'>
                       <div className={`vote-cont-${comment?.id}`} style={{'display':'flex', 'flexDirection':'row', 'alignItems':'center'}}>
                         <svg onClick={() => handleCommentVote(comment?.id, true)} className="vote-buttons" id="upVoteButton" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path id={`com-up:${comment?.id}`} d="M12 4 3 15h6v5h6v-5h6z" className="icon_svg-stroke icon_svg-fill" strokeWidth="1.5" stroke="#666" fill={user?.id && votes?.comment_votes[comment.id]?.vote_type === true ? '#ff4500' : 'none'} strokeLinejoin="round"></path>
+                          <path id={`com-up:${comment?.id}`} d="M12 4 3 15h6v5h6v-5h6z" className="icon_svg-stroke icon_svg-fill" strokeWidth="1.5" stroke="#666" fill={votes?.comment_votes !== undefined && comment?.id in votes?.comment_votes && votes?.comment_votes[comment.id]?.vote_type === true ? '#ff4500' : 'none'} strokeLinejoin="round"></path>
                         </svg>
                         <div id={`comment-counter-${comment?.id}`}>{comment?.vote_score}</div>
                         <svg onClick={() => handleCommentVote(comment?.id, false)} className="vote-buttons" id="downVoteButton" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path id={`com-down:${comment?.id}`} d="m12 20 9-11h-6V4H9v5H3z" className="icon_svg-stroke icon_svg-fill" stroke="#666" fill={user?.id && votes?.comment_votes[comment.id]?.vote_type === false ? '#0079D3' : 'none'} strokeWidth="1.5" strokeLinejoin="round"></path>
+                          <path id={`com-down:${comment?.id}`} d="m12 20 9-11h-6V4H9v5H3z" className="icon_svg-stroke icon_svg-fill" stroke="#666" fill={votes?.comment_votes !== undefined && comment?.id in votes?.comment_votes && votes?.comment_votes[comment.id]?.vote_type === false ? '#0079D3' : 'none'} strokeWidth="1.5" strokeLinejoin="round"></path>
                         </svg>
                       </div>
                       <button onClick={saidItComment} style={{'background':'none', 'border':'none', 'color': 'grey'}}><i id={ind} className="fa-solid fa-volume-high"></i></button>

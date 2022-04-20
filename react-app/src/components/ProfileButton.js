@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../store/session';
+import { remove_session } from '../store/data_store';
 
 function ProfileButton() {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ function ProfileButton() {
 
     const onLogout = async (e) => {
       await dispatch(logout());
+      await dispatch(remove_session());
     };
 
   return (
