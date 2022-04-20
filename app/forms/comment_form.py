@@ -4,4 +4,4 @@ from wtforms.validators import DataRequired, ValidationError, Length
 
 
 class CommentForm(FlaskForm):
-  content = TextAreaField('comment', validators=[DataRequired()])
+  content = TextAreaField('comment', validators=[DataRequired(), Length(max=500)])
