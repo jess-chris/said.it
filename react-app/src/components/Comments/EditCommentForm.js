@@ -27,11 +27,11 @@ const EditCommentForm = ({ comment }) => {
     };
 
     const data = await dispatch(data_funcs.edit_comment(updated_comment));
-    await dispatch(data_funcs.get_communities());
-
+    
     if (data) {
       setErrors(data);
     } else {
+      await dispatch(data_funcs.get_communities());
       setShowModal(false)
     }
 
@@ -73,7 +73,7 @@ const EditCommentForm = ({ comment }) => {
               <textarea
                 name='content'
                 style={{'height':'200px'}}
-                placeholder='Text (optional'
+                placeholder='What are your thoughts?'
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
                 required

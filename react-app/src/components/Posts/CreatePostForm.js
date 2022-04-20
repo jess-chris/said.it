@@ -18,7 +18,9 @@ const CreatePostForm = () => {
   const [communityName, setCommunityName] = useState('');
 
   const userId = useSelector(state => state.session.user?.id);
-  const community = useSelector(state => state.data_store?.all_communities[communityName.toLowerCase()]);
+  const communityObj = useSelector(state => state.data_store?.all_communities);
+  const communities = Object.values(communityObj);
+  const communityId = useSelector(state => state.data_store?.all_communities[communityName.toLowerCase()]);
 
   const createPost = async (e) => {
 
@@ -27,7 +29,7 @@ const CreatePostForm = () => {
     let id;
 
     try {
-      id = community.id;
+      id = communityId.id;
     } catch {
       return setErrors(['Community does not exist']);
     }
@@ -66,7 +68,17 @@ const CreatePostForm = () => {
               ))}
             </div>
             <div>
-              <label htmlFor='name'></label>
+              <fieldset id='community-list'>
+                <select onChange={(e) => setCommunityName(e.target.value)} required name='communities' style={{'border':'none', 'outline':'none'}}>
+                  <option value=''>Choose a community</option>
+                  {communities && communities.map((community) => {
+                    return (
+                      <option key={community?.id} value={community?.name.toLowerCase()}>{community?.name}</option>
+                    )
+                  })}
+                </select>
+              </fieldset>
+              {/* <label htmlFor='name'></label>
               <textarea
                 name='name'
                 className='post-input'
@@ -76,7 +88,7 @@ const CreatePostForm = () => {
                 value={communityName}
                 onChange={(e) => setCommunityName(e.target.value)}
                 required
-              />
+              /> */}
             </div>
             <div>
               <label htmlFor='title'></label>

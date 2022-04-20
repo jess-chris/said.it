@@ -6,4 +6,4 @@ from wtforms.validators import DataRequired, ValidationError, Length
 
 class PostForm(FlaskForm):
   title = TextAreaField('Title', validators=[DataRequired(), Length(min=3, max=300)])
-  content = TextAreaField('content')
+  content = TextAreaField('content', validators=[Length(max=500)])

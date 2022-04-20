@@ -70,11 +70,11 @@ const ViewPost = () => {
 
     const data = await dispatch(data_funcs.create_comment(comment));
     await dispatch(data_funcs.get_communities());
-    setNewComment('');
-
+    
     if (data) {
       setErrors(data);
     } else {
+      setNewComment('');
       history.push(`/s/${community?.name}/${post?.id}/${post?.title.replaceAll(' ', '_')}`);
     }
 
