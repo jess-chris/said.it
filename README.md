@@ -1,6 +1,55 @@
-# Flask React Project
+# Said.it
 
-This is the starter for the Flask React project.
+Said.it is a pretty straight-forward Reddit clone, with a small addition of a text to speech button for Post titles and for user Comments. Logged in users can create communities and create posts inside individual communities. Users must also be logged in to leave comments and votes. Non logged in users have the ability to access communities and see posts, but cannot interact unless logged in.
+
+I chose Reddit as it seems like a good way to test design concepts from the standpoint of authorized users and non authorized users. Along with many different functionality concepts to implement.
+
+
+# Features
+ * Account creation, sign in, and demo user function.
+ * Can create, read, update, and delete the following:
+   * Communities
+   * Posts
+   * Comments
+ * Upvote system
+
+Future features:
+   * AWS support
+   * Search functionality
+   * Web sockets for messaging
+
+# Technologies used
+  * React
+  * Redux
+  * Flask
+  * SQLAlchemy
+  * PostgreSQL
+
+***
+
+
+# Splash / Home page
+
+From the home page users can access the site as a normal logged in user would, just without the ability to create anything. Here you can access the buttons for text to speech for post titles.
+
+![splash](https://user-images.githubusercontent.com/94084333/164514945-af199a86-de76-467c-803f-ad99ca3488b7.PNG)
+
+# Creating / Viewing Communities
+
+From the home page users can create a new community or click on an existing one to view the specific community.
+
+![create-com](https://user-images.githubusercontent.com/94084333/164514974-9734e9cf-5852-49bd-a47c-0f00002aae10.PNG)
+![view-com](https://user-images.githubusercontent.com/94084333/164514982-eac6e959-b366-40a6-a0fc-ab3c951b05fe.PNG)
+
+# Creating / Viewing Posts & Comments
+
+When clicking on an individual post users will be able to read the post in its entirety as well as leave comments, or votes like normal. Here you can also access the text to speech for comments as well as post titles.
+
+![create-post](https://user-images.githubusercontent.com/94084333/164515027-ca25e20f-96ad-4f75-8273-1320998f1305.PNG)
+![view-post](https://user-images.githubusercontent.com/94084333/164515036-056b60ed-dc72-4c7a-82a1-d72f52077b5a.PNG)
+
+
+***
 
 ## Getting started
 ### Dev Containers (M1 Users, follow this guide)
