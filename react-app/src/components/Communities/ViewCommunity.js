@@ -35,7 +35,7 @@ useEffect(() => {
 const userId = useSelector(state => state.session.user?.id);
 const community = useSelector(state => state.data_store.all_communities[name.toLowerCase()]);
 const votes = useSelector(state => state.data_store.user_votes.post_votes)
-const posts = Object.values(community?.posts);
+const posts = Object.values(community?.posts).reverse();
 
 const openMenu = () => {
   if (showComMenu) return;
@@ -104,6 +104,8 @@ const handlePost = async (e) => {
     setErrors(data);
   } else {
     setContent('');
+    setPostTitle('');
+    setErrors([]);
     await dispatch(data_funcs.get_communities());
   }
 
@@ -158,6 +160,13 @@ const handleVote = async (post, val) => {
   scoreCont.innerText = score;
 };
 
+const defaultLogo = (e) => {
+  e.preventDefault();
+
+  document.getElementById('community-logo').setAttribute('src', 'public/assets/default.png');
+
+};
+
 
 
 
@@ -175,11 +184,22 @@ return (
     <div className='main-com-cont'>
 
       <div className='com-menu-bar'>
-        <h1 className='bold-text' style={{'fontSize': '18px'}}>s/{community?.name}</h1>
+        <div style={{'display':'flex', 'flexDirection':'row', 'alignItems':'center', 'justifyContent':'center', 'gap':'10px'}}>
+            {!community?.community_image && (
+            <img style={{'height':'40px', 'width':'40px', 'borderRadius': '50%'}} alt='default-logo' id='community-logo' src='public/assets/default.png'></img>
+              // <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="_1O4jTk-dZ-VIxsCuYB6OR8 " width="40" height="48"><g><circle fill="#0079D3" cx="10" cy="10" r="10"></circle><path fill="#FFFFFF" d="M16.67,10A1.46,1.46,0,0,0,14.2,9a7.12,7.12,0,0,0-3.85-1.23L11,4.65,13.14,5.1a1,1,0,1,0,.13-0.61L10.82,4a0.31,0.31,0,0,0-.37.24L9.71,7.71a7.14,7.14,0,0,0-3.9,1.23A1.46,1.46,0,1,0,4.2,11.33a2.87,2.87,0,0,0,0,.44c0,2.24,2.61,4.06,5.83,4.06s5.83-1.82,5.83-4.06a2.87,2.87,0,0,0,0-.44A1.46,1.46,0,0,0,16.67,10Zm-10,1a1,1,0,1,1,1,1A1,1,0,0,1,6.67,11Zm5.81,2.75a3.84,3.84,0,0,1-2.47.77,3.84,3.84,0,0,1-2.47-.77,0.27,0.27,0,0,1,.38-0.38A3.27,3.27,0,0,0,10,14a3.28,3.28,0,0,0,2.09-.61A0.27,0.27,0,1,1,12.48,13.79Zm-0.18-1.71a1,1,0,1,1,1-1A1,1,0,0,1,12.29,12.08Z"></path></g></svg>
+            )}
+            {community?.community_image && (
+              <img alt='community-logo' style={{'height':'40px', 'width':'40px', 'borderRadius': '50%'}} id='community-logo' onError={defaultLogo} src={community.community_image}></img>
+            )}
+          <h1 className='bold-text' style={{'fontSize': '18px'}}>
+            s/{community?.name}
+          </h1>
+        </div>
         {userId && userId === community?.owner && (
         <div className="user-profile">
           <button className="user-profile-btn" onClick={openMenu}>
-          <i style={{'color': '#0079D3'}} className="fa-brands fa-reddit fa-lg"></i>
+          <i class="fa-solid fa-gear">  </i>
             <div className="drop-down-menu">
             {community.name} Settings
               {showComMenu && (
@@ -322,7 +342,7 @@ return (
 
             <div className="main-spacer"></div>
 
-            <div className='side-header'>
+            <div className='side-header' style={{'position':'sticky', 'top':'50px'}}>
               <div className='bold-text com-banner' style={{'justifyContent':'center'}}>
                 Technologies Used & Links
               </div>

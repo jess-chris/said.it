@@ -89,17 +89,17 @@ const HomePage = () => {
 
       <div className="post-cont">
 
-        <div className="post-cont-topbar">
+        {/* <div className="post-cont-topbar">
           <button className="post-links light-text btn-style"><i className="fa-solid fa-burst fa-lg"></i>  New</button>
           <button className="post-links light-text btn-style"><i className="fa-solid fa-arrow-up-from-bracket fa-lg"></i>  Top</button>
-        </div>
+        </div> */}
 
         <div className="medium-text" style={{'fontWeight':'bold', 'opacity':'0.7'}}>Popular posts</div>
 
         <div style={{'paddingTop': '20px'}}>
 
           {loaded && communities?.map((community) => {
-            let posts = Object.values(community.posts);
+            let posts = Object.values(community.posts).reverse();
             return posts?.map((post) => {
               // for (const [key, post] of Object.entries(community?.posts)) {
               return (
@@ -199,7 +199,7 @@ const HomePage = () => {
 
           <div className="main-spacer"></div>
 
-          <div className='side-header'>
+          <div className='side-header' style={{'position':'sticky', 'top':'50px'}}>
               <div className='bold-text com-banner' style={{'justifyContent':'center'}}>
                 Technologies Used & Links
               </div>
