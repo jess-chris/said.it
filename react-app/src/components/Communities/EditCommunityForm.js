@@ -21,29 +21,27 @@ const EditCommunityForm = ({value}) => {
   const [communityInfo, setCommunityInfo] = useState(community?.community_info);
   // const [communityMemberTitle, setCommunityMemberTitle] = useState(community?.member_title);
   const [id] = useState(community?.id);
-  const [errors, setErrors] = useState([]);
+  const [formErrors, setFormErrors] = useState([]);
 
-  const handleEdit = (e) => {
+  const handleEdit = async (e) => {
     e.preventDefault();
 
     const community = {
       // 'name': communityName,
       // 'title': communityMemberTitle,
-      'image': communityImage,
-      'info': communityInfo,
+      'image': communityImage.trim(),
+      'info': communityInfo.trim(),
       id
     }
 
-    const data = dispatch(data_funcs.edit_community(community));
+    const data = await dispatch(data_funcs.edit_community(community));
 
     if (data) {
-      setErrors(data);
-    }
-
-
+      setFormErrors(data);
+    } else {
     setShowModal(false);
     history.push(`/s/${communityName}`);
-    
+    }
   }
 
 
@@ -62,7 +60,7 @@ const EditCommunityForm = ({value}) => {
           </div>
           <form onSubmit={handleEdit}>
             <div>
-              {errors.map((error, ind) => (
+              {formErrors.map((error, ind) => (
                 <div key={ind}>{error}</div>
               ))}
             </div>
@@ -90,7 +88,6 @@ const EditCommunityForm = ({value}) => {
                 placeholder='Optional image for your community'
                 value={communityImage}
                 onChange={(e) => setCommunityImage(e.target.value)}
-                disabled={true}
               />
             </div>
             <div className='com-form-name'>

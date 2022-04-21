@@ -38,8 +38,8 @@ const CreatePostForm = () => {
       'name': communityName,
       'community': id,
       'userId': userId,
-      'content': content,
-      'title': title
+      'content': content.trim(),
+      'title': title.trim()
     };
 
     const data = await dispatch(data_funcs.create_post(post));

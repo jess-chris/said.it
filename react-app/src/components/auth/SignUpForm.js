@@ -3,6 +3,7 @@ import { Modal } from '../../context/Modal';
 import { useDispatch, useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
+import { login } from '../../store/session';
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
@@ -21,6 +22,14 @@ const SignUpForm = () => {
       if (data) {
         setErrors(data)
       }
+    }
+  };
+
+  const demoLogin = async (e) => {
+    e.preventDefault();
+    const data = await dispatch(login('demo@aa.io', 'password'));
+    if (data) {
+      setErrors(data);
     }
   };
 
@@ -105,6 +114,7 @@ const SignUpForm = () => {
                 ></input>
               </div>
               <button className='main-links login-btn' type='submit'>Sign Up</button>
+              <button style={{'marginTop':'20px', 'background':'#fff', 'border':'1px solid #0079D3', 'color':'#0079D3'}} className='main-links login-btn' onClick={demoLogin}>Demo</button>
             </form>
           </div>
         </div>

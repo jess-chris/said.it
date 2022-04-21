@@ -25,9 +25,9 @@ const CreateCommunityForm = () => {
     e.preventDefault()
 
     const community = {
-      'name': communityName,
-      'image': communityImage,
-      'info': communityInfo
+      'name': communityName.trim(),
+      'image': communityImage.trim(),
+      'info': communityInfo.trim()
     }
 
     const data = await dispatch(data_funcs.create_community(community));
@@ -89,7 +89,6 @@ const CreateCommunityForm = () => {
                 placeholder='Optional image for your community'
                 value={communityImage}
                 onChange={(e) => setCommunityImage(e.target.value)}
-                disabled={true}
               />
             </div>
             <div className='com-form-name'>

@@ -29,6 +29,14 @@ const LoginForm = ({value}) => {
     }
   };
 
+  const demoLogin = async (e) => {
+    e.preventDefault();
+    const data = await dispatch(login('demo@aa.io', 'password'));
+    if (data) {
+      setErrors(data);
+    }
+  };
+
   const updateEmail = (e) => {
     setEmail(e.target.value);
   };
@@ -89,6 +97,7 @@ const LoginForm = ({value}) => {
                   onChange={updatePassword}
                 />
                 <button className='main-links login-btn' type='submit'>Login</button>
+                <button style={{'marginTop':'20px', 'background':'#fff', 'border':'1px solid #0079D3', 'color':'#0079D3'}} className='main-links login-btn' onClick={demoLogin}>Demo</button>
               </div>
             </form>
           </div>

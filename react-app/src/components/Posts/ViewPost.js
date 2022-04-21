@@ -65,7 +65,7 @@ const ViewPost = () => {
 
     const comment = {
       'postId': post.id,
-      'content': newComment
+      'content': newComment.trim()
     };
 
     const data = await dispatch(data_funcs.create_comment(comment));

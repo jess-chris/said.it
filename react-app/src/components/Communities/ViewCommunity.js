@@ -96,8 +96,8 @@ const handlePost = async (e) => {
     'name': community.name,
     'community': community.id,
     'userId': userId,
-    'title': postTitle,
-    'content': content
+    'title': postTitle.trim(),
+    'content': content.trim()
   };
   const data = await dispatch(data_funcs.create_post(post));
   if (data) {
