@@ -22,7 +22,7 @@ def community_exists(form, field):
 def check_ext(form, field):
   image = field.data
   
-  if len(image) > 0 and image.endswith((".pdf", ".png", ".jpg", ".jpeg", ".gif")) == False:
+  if len(image) > 0 and image.endswith((".png", ".jpg", ".jpeg", ".gif")) == False:
     raise ValidationError('Invalid image extension.')
 
 

@@ -82,7 +82,7 @@ const CreateCommunityForm = () => {
             </div>
             <div className='com-form-name'>
               <label className='com-form-header' htmlFor='image'>Community Image</label>
-              <div style={{'marginBottom':'16px'}} className='light-text'>Will only accept image url's of .jpg or .png</div>
+              <div style={{'marginBottom':'16px'}} className='light-text'>Will only accept image url's of .jpg, .jpeg, .png, or .gif</div>
               <input
                 name='image'
                 type='text'
