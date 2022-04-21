@@ -23,7 +23,7 @@ const EditCommentForm = ({ comment }) => {
   
     const updated_comment = {
       'commentId': comment.id,
-      'content': content
+      'content': content.trim()
     };
 
     const data = await dispatch(data_funcs.edit_comment(updated_comment));

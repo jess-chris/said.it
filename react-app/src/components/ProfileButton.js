@@ -41,6 +41,7 @@ function ProfileButton() {
             <div className="profile-dropdown-cont">
               <div className="profile-dropdown">
                 <div className="profile-btn-item" onClick={onLogout}>Log Out</div>
+                <div className="profile-btn-item"></div>
                 <a href='https://www.linkedin.com/in/jesse-christensen-204801232/'><div className="profile-btn-item">LinkedIn</div></a>
                 <a href='https://github.com/jess-chris'><div className="profile-btn-item">GitHub</div></a>
               </div>

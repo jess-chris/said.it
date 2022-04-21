@@ -1,4 +1,4 @@
-from crypt import methods
+from sqlalchemy import desc
 from flask import Blueprint, jsonify, session, request
 from app.models import db, Post
 from app.forms import PostForm
