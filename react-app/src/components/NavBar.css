@@ -108,7 +108,10 @@
 }
 
 
-.main-logo img {
+.main-logo div {
   height: 24px;
   width: 80px;
+  background: url('said_it.png');
+  background-size: contain;
+  background-repeat: no-repeat;
 }
