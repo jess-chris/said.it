@@ -275,7 +275,7 @@ textarea {
 }
 
 .p-home-banner {
-  background-image: url('https://www.redditstatic.com/desktop2x/img/id-cards/home-banner@2x.png');
+  background-image: url('home-banner.png');
   background-size: cover;
 
   width: 100%;
@@ -299,7 +299,7 @@ textarea {
 }
 
 #p-home-moogle {
-  background: url('https://www.redditstatic.com/desktop2x/img/id-cards/snoo-home@2x.png');
+  background: url('snoo-home.png');
   background-size: 40px 68px;
   height: 68px;
   width: 40px;
