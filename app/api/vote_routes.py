@@ -25,7 +25,7 @@ def post_vote():
   
   
   try:
-    prev_vote = Post_Vote.query.filter_by(user_id = user_id, post_id = post_id).one()
+    prev_vote = Post_Vote.query.filter_by(user_id = current_user.id, post_id = post_id).one()
   except:
     prev_vote = None
   
