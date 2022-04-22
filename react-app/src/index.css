@@ -2,6 +2,11 @@
   font: inherit;
 }
 
+button, span,
+#upVoteButton, #downVoteButton {
+  cursor: pointer;
+}
+
 
 .user-profile-btn {
   display: flex;
