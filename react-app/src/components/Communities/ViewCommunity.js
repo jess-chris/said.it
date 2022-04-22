@@ -318,8 +318,8 @@ return (
                     </div>
                   </div>
                   <div className="single-post-content">
+                    <p className='light-text' style={{'cursor':'auto'}}>Posted by u/{post?.user_name}</p>
                     <NavLink to={{pathname: `/s/${community?.name}/${post?.id}/${post?.title.replaceAll(' ', '_')}`, state:{location}}}>
-                    <p className='light-text'>Posted by u/{post?.user_name}</p>
                     <p className="medium-text" style={{'fontWeight': 'bold'}}>{post?.title}</p>
                     <div className="text-post-content">
                       <p className="light-text">{post?.content}</p>

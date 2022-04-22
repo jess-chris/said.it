@@ -224,8 +224,8 @@ const ViewPost = () => {
                 </div>
               </div>
 
-              <div key={post?.id} className="single-post-view text-post-view">
-              <div><NavLink to={`/s/${community?.name}`}><span className="bold-text">{`s/${community?.name}`}</span></NavLink> • <span className="light-text">Posted by u/{post?.user_name}</span></div>
+              <div key={post?.id} className="single-post-view text-post-view" style={{'cursor':'auto'}}>
+              <div><NavLink to={`/s/${community?.name}`}><span className="bold-text">{`s/${community?.name}`}</span></NavLink> • <span className="light-text" style={{'cursor':'auto'}}>Posted by u/{post?.user_name}</span></div>
                 <p className="medium-text" style={{'fontWeight': 'bold', 'fontSize': '16px'}}>{post?.title}</p>
                 <p className="medium-text text-post-view">{post?.content}</p>
                 {userId === post?.user_id && (
