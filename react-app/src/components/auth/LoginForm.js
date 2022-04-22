@@ -80,7 +80,7 @@ const LoginForm = ({value}) => {
                 <input
                   className='auth-input'
                   name='email'
-                  type='text'
+                  type='email'
                   placeholder='Email'
                   value={email}
                   onChange={updateEmail}
