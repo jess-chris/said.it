@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect, useHistory, useLocation } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { login } from '../../store/session';
 
 import './Auth.css';
@@ -9,7 +9,7 @@ import './Auth.css';
 const LoginForm = ({value}) => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const location = useLocation();
+  // const location = useLocation();
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -19,13 +19,16 @@ const LoginForm = ({value}) => {
 
   if (path === '/login' && user) {
     return <Redirect to='/' />;
-  }
+  } 
 
   const onLogin = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
     if (data) {
       setErrors(data);
+    } else {
+      // return <Redirect to={path} />
+      history.goBack()
     }
   };
 
@@ -34,6 +37,9 @@ const LoginForm = ({value}) => {
     const data = await dispatch(login('demo@aa.io', 'password'));
     if (data) {
       setErrors(data);
+    } else {
+      // return <Redirect to={path} />
+      history.goBack()
     }
   };
 
@@ -52,7 +58,6 @@ const LoginForm = ({value}) => {
       history.push('/');
     } else {
       setShowModal(false);
-      history.push(location.pathname);
     }
 
   }
