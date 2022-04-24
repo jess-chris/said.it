@@ -88,6 +88,7 @@ const EditCommunityForm = ({value}) => {
                 placeholder='Optional image for your community'
                 value={communityImage}
                 onChange={(e) => setCommunityImage(e.target.value)}
+                autoComplete='off'
               />
             </div>
             <div className='com-form-name'>
