@@ -27,7 +27,7 @@ const LoginForm = ({value}) => {
     if (data) {
       setErrors(data);
     } else {
-      if (path === '/login') {
+      if (path === '/login' && history.length > 2) {
         history.goBack()
       } else {
         return <Redirect to={path} />
@@ -36,12 +36,13 @@ const LoginForm = ({value}) => {
   };
 
   const demoLogin = async (e) => {
+    console.log(history)
     e.preventDefault();
     const data = await dispatch(login('demo@aa.io', 'password'));
     if (data) {
       setErrors(data);
     } else {
-      if (path === '/login') {
+      if (path === '/login' && history.length > 2) {
         history.goBack()
       } else {
         return <Redirect to={path} />
