@@ -27,8 +27,11 @@ const LoginForm = ({value}) => {
     if (data) {
       setErrors(data);
     } else {
-      // return <Redirect to={path} />
-      history.goBack()
+      if (path === '/login') {
+        history.goBack()
+      } else {
+        return <Redirect to={path} />
+      }
     }
   };
 
@@ -38,8 +41,11 @@ const LoginForm = ({value}) => {
     if (data) {
       setErrors(data);
     } else {
-      // return <Redirect to={path} />
-      history.goBack()
+      if (path === '/login') {
+        history.goBack()
+      } else {
+        return <Redirect to={path} />
+      }
     }
   };
 
@@ -56,6 +62,7 @@ const LoginForm = ({value}) => {
     if (path === '/login') {
       setShowModal(false);
       history.push('/');
+      history.goBack()
     } else {
       setShowModal(false);
     }
