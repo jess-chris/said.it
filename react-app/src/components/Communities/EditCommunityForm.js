@@ -41,6 +41,7 @@ const EditCommunityForm = ({value}) => {
     } else {
     setShowModal(false);
     await dispatch(data_funcs.get_communities());
+    history.push('/');
     history.push(`/s/${communityName}`);
     }
   }
