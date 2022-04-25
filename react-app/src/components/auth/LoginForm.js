@@ -63,7 +63,6 @@ const LoginForm = ({value}) => {
     if (path === '/login') {
       setShowModal(false);
       history.push('/');
-      history.goBack()
     } else {
       setShowModal(false);
     }
