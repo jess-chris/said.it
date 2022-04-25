@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import * as data_funcs from '../../store/data_store';
 
@@ -9,7 +9,6 @@ import './CommunityModal.css';
 
 const EditCommunityForm = ({value}) => {
   
-  const history = useHistory();
   const dispatch = useDispatch();
   const { name } = useParams();
   const community = useSelector(state => state.data_store.all_communities[name.toLowerCase()]);
@@ -41,8 +40,8 @@ const EditCommunityForm = ({value}) => {
     } else {
     setShowModal(false);
     await dispatch(data_funcs.get_communities());
-    history.push('/');
-    history.push(`/s/${communityName}`);
+    
+    window.location.reload(false);
     }
   }
 
