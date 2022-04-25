@@ -75,6 +75,7 @@ const ViewPost = () => {
       setErrors(data);
     } else {
       setNewComment('');
+      setErrors([]);
       history.push(`/s/${community?.name}/${post?.id}/${post?.title.replaceAll(' ', '_')}`);
     }
 
