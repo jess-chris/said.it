@@ -40,6 +40,7 @@ const EditCommunityForm = ({value}) => {
       setFormErrors(data);
     } else {
     setShowModal(false);
+    await dispatch(data_funcs.get_communities());
     history.push(`/s/${communityName}`);
     }
   }

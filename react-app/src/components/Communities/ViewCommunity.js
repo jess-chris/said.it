@@ -204,7 +204,7 @@ return (
         {userId && userId === community?.owner && (
         <div className="user-profile">
           <button className="user-profile-btn" onClick={openMenu}>
-          <i class="fa-solid fa-gear">  </i>
+          <i className="fa-solid fa-gear">  </i>
             <div className="drop-down-menu">
             {community.name} Settings
               {showComMenu && (
