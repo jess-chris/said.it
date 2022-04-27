@@ -94,7 +94,7 @@ const EditPostForm = ({ post }) => {
                 <textarea
                   name='content'
                   style={{'height':'200px'}}
-                  placeholder='Text (optional'
+                  placeholder='Text (optional)'
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
                 />
