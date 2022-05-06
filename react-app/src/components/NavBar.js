@@ -69,7 +69,7 @@ const NavBar = () => {
               </NavLink>
             </div> */}
         <div className='nav-community-cont'>
-
+            {user && user && (
             <div className='community-dropdown-menu'>
             <button onClick={openMenu} className='nav-community-select'>
             <i style={{'paddingRight':'10px'}} className="fa-solid fa-house"></i>
@@ -91,6 +91,7 @@ const NavBar = () => {
             <i className="fa-solid fa-chevron-down"></i>
             </button>
             </div>
+            )}
         </div>
 
 

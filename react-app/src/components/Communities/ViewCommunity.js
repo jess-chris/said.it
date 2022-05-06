@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useParams, NavLink, useLocation } from 'react-router-dom';
+import { useHistory, useParams, NavLink, useLocation, Redirect } from 'react-router-dom';
 import * as data_funcs from '../../store/data_store';
 import EditCommunityForm from './EditCommunityForm';
 
@@ -35,7 +35,7 @@ useEffect(() => {
 const userId = useSelector(state => state.session.user?.id);
 const community = useSelector(state => state.data_store.all_communities[name.toLowerCase()]);
 const votes = useSelector(state => state.data_store.user_votes.post_votes)
-const posts = Object.values(community?.posts).reverse();
+
 
 const openMenu = () => {
   if (showComMenu) return;
@@ -45,37 +45,42 @@ const openMenu = () => {
 const openEdit = () => {
   if (showEdit) return;
   setShowEdit(true);
-}
+};
 
 useEffect(() => {
   if (!showEdit) return;
-
+  
   const closeEdit = () => {
     setShowEdit(false);
   };
-
+  
   const home = document.querySelector('.community-page');
   home.addEventListener('click', closeEdit);
-
+  
   return () => home.removeEventListener("click", closeEdit);
 }, [showEdit]);
 
 useEffect(() => {
   if (!showComMenu) return;
-
+  
   const closeMenu = () => {
     setShowComMenu(false);
   };
-
+  
   document.addEventListener('click', closeMenu);
-
+  
   return () => document.removeEventListener("click", closeMenu);
 }, [showComMenu]);
-
 
 if (!loaded) {
   return null;
 }
+
+if (!community) {
+  return <Redirect to='/' />;
+};
+
+const posts = Object.values(community.posts).reverse();
 
 const handleDelete = (e) => {
 
@@ -201,8 +206,8 @@ return (
             s/{community?.name}
           </h1>
         </div>
+        <div style={{'minWidth':'235px'}} className="user-profile">
         {userId && userId === community?.owner && (
-        <div className="user-profile">
           <button className="user-profile-btn" onClick={openMenu}>
           <i className="fa-solid fa-gear">  </i>
             <div className="drop-down-menu">
@@ -220,8 +225,8 @@ return (
             </div>
             <i className="fa-solid fa-chevron-down"></i>
           </button>
-        </div>
         )}
+        </div>
       </div>
 
     </div>
@@ -352,7 +357,7 @@ return (
             <div className="main-spacer"></div>
 
             <div className='side-header' style={{'position':'sticky', 'top':'50px'}}>
-              <div className='bold-text com-banner' style={{'justifyContent':'center'}}>
+              <div className='bold-text com-banner'>
                 Technologies Used & Links
               </div>
               <ul className='light-text'>

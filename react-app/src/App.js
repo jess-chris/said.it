@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Switch, Redirect, useHistory } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
@@ -18,14 +18,12 @@ import ViewPost from './components/Posts/ViewPost';
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
-  // const userId = useSelector(state => state.session.user)
 
 
   useEffect(() => {
     (async() => {
       await dispatch(authenticate());
       await dispatch(data_funcs.get_communities());
-      // await dispatch(data_funcs.get_user_votes(userId));
       setLoaded(true);
     })();
   }, [dispatch]);
