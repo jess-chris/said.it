@@ -25,8 +25,8 @@ const HomePage = () => {
     })();
   }, [dispatch, user]);
   
-  const communityObj = useSelector(state => state.data_store.all_communities)
-  const votes = useSelector(state => state.data_store.user_votes.post_votes)
+  const communityObj = useSelector(state => state.data_store.all_communities);
+  const votes = useSelector(state => state.data_store.user_votes.post_votes);
   const communities = Object.values(communityObj);
 
   
@@ -90,10 +90,10 @@ const HomePage = () => {
 
       <div className="post-cont">
 
-        {/* <div className="post-cont-topbar">
-          <button className="post-links light-text btn-style"><i className="fa-solid fa-burst fa-lg"></i>  New</button>
-          <button className="post-links light-text btn-style"><i className="fa-solid fa-arrow-up-from-bracket fa-lg"></i>  Top</button>
-        </div> */}
+        <div className="post-cont-topbar">
+          <button className="post-links light-text"><i className="fa-solid fa-burst fa-lg"></i>  New</button>
+          <button className="post-links light-text"><i className="fa-solid fa-arrow-up-from-bracket fa-lg"></i>  Top</button>
+        </div>
 
         <div className="medium-text" style={{'fontWeight':'bold', 'opacity':'0.7'}}>Popular posts</div>
 

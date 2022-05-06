@@ -1,15 +1,54 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { NavLink, useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
 import './NavBar.css';
 import ProfileButton from './ProfileButton';
 import LoginForm from './auth/LoginForm';
 import SignUpForm from './auth/SignUpForm';
 
+import * as data_funcs from '../store/data_store';
+
 const NavBar = () => {
 
-  const user = useSelector(state => state.session.user)
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const [loaded, setLoaded] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
+  
+  const user = useSelector(state => state.session.user);
+  
+  useEffect(() => {
+    (async() => {
+      await dispatch(data_funcs.get_communities());
+      setLoaded(true);
+    })();
+  }, [dispatch]);
+  
+  
+  const communityObj = useSelector(state => state.data_store.all_communities);
+  const communities = Object.values(communityObj);
+  const current_community = useSelector(state => state.data_store.all_communities[history?.location?.pathname?.split('/')[2]?.toLowerCase()]?.name);
+
+
+  const openMenu = () => {
+    if (showMenu) return;
+    setShowMenu(true);
+  };
+  
+  useEffect(() => {
+    if (!showMenu) return;
+
+    const closeMenu = () => {
+      setShowMenu(false);
+    };
+
+    document.addEventListener('click', closeMenu);
+  
+    return () => document.removeEventListener("click", closeMenu);
+  }, [showMenu]);
+
+
 
   return (
     <>
@@ -29,6 +68,30 @@ const NavBar = () => {
               Users
               </NavLink>
             </div> */}
+        <div className='nav-community-cont'>
+
+            <div className='community-dropdown-menu'>
+            <button onClick={openMenu} className='nav-community-select'>
+            <i style={{'paddingRight':'10px'}} className="fa-solid fa-house"></i>
+            {loaded && current_community}
+            {loaded && !current_community && 'Home'}
+              {showMenu && (
+                <div className='community-dropdown-cont'>
+                  <div className='community-dropdown'>
+
+                    {communities && communities?.map((community) => {
+                      return (
+                        <NavLink key={community?.id} to={`/s/${community?.name}`}><div className='community-dropdown-item'>{community?.name}</div></NavLink>
+                      )
+                      })}
+
+                  </div>
+                </div>
+              )}
+            <i className="fa-solid fa-chevron-down"></i>
+            </button>
+            </div>
+        </div>
 
 
 
