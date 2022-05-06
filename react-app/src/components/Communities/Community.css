@@ -110,10 +110,11 @@
 .com-menu-bar {
   display: flex;
   flex-flow: row;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   /* color: #fff; */
   width: 100%;
+  gap: 50%;
 }
 
 .com-content {

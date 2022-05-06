@@ -37,7 +37,8 @@ button, span,
   padding-top: 5px;
 }
 
-.profile-dropdown-cont {
+.profile-dropdown-cont,
+.community-dropdown-cont {
   margin-top: 10px;
   position: absolute;
   display: flex;
@@ -53,7 +54,8 @@ button, span,
   cursor: pointer;
 }
 
-.profile-dropdown {
+.profile-dropdown,
+.community-dropdown {
   display: flex;
   flex-direction: column;
   display: block;
@@ -70,7 +72,24 @@ button, span,
 
   width: 175px; 
 }
-.profile-btn-item {
+
+.community-dropdown-menu {
+  position: relative;
+  max-width: 100%;
+  text-align: center;
+  width: 250px;
+}
+
+.community-dropdown {
+  position: absolute;
+  width: 235px;
+  margin-top: 13.5px;
+}
+
+
+
+.profile-btn-item,
+.community-dropdown-item {
   display: flex;
   position: relative;
   flex-flow: row nowrap;
@@ -80,7 +99,12 @@ button, span,
   /* margin-right: 2rem; */
   height: 30px;
   width: 100%;
-  border-bottom: 1px solid gray;
+  /* border-bottom: 1px solid gray; */
+}
+
+.community-dropdown-item:hover {
+  border: 1px solid gray;
+  z-index: 1;
 }
 
 
@@ -100,6 +124,24 @@ button, span,
   margin-bottom: 5px;
   align-content: center;
   align-items: center;
+}
+
+.post-form > div {
+  width: 100%;
+}
+
+#community-dropdown {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: center; */
+  align-items: center;
+  margin-left: 30px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.post-form fieldset, select {
+  width: 100%;
 }
 
 .post-input {

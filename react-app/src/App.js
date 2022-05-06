@@ -18,13 +18,12 @@ import ViewPost from './components/Posts/ViewPost';
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
-  // const userId = useSelector(state => state.session.user)
+
 
   useEffect(() => {
     (async() => {
       await dispatch(authenticate());
       await dispatch(data_funcs.get_communities());
-      // await dispatch(data_funcs.get_user_votes(userId));
       setLoaded(true);
     })();
   }, [dispatch]);

@@ -67,13 +67,15 @@ const CreatePostForm = () => {
                 <div key={ind}>{error}</div>
               ))}
             </div>
-            <div>
+            <div id='community-dropdown'>
               <fieldset id='community-list'>
                 <select onChange={(e) => setCommunityName(e.target.value)} required name='communities' style={{'border':'none', 'outline':'none'}}>
                   <option value=''>Choose a community</option>
                   {communities && communities.map((community) => {
                     return (
-                      <option key={community?.id} value={community?.name.toLowerCase()}>{community?.name}</option>
+                      <>
+                        <option name={community?.name} className='profile-btn-item' key={community?.id} value={community?.name.toLowerCase()}>{community?.name}</option>
+                      </>
                     )
                   })}
                 </select>
@@ -93,7 +95,7 @@ const CreatePostForm = () => {
             <div>
               <label htmlFor='title'></label>
               <textarea
-                name='content'
+                name='title'
                 className='post-input'
                 rows='2'
                 cols='75'
