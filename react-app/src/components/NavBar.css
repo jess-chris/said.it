@@ -118,8 +118,9 @@
 
 
 .nav-community-cont {
-  max-width: 250px;
+  max-width: 235px;
   width: 100%;
+  padding: 0 6px;
   /* height: 32px; */
   display: flex;
   background: #FFF;
@@ -135,4 +136,17 @@
   outline: none;
   border: none;
   background: #FFF;
+}
+
+.community-filter {
+  height: 30px;
+  outline: 0;
+  border: 1px solid #f6f7f8;
+  margin-bottom: 10px;
+}
+
+.community-filter:hover,
+.community-filter:focus {
+  border-color: #0079D3;
+
 }
