@@ -104,6 +104,14 @@ button, span,
   /* border-bottom: 1px solid gray; */
 }
 
+.community-dropdown-item {
+  cursor: pointer;
+}
+
+.profile-btn-item {
+  justify-content: center;
+}
+
 .community-search-logo {
   height: 20px;
   width: 20px;

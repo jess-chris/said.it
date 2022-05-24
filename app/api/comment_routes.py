@@ -1,5 +1,6 @@
 from crypt import methods
 from flask import Blueprint, jsonify, session, request
+from datetime import datetime
 from app.models import db, Post, Comment
 from app.forms import CommentForm
 from flask_login import current_user
@@ -48,6 +49,7 @@ def edit_comment():
   
   if form.validate_on_submit():
     comment.content=form.data['content']
+    comment.updated_at = datetime.now()
     
     db.session.add(comment)
     db.session.commit()
