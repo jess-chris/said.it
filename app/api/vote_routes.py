@@ -1,6 +1,6 @@
 from crypt import methods
 from flask import Blueprint, jsonify, session, request
-from app.models import db, Post, Comment, Post_Vote, Comment_Vote
+from app.models import db, Post, Comment, Post_Vote, Comment_Vote, User
 from flask_login import current_user
 from .auth_routes import validation_errors_to_error_messages
 
@@ -18,10 +18,21 @@ def get_post_vote():
 def post_vote():
   
   post_id = request.json['postId']
-  user_id = request.json['userId']
+  # user_id = request.json['userId']
   vote_type = request.json['voteType']
   
   post = Post.query.get(post_id)
+  
+  # user = User.query.get(user_id)
+  
+  # user.user_communities = []
+  # user.user_communities.append(1)
+  # user.user_communities = user.user_communities
+  # db.session.add(user)
+  
+  # print("\n\n\n\n\n\n\n")
+  # print(user.user_communities)
+  # print("\n\n\n\n\n\n\n")
   
   
   try:

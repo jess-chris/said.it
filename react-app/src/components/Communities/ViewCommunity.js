@@ -351,7 +351,17 @@ return (
               <div className='bold-text com-banner'>
                 About Community
               </div>
-              <p className='bold-text community-info'>{community?.community_info}</p>
+              <div className='community-info'>
+                <p className='bold-text'>{community?.community_info}</p>
+
+                {/* <div className=''>
+                  info
+                </div> */}
+
+                <div>
+                <button onClick={() => null} style={{"width":"90%","backgroundColor": "#FFF", "color": "#0079D3", "borderColor": "#0079D3"}} className="main-links btn-style">Join</button>
+                </div>
+              </div>
             </div>
 
             <div className="main-spacer"></div>

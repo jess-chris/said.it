@@ -375,7 +375,7 @@ export const remove_session = () => async (dispatch) => {
 
 export default function reducer(state = {all_communities: {}, user_votes: {post_votes: {}, comment_votes: {}}}, action) {
 
-  const newState = { ...state }
+  const newState = {...state};
 
   switch(action.type) {
 
@@ -413,7 +413,6 @@ export default function reducer(state = {all_communities: {}, user_votes: {post_
 
     case UPDATE_USER_POST_VOTES:
     
-
       if (newState.user_votes[action.vote.post_id]?.vote_type === action.vote.vote_type) {
         delete newState.user_votes[action.vote.post_id];
       } else {

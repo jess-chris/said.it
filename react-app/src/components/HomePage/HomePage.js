@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useLocation, useHistory } from "react-router-dom";
+import { io } from 'socket.io-client';
+
 
 import * as data_funcs from '../../store/data_store';
 import CreateCommunityForm from "../Communities/CreateCommunityForm";
@@ -8,12 +10,15 @@ import CreatePostForm from "../Posts/CreatePostForm";
 
 import './HomePage.css'
 
+let socket;
+
 const HomePage = () => {
 
   const dispatch = useDispatch();
   const history = useHistory()
   const [loaded, setLoaded] = useState(false);
   const location = useLocation().pathname;
+
   
   const user = useSelector(state => state.session?.user);
   
@@ -25,6 +30,30 @@ const HomePage = () => {
     })();
   }, [dispatch, user]);
   
+  useEffect(() => {
+
+    socket = io();
+
+    socket.on("votes", async ({post}) => {
+
+
+      const scoreCont = document.getElementById(`counter-${post}`)
+
+      // await dispatch(data_funcs.get_communities());
+      const {score} = await dispatch(data_funcs.current_post_score(post));
+      scoreCont.innerText = score;
+
+    });
+
+
+    return (() => {
+      socket.disconnect()
+    })
+
+  }, [dispatch]);
+
+
+
   const communityObj = useSelector(state => state.data_store.all_communities);
   const votes = useSelector(state => state.data_store.user_votes.post_votes);
   const communities = Object.values(communityObj);
@@ -34,6 +63,12 @@ const HomePage = () => {
     return null;
   }
 
+
+
+
+
+
+
   const saidIt = (e) => {
 
     e.preventDefault();
@@ -42,8 +77,6 @@ const HomePage = () => {
     const voiceMessage = new SpeechSynthesisUtterance();
     voiceMessage.text = communityObj[name.toLowerCase()].posts[id].title;
     window.speechSynthesis.speak(voiceMessage);
-
-
 
   };
 
@@ -80,6 +113,8 @@ const HomePage = () => {
     await dispatch(data_funcs.get_communities());
     const {score} = await dispatch(data_funcs.current_post_score(post));
     scoreCont.innerText = score;
+
+    socket.emit("votes", {post});
   };
 
   
@@ -209,11 +244,11 @@ const HomePage = () => {
                 Technologies Used & Links
               </div>
               <ul className='light-text'>
-                <li>React</li>
-                <li>Redux</li>
-                <li>Python</li>
-                <li>Flask SQLAlchemy</li>
-                <li>PostgreSQL</li>
+                <li key='react'>React</li>
+                <li key='redux'>Redux</li>
+                <li key='python'>Python</li>
+                <li key='flask'>Flask SQLAlchemy</li>
+                <li key='psql'>PostgreSQL</li>
               </ul>
               <div style={{'textAlign':'center'}} className="light-text">Developed by Jesse Christensen</div>
               <div style={{'display':'flex', 'flexDirection':'row', 'textAlign':'center'}}>

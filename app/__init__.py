@@ -16,6 +16,7 @@ from .api.vote_routes import vote_routes
 from .seeds import seed_commands
 
 from .config import Config
+from .socket_config import socketio
 
 app = Flask(__name__)
 
@@ -41,6 +42,9 @@ app.register_blueprint(comment_routes, url_prefix='/api/comments')
 app.register_blueprint(vote_routes, url_prefix='/api/votes')
 db.init_app(app)
 Migrate(app, db)
+
+
+socketio.init_app(app)
 
 # Application Security
 CORS(app)
@@ -78,3 +82,6 @@ def react_root(path):
     if path == 'favicon.ico':
         return app.send_static_file('favicon.ico')
     return app.send_static_file('index.html')
+
+if __name__ == '__main__':
+    socketio.run(app)
