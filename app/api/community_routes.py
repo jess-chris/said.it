@@ -1,5 +1,6 @@
 from crypt import methods
 from flask import Blueprint, jsonify, session, request
+from datetime import datetime
 from app.models import db, Community
 from app.forms import CommunityForm, EditCommunityForm
 from flask_login import current_user
@@ -55,6 +56,7 @@ def edit_community():
     # community.member_title=form.data['title'],
     community.community_image=form.data['image'],
     community.community_info=form.data['info']
+    community.updated_at = datetime.now()
     
     db.session.add(community)
     db.session.commit()

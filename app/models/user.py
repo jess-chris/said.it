@@ -1,7 +1,10 @@
+from email.policy import default
+from sqlalchemy import Integer
 from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from datetime import datetime
+from sqlalchemy.dialects import postgresql
 
 
 class User(db.Model, UserMixin):
@@ -12,6 +15,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
     profile_image = db.Column(db.String())
+    user_communities = db.Column(postgresql.ARRAY(Integer), default=[])
     created_at = db.Column(db.DateTime, default=datetime.now(), nullable=False)
     updated_at = db.Column(db.DateTime, default=datetime.now(), nullable=False)
 

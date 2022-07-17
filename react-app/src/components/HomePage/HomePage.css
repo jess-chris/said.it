@@ -265,6 +265,10 @@ textarea {
   border-bottom: thin solid #CCC;
 }
 
+.top-com-list img {
+  padding-right: 5px;
+}
+
 
 .personal-home-cont {
   padding: 12px;
@@ -338,6 +342,11 @@ textarea {
   display: flex;
   justify-content: center;
   /* position: absolute; */
+}
+
+
+.community-logo {
+  border-radius: 50%;
 }
 
 

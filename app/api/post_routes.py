@@ -1,6 +1,7 @@
 from sqlalchemy import desc
 from flask import Blueprint, jsonify, session, request
 from app.models import db, Post
+from datetime import datetime
 from app.forms import PostForm
 from flask_login import current_user
 from .auth_routes import validation_errors_to_error_messages
@@ -63,6 +64,7 @@ def edit_post():
   if form.validate_on_submit() and post.user_id == current_user.id:
     post.title=form.data['title'],
     post.content=form.data['content']
+    post.updated_at = datetime.now()
     
     db.session.add(post)
     db.session.commit()
