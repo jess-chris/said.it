@@ -118,14 +118,14 @@ const handlePost = async (e) => {
 
 
 
-const saidIt = (e) => {
+const saidIt = async (e) => {
 
   e.preventDefault();
 
   const id = e.target.id;
-  const voiceMessage = new SpeechSynthesisUtterance();
-  voiceMessage.text = community.posts[id].title;
-  window.speechSynthesis.speak(voiceMessage);
+  const voiceMessage = await new SpeechSynthesisUtterance();
+  voiceMessage.text = await community.posts[id].title;
+  await window.speechSynthesis.speak(voiceMessage);
 
 
 };

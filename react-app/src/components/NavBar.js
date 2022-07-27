@@ -85,7 +85,6 @@ const NavBar = () => {
                 <div className='community-dropdown-cont'>
                   <div className='community-dropdown'>
 
-                    {/* <div> */}
                       <input 
                       className='community-filter' 
                       type='text' 
@@ -99,7 +98,6 @@ const NavBar = () => {
                       }
                       >
                       </input>
-                    {/* </div> */}
 
                     {noResults && (
                       <div className='no-result community-dropdown-item'>No results found.</div>
@@ -140,17 +138,17 @@ const NavBar = () => {
 
 
         <div className='search-bar-cont'>
-          {/* <form className='search-bar'>
+          <form className='search-bar'>
             <div className='search-bar-input'>
-              <label  htmlFor='search'><i style={{'color':'grey', 'background':'#f6f7f8'}} className="fa-solid fa-magnifying-glass"></i></label>
+              {/* <label  htmlFor='search'><i style={{'color':'grey', 'background':'#f6f7f8'}} className="fa-solid fa-magnifying-glass"></i></label>
               <input
                 type='search'
                 name='search'
                 className='search-bar-input'
                 placeholder='Search Said.it'
-              />
+              /> */}
             </div>
-          </form> */}
+          </form>
         </div>
 
 

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Redirect } from 'react-router-dom';
 
 import * as data_funcs from '../../store/data_store';
-
+import './PostForm.css';
 
 const CreatePostForm = () => {
 
@@ -14,15 +14,19 @@ const CreatePostForm = () => {
   const [showModal, setShowModal] = useState(false);
   const [errors, setErrors] = useState([]);
   const [content, setContent] = useState('');
-  const [title, setTitle] = useState('');
+  const [postTitle, setPostTitle] = useState('');
   const [communityName, setCommunityName] = useState('');
+
+
+
+
 
   const userId = useSelector(state => state.session.user?.id);
   const communityObj = useSelector(state => state.data_store?.all_communities);
   const communities = Object.values(communityObj);
   const communityId = useSelector(state => state.data_store?.all_communities[communityName.toLowerCase()]);
 
-  const createPost = async (e) => {
+  const handlePost = async (e) => {
 
     e.preventDefault();
   
@@ -39,7 +43,7 @@ const CreatePostForm = () => {
       'community': id,
       'userId': userId,
       'content': content.trim(),
-      'title': title.trim()
+      'title': postTitle.trim()
     };
 
     const data = await dispatch(data_funcs.create_post(post));
@@ -51,6 +55,12 @@ const CreatePostForm = () => {
     }
   }
 
+  // TODO text editor 
+
+  // const handleKeyCommand = () => {
+
+  // };
+
   
   return (
     <>
@@ -58,15 +68,11 @@ const CreatePostForm = () => {
       {showModal && userId && (
       <Modal onClose={() => setShowModal(false)}>
         <div className='post-form-cont'>
-          {/* <svg onClick={() => setShowModal(false)} viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="menu-close">
+          <svg onClick={() => setShowModal(false)} viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="menu-close">
             <polygon fill="inherit" points="11.649 9.882 18.262 3.267 16.495 1.5 9.881 8.114 3.267 1.5 1.5 3.267 8.114 9.883 1.5 16.497 3.267 18.264 9.881 11.65 16.495 18.264 18.262 16.497"></polygon>
-          </svg> */}
-          <form className='post-form' onSubmit={createPost}>
-            <div>
-              {errors.map((error, ind) => (
-                <div key={ind}>{error}</div>
-              ))}
-            </div>
+          </svg>
+
+          <form className='post-form' onSubmit={handlePost}>
             <div id='community-dropdown'>
               <fieldset id='community-list'>
                 <select onChange={(e) => setCommunityName(e.target.value)} required name='communities' style={{'border':'none', 'outline':'none'}}>
@@ -93,23 +99,32 @@ const CreatePostForm = () => {
               /> */}
             </div>
             <div>
+              {errors.map((error, ind) => (
+                <div key={ind}>{error}</div>
+              ))}
+            </div>
+
+            <div>
               <label htmlFor='title'></label>
               <textarea
                 name='title'
                 className='post-input'
-                rows='2'
+                id='post-title'
+                rows='1'
                 cols='75'
                 placeholder='Title'
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                value={postTitle}
+                onChange={(e) => setPostTitle(e.target.value)}
                 required
               />
             </div>
+
             <div>
               <label htmlFor='content'></label>
               <textarea
                 name='content'
                 className='post-input'
+                id='post-content'
                 rows='15'
                 cols='75'
                 placeholder='Text (optional)'
@@ -117,8 +132,14 @@ const CreatePostForm = () => {
                 onChange={(e) => setContent(e.target.value)}
               />
             </div>
+
+            <div>
+
+            </div>
+
             <button className='main-links btn-style' type='submit'>Submit</button>
           </form>
+
         </div>
       </Modal>
       )}
