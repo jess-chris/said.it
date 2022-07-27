@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useLocation, useHistory } from "react-router-dom";
-import { io } from 'socket.io-client';
+
+// import { io } from 'socket.io-client';
 
 
 import * as data_funcs from '../../store/data_store';
@@ -9,8 +10,9 @@ import CreateCommunityForm from "../Communities/CreateCommunityForm";
 import CreatePostForm from "../Posts/CreatePostForm";
 
 import './HomePage.css'
+import '../Communities/Community.css'
 
-let socket;
+// let socket;
 
 const HomePage = () => {
 
@@ -30,27 +32,30 @@ const HomePage = () => {
     })();
   }, [dispatch, user]);
   
-  useEffect(() => {
 
-    socket = io();
+  // *** Possible future socket use ***
 
-    socket.on("votes", async ({post}) => {
+  // useEffect(() => {
 
+  //   socket = io();
 
-      const scoreCont = document.getElementById(`counter-${post}`)
-
-      // await dispatch(data_funcs.get_communities());
-      const {score} = await dispatch(data_funcs.current_post_score(post));
-      scoreCont.innerText = score;
-
-    });
+  //   socket.on("votes", async ({post}) => {
 
 
-    return (() => {
-      socket.disconnect()
-    })
+  //     const scoreCont = document.getElementById(`counter-${post}`)
 
-  }, [dispatch]);
+  //     // await dispatch(data_funcs.get_communities());
+  //     const {score} = await dispatch(data_funcs.current_post_score(post));
+  //     scoreCont.innerText = score;
+
+  //   });
+
+
+  //   return (() => {
+  //     socket.disconnect()
+  //   })
+
+  // }, [dispatch]);
 
 
 
@@ -66,17 +71,14 @@ const HomePage = () => {
 
 
 
-
-
-
-  const saidIt = (e) => {
+  const saidIt = async (e) => {
 
     e.preventDefault();
 
     const [name, id] = e.target.id.split(':');
-    const voiceMessage = new SpeechSynthesisUtterance();
-    voiceMessage.text = communityObj[name.toLowerCase()].posts[id].title;
-    window.speechSynthesis.speak(voiceMessage);
+    const voiceMessage = await new SpeechSynthesisUtterance();
+    voiceMessage.text = await communityObj[name.toLowerCase()].posts[id].title;
+    await window.speechSynthesis.speak(voiceMessage);
 
   };
 
@@ -114,7 +116,7 @@ const HomePage = () => {
     const {score} = await dispatch(data_funcs.current_post_score(post));
     scoreCont.innerText = score;
 
-    socket.emit("votes", {post});
+    // socket.emit("votes", {post});
   };
 
   
@@ -142,20 +144,29 @@ const HomePage = () => {
                 <>
                   <div key={`key:${post.id}`} className="single-post">
                     <div className="single-post-btn-bar">
+
                       <div className={`vote-cont-${post?.id}`} style={{'display': 'flex', 'flexDirection':'column', 'justifyContent': 'center', 'alignItems':'center'}}>
+
                         <svg onClick={() => handleVote(post?.id, true)} className="vote-buttons" id="upVoteButton" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                           <path id={`up:${post?.id}`} d="M12 4 3 15h6v5h6v-5h6z" className="icon_svg-stroke icon_svg-fill" strokeWidth="1.5" stroke="#666" fill={votes !== undefined && post?.id in votes && votes[post?.id]?.vote_type === true ? '#ff4500' : 'none'} strokeLinejoin="round"></path>
                         </svg>
+
                         <div style={{'cursor':'auto'}} id={`counter-${post?.id}`}>{post?.vote_score}</div>
+
                         <svg onClick={() => handleVote(post?.id, false)} className="vote-buttons" id="downVoteButton" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                           <path id={`down:${post?.id}`} d="m12 20 9-11h-6V4H9v5H3z" className="icon_svg-stroke icon_svg-fill" stroke="#666" fill={votes !== undefined && post?.id in votes && votes[post?.id]?.vote_type === false ? '#0079D3' : 'none'} strokeWidth="1.5" strokeLinejoin="round"></path>
                         </svg>
+
                       </div>
+
                       <div></div>
+
                       <div className="sound-cont">
                         <button onClick={saidIt} style={{'background':'none', 'border':'none', 'color': 'grey'}}><i id={`${community.name}:${post?.id}`} className="fa-solid fa-volume-high"></i></button>
                       </div>
+
                     </div>
+
                     <div className="single-post-content">
                       <div><NavLink to={`/s/${community?.name}`}><span className="bold-text">{`s/${community?.name}`}</span></NavLink> • <span className="light-text" style={{'cursor':'auto'}}>Posted by u/{post?.user_name}</span></div>
                       <NavLink to={{pathname: `/s/${community?.name}/${post?.id}/${post?.title.replaceAll(' ', '_')}`, state:{location}}}>
