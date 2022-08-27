@@ -3,8 +3,10 @@ import { Modal } from '../../context/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useHistory } from 'react-router-dom';
 import { login } from '../../store/session';
-
 import './Auth.css';
+
+const baseUrl = process.env.REACT_APP_BASE_URL
+
 
 const LoginForm = ({value}) => {
   const dispatch = useDispatch();
@@ -17,8 +19,8 @@ const LoginForm = ({value}) => {
   const path = window.location.pathname;
   const user = useSelector(state => state.session.user)
 
-  if (path === '/login' && user) {
-    return <Redirect to='/' />;
+  if (path === `${baseUrl}/login` && user) {
+    return <Redirect to={`${baseUrl}/`} />;
   } 
 
   const onLogin = async (e) => {
@@ -27,7 +29,7 @@ const LoginForm = ({value}) => {
     if (data) {
       setErrors(data);
     } else {
-      if (path === '/login' && history.length > 2) {
+      if (path === `${baseUrl}/login` && history.length > 2) {
         history.goBack()
       } else {
         return <Redirect to={path} />
@@ -42,7 +44,7 @@ const LoginForm = ({value}) => {
     if (data) {
       setErrors(data);
     } else {
-      if (path === '/login' && history.length > 2) {
+      if (path === `${baseUrl}/login` && history.length > 2) {
         history.goBack()
       } else {
         return <Redirect to={path} />
@@ -60,9 +62,9 @@ const LoginForm = ({value}) => {
 
   const handleClose = () => {
 
-    if (path === '/login') {
+    if (path === `${baseUrl}/login`) {
       setShowModal(false);
-      history.push('/');
+      history.push(`${baseUrl}/`);
     } else {
       setShowModal(false);
     }

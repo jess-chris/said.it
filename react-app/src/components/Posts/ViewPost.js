@@ -11,6 +11,7 @@ import * as data_funcs from '../../store/data_store';
 
 import EditCommentForm from '../Comments/EditCommentForm';
 
+const baseUrl = process.env.REACT_APP_BASE_URL
 
 const ViewPost = () => {
 
@@ -76,7 +77,7 @@ const ViewPost = () => {
     } else {
       setNewComment('');
       setErrors([]);
-      history.push(`/s/${community?.name}/${post?.id}/${post?.title.replaceAll(' ', '_')}`);
+      history.push(`${baseUrl}/s/${community?.name}/${post?.id}/${post?.title.replaceAll(' ', '_')}`);
     }
 
 
@@ -113,7 +114,7 @@ const ViewPost = () => {
   const handlePostVote = async (post, val) => {
 
     if (!user) {
-      return history.push('/login');
+      return history.push(`${baseUrl}/login`);
     }
 
     const upArrow = document.getElementById(`post-up:${post}`);
@@ -147,7 +148,7 @@ const ViewPost = () => {
   const handleCommentVote = async (comment, val) => {
 
     if (!user) {
-      return history.push('/login');
+      return history.push(`${baseUrl}/login`);
     }
 
     const upArrow = document.getElementById(`com-up:${comment}`);
@@ -233,7 +234,7 @@ const ViewPost = () => {
               </div>
 
               <div key={post?.id} className="single-post-view text-post-view" style={{'cursor':'auto'}}>
-              <div><NavLink to={`/s/${community?.name}`}><span className="bold-text">{`s/${community?.name}`}</span></NavLink> • <span className="light-text" style={{'cursor':'auto'}}>Posted by u/{post?.user_name}</span></div>
+              <div><NavLink to={`${baseUrl}/s/${community?.name}`}><span className="bold-text">{`s/${community?.name}`}</span></NavLink> • <span className="light-text" style={{'cursor':'auto'}}>Posted by u/{post?.user_name}</span></div>
                 <p className="medium-text" style={{'fontWeight': 'bold', 'fontSize': '16px'}}>{post?.title}</p>
                 <p className="medium-text text-post-view">{post?.content}</p>
                 {userId === post?.user_id && (

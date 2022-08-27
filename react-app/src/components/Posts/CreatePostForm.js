@@ -6,6 +6,8 @@ import { useHistory, Redirect } from 'react-router-dom';
 import * as data_funcs from '../../store/data_store';
 import './PostForm.css';
 
+const baseUrl = process.env.REACT_APP_BASE_URL
+
 const CreatePostForm = () => {
 
   const dispatch = useDispatch();
@@ -51,7 +53,7 @@ const CreatePostForm = () => {
     if (data) {
       setErrors(data);
     } else {
-      history.push(`/s/${communityName}`);
+      history.push(`${baseUrl}/s/${communityName}`);
     }
   }
 
@@ -144,7 +146,7 @@ const CreatePostForm = () => {
       </Modal>
       )}
       {showModal && !userId && (
-      <Redirect to='/login' />
+      <Redirect to={`${baseUrl}/login`} />
       )}
     </>
   )

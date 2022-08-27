@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, Redirect } from 'react-router-dom';
 import * as data_funcs from '../../store/data_store';
 
-
+const baseUrl = process.env.REACT_APP_BASE_URL
 
 const CreateCommunityForm = () => {
 
@@ -39,7 +39,7 @@ const CreateCommunityForm = () => {
       setCommunityName('');
       setCommunityImage('');
       setCommunityInfo('');
-      history.push('/');
+      history.push(`${baseUrl}/`);
     }
 
   };
@@ -125,7 +125,7 @@ const CreateCommunityForm = () => {
       </Modal>
       )}
       {showModal && !userId && (
-      <Redirect to='/login' />
+      <Redirect to={`${baseUrl}/login`} />
       )}
     </>
   )

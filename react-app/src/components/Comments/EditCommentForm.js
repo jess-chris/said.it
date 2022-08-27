@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import * as data_funcs from '../../store/data_store';
 import { useHistory, useParams } from 'react-router-dom';
 
+const baseUrl = process.env.REACT_APP_BASE_URL
 
 const EditCommentForm = ({ comment }) => {
 
@@ -47,7 +48,7 @@ const EditCommentForm = ({ comment }) => {
 
     await dispatch(data_funcs.delete_comment(toDelete));
     await dispatch(data_funcs.get_communities());
-    history.push(`/s/${name}/${id}/${title}`);
+    history.push(`${baseUrl}/s/${name}/${id}/${title}`);
   }
 
 

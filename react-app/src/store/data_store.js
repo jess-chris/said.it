@@ -12,6 +12,9 @@ const UPDATE_USER_COMMENT_VOTES = 'data_store/UPDATE_USER_POST_VOTES';
 
 const REMOVE_SESSION = 'data_store/REMOVE_SESSION';
 
+const baseUrl = process.env.REACT_APP_BASE_URL
+
+
 const all_communities = (communities) => ({
   type: GET_COMMUNITIES,
   communities
@@ -65,7 +68,7 @@ const remove_user_session = () => ({
 
 export const get_communities = () => async (dispatch) => {
 
-  const res = await fetch('/api/communities/')
+  const res = await fetch(`${baseUrl}/api/communities/`)
   if (res.ok) {
     const { communities } = await res.json()
     dispatch(all_communities(communities));
@@ -80,7 +83,7 @@ export const get_communities = () => async (dispatch) => {
 
 export const create_community = (community) => async (dispatch) => {
 
-  const res = await fetch('/api/communities/new', {
+  const res = await fetch(`${baseUrl}/api/communities/new`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -104,7 +107,7 @@ export const create_community = (community) => async (dispatch) => {
 
 export const edit_community = (community) => async (dispatch) => {
 
-  const res = await fetch('/api/communities/edit', {
+  const res = await fetch(`${baseUrl}/api/communities/edit`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
@@ -130,7 +133,7 @@ export const edit_community = (community) => async (dispatch) => {
 
 export const delete_community = (community_id) => async (dispatch) => {
 
-  const res = await fetch('/api/communities/delete', {
+  const res = await fetch(`${baseUrl}/api/communities/delete`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json'
@@ -152,7 +155,7 @@ export const delete_community = (community_id) => async (dispatch) => {
 
 export const create_post = (post) => async (dispatch) => {
 
-  const res = await fetch('/api/posts/new', {
+  const res = await fetch(`${baseUrl}/api/posts/new`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -175,7 +178,7 @@ export const create_post = (post) => async (dispatch) => {
 
 export const edit_post = (post) => async (dispatch) => {
 
-  const res = await fetch('/api/posts/edit', {
+  const res = await fetch(`${baseUrl}/api/posts/edit`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
@@ -198,7 +201,7 @@ export const edit_post = (post) => async (dispatch) => {
 
 export const delete_post = (post_id) => async (dispatch) => {
 
-  const res = await fetch('/api/posts/delete', {
+  const res = await fetch(`${baseUrl}/api/posts/delete`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json'
@@ -215,7 +218,7 @@ export const delete_post = (post_id) => async (dispatch) => {
 
 export const current_comment_score = (commentId) => async dispatch => {
 
-  const res = await fetch(`/api/comments/score/${commentId}`, {
+  const res = await fetch(`${baseUrl}/api/comments/score/${commentId}`, {
     headers: {
     'Content-Type': 'application/json'
     },
@@ -231,7 +234,7 @@ export const current_comment_score = (commentId) => async dispatch => {
 
 export const create_comment = (comment) => async (dispatch) => {
 
-  const res = await fetch('/api/comments/new', {
+  const res = await fetch(`${baseUrl}/api/comments/new`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -254,7 +257,7 @@ export const create_comment = (comment) => async (dispatch) => {
 
 export const edit_comment = (comment) => async (dispatch) => {
 
-  const res = await fetch('/api/comments/edit', {
+  const res = await fetch(`${baseUrl}/api/comments/edit`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
@@ -277,7 +280,7 @@ export const edit_comment = (comment) => async (dispatch) => {
 
 export const delete_comment = (comment) => async (dispatch) => {
 
-  const res = await fetch('/api/comments/delete', {
+  const res = await fetch(`${baseUrl}/api/comments/delete`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json'
@@ -293,7 +296,7 @@ export const delete_comment = (comment) => async (dispatch) => {
 
 export const current_post_score = (postId) => async dispatch => {
 
-  const res = await fetch(`/api/posts/score/${postId}`, {
+  const res = await fetch(`${baseUrl}/api/posts/score/${postId}`, {
     headers: {
     'Content-Type': 'application/json'
     },
@@ -313,13 +316,13 @@ export const get_user_votes = (userId) => async (dispatch) => {
 
   if (!userId) return null;
 
-  const res = await fetch('/api/votes/post_vote')
+  const res = await fetch(`${baseUrl}/api/votes/post_vote`)
   if (res.ok) {
     const votes = await res.json()
     await dispatch(user_post_votes(votes));
   } 
 
-  const res2 = await fetch('/api/votes/comment_vote')
+  const res2 = await fetch(`${baseUrl}/api/votes/comment_vote`)
   if (res2.ok) {
     const votes = await res2.json()
     await dispatch(user_comment_votes(votes));
@@ -330,7 +333,7 @@ export const get_user_votes = (userId) => async (dispatch) => {
 
 export const post_vote = (vote) => async (dispatch) => {
 
-  const res = await fetch('/api/votes/post_vote', {
+  const res = await fetch(`${baseUrl}/api/votes/post_vote`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -348,7 +351,7 @@ export const post_vote = (vote) => async (dispatch) => {
 
 export const comment_vote = (vote) => async (dispatch) => {
 
-  const res = await fetch('/api/votes/comment_vote', {
+  const res = await fetch(`${baseUrl}/api/votes/comment_vote`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

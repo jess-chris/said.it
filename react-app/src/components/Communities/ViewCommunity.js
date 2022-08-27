@@ -8,6 +8,8 @@ import './Community.css';
 import LoginForm from '../auth/LoginForm';
 import SignUpForm from '../auth/SignUpForm';
 
+const baseUrl = process.env.REACT_APP_BASE_URL
+
 const ViewCommunity = () => {
 
 const dispatch = useDispatch();
@@ -77,7 +79,7 @@ if (!loaded) {
 }
 
 if (!community) {
-  return <Redirect to='/' />;
+  return <Redirect to={`${baseUrl}/`} />;
 };
 
 const posts = Object.values(community.posts).reverse();
@@ -91,7 +93,7 @@ const handleDelete = (e) => {
   };
 
   dispatch(data_funcs.delete_community(data));
-  history.push('/');
+  history.push(`${baseUrl}/`);
 };
 
 const handlePost = async (e) => {
@@ -134,7 +136,7 @@ const saidIt = async (e) => {
 const handleVote = async (post, val) => {
 
   if (!user) {
-    return history.push('/login');
+    return history.push(`${baseUrl}/login`);
   }
 
   const upArrow = document.getElementById(`up:${post}`);
@@ -324,7 +326,7 @@ return (
                   </div>
                   <div className="single-post-content">
                     <p className='light-text' style={{'cursor':'auto'}}>Posted by u/{post?.user_name}</p>
-                    <NavLink to={{pathname: `/s/${community?.name}/${post?.id}/${post?.title.replaceAll(' ', '_')}`, state:{location}}}>
+                    <NavLink to={{pathname: `${baseUrl}/s/${community?.name}/${post?.id}/${post?.title.replaceAll(' ', '_')}`, state:{location}}}>
                     <p className="medium-text" style={{'fontWeight': 'bold'}}>{post?.title}</p>
                     <div className="text-post-content">
                       <p className="light-text">{post?.content}</p>

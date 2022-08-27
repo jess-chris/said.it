@@ -19,6 +19,8 @@ function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
 
+  const baseUrl = process.env.REACT_APP_BASE_URL
+
 
   useEffect(() => {
     (async() => {
@@ -40,32 +42,32 @@ function App() {
         <NavBar />
       </div>
       <Switch>
-        <Route path='/' exact={true} >
+        <Route path={`${baseUrl}/`} exact={true} >
           <HomePage />
         </Route>
-        <Route path='/login' exact={true}>
+        <Route path={`${baseUrl}/login`} exact={true}>
           <LoginForm value={true} />
         </Route>
-        <Route path='/sign-up' exact={true}>
+        <Route path={`${baseUrl}/sign-up`} exact={true}>
           <SignUpForm />
         </Route>
-        <Route path='/s/:name' exact={true}>
+        <Route path={`${baseUrl}/s/:name`} exact={true}>
           <ViewCommunity />
         </Route>
-        <Route path='/s/:name/:id/:title' exact={true}>
+        <Route path={`${baseUrl}/s/:name/:id/:title`} exact={true}>
           <ViewPost />
         </Route>
         {/* <ProtectedRoute path='/communities/new' exact={true}>
           <CreateCommunityForm />
         </ProtectedRoute> */}
-        <ProtectedRoute path='/users' exact={true} >
+        <ProtectedRoute path={`${baseUrl}/users`} exact={true} >
           <UsersList/>
         </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId' exact={true} >
+        <ProtectedRoute path={`${baseUrl}/users/:userId`} exact={true} >
           <User />
         </ProtectedRoute>
         <Route path=''>
-          <Redirect to='/' />
+          <Redirect to={`${baseUrl}/`} />
         </Route>
       </Switch>
     </BrowserRouter>

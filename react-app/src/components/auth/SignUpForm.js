@@ -5,6 +5,8 @@ import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
 import { login } from '../../store/session';
 
+const baseUrl = process.env.REACT_APP_BASE_URL
+
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState('');
@@ -52,7 +54,7 @@ const SignUpForm = () => {
   };
 
   if (user) {
-    return <Redirect to='/' />;
+    return <Redirect to={`${baseUrl}/`} />;
   }
 
   return (

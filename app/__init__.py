@@ -20,6 +20,8 @@ from .socket_config import socketio
 
 app = Flask(__name__)
 
+base_url = os.environ.get('BASE_URL')
+
 # Setup login manager
 login = LoginManager(app)
 login.login_view = 'auth.unauthorized'
@@ -34,12 +36,12 @@ def load_user(id):
 app.cli.add_command(seed_commands)
 
 app.config.from_object(Config)
-app.register_blueprint(user_routes, url_prefix='/api/users')
-app.register_blueprint(auth_routes, url_prefix='/api/auth')
-app.register_blueprint(community_routes, url_prefix='/api/communities')
-app.register_blueprint(post_routes, url_prefix='/api/posts')
-app.register_blueprint(comment_routes, url_prefix='/api/comments')
-app.register_blueprint(vote_routes, url_prefix='/api/votes')
+app.register_blueprint(user_routes, url_prefix=f"{base_url}/api/users")
+app.register_blueprint(auth_routes, url_prefix=f"{base_url}/api/auth")
+app.register_blueprint(community_routes, url_prefix=f"{base_url}/api/communities")
+app.register_blueprint(post_routes, url_prefix=f"{base_url}/api/posts")
+app.register_blueprint(comment_routes, url_prefix=f"{base_url}/api/comments")
+app.register_blueprint(vote_routes, url_prefix=f"{base_url}/api/votes")
 db.init_app(app)
 Migrate(app, db)
 
