@@ -38,7 +38,6 @@ const LoginForm = ({value}) => {
   };
 
   const demoLogin = async (e) => {
-    console.log(history)
     e.preventDefault();
     const data = await dispatch(login('demo@aa.io', 'password'));
     if (data) {
