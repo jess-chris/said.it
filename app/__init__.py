@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, session, redirect
+from flask import Flask, render_template, request, session, redirect, send_from_directory
 from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
@@ -16,11 +16,12 @@ from .api.vote_routes import vote_routes
 from .seeds import seed_commands
 
 from .config import Config
-from .socket_config import socketio
+#from .socket_config import socketio
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='../build', static_url_path='/')
 
-base_url = os.environ.get('BASE_URL')
+base_url = 'said_it'
+#secret_key = os.environ.get('SECRET_KEY')
 
 # Setup login manager
 login = LoginManager(app)
@@ -36,17 +37,19 @@ def load_user(id):
 app.cli.add_command(seed_commands)
 
 app.config.from_object(Config)
-app.register_blueprint(user_routes, url_prefix=f"{base_url}/api/users")
-app.register_blueprint(auth_routes, url_prefix=f"{base_url}/api/auth")
-app.register_blueprint(community_routes, url_prefix=f"{base_url}/api/communities")
-app.register_blueprint(post_routes, url_prefix=f"{base_url}/api/posts")
-app.register_blueprint(comment_routes, url_prefix=f"{base_url}/api/comments")
-app.register_blueprint(vote_routes, url_prefix=f"{base_url}/api/votes")
+#app.config['SECRET_KEY'] = settings.SECRET_KEY
+
+app.register_blueprint(user_routes, url_prefix=f"/{base_url}/api/users")
+app.register_blueprint(auth_routes, url_prefix=f"/{base_url}/api/auth")
+app.register_blueprint(community_routes, url_prefix=f"/{base_url}/api/communities")
+app.register_blueprint(post_routes, url_prefix=f"/{base_url}/api/posts")
+app.register_blueprint(comment_routes, url_prefix=f"/{base_url}/api/comments")
+app.register_blueprint(vote_routes, url_prefix=f"/{base_url}/api/votes")
 db.init_app(app)
 Migrate(app, db)
 
 
-socketio.init_app(app)
+#socketio.init_app(app)
 
 # Application Security
 CORS(app)
@@ -78,12 +81,17 @@ def inject_csrf_token(response):
     return response
 
 
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
+@app.route(f"/{base_url}/", defaults={'path': ''})
+@app.route(f"/{base_url}/<path:path>")
 def react_root(path):
-    if path == 'favicon.ico':
-        return app.send_static_file('favicon.ico')
-    return app.send_static_file('index.html')
+    if path != "" and os.path.exists(f"{app.static_folder}/{path}"):
+        return send_from_directory(app.static_folder, path)
+    else:
+        return send_from_directory(app.static_folder, 'index.html')
 
-if __name__ == '__main__':
-    socketio.run(app)
+#    if path == 'favicon.ico':
+#        return app.send_static_file('favicon.ico')
+#    return app.send_static_file('index.html')
+
+#if __name__ == '__main__':
+#    socketio.run(app)

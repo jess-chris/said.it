@@ -239,7 +239,7 @@ return (
 
           {userId && userId && (
           <>
-          <div className="create-post-cont">
+          <div className="create-post-cont" style={{'display':'flex', 'flex-direction':'column'}}>
             <div className='create-post-top'>
               <h3 className='bold-text'>Create Post</h3>
             </div>

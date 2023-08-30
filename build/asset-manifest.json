@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/said_it/static/css/main.9e030a7c.chunk.css",
+    "main.js": "/said_it/static/js/main.939cf947.chunk.js",
+    "main.js.map": "/said_it/static/js/main.939cf947.chunk.js.map",
+    "runtime-main.js": "/said_it/static/js/runtime-main.708c25ce.js",
+    "runtime-main.js.map": "/said_it/static/js/runtime-main.708c25ce.js.map",
+    "static/js/2.a3c51616.chunk.js": "/said_it/static/js/2.a3c51616.chunk.js",
+    "static/js/2.a3c51616.chunk.js.map": "/said_it/static/js/2.a3c51616.chunk.js.map",
+    "index.html": "/said_it/index.html",
+    "static/css/main.9e030a7c.chunk.css.map": "/said_it/static/css/main.9e030a7c.chunk.css.map",
+    "static/js/2.a3c51616.chunk.js.LICENSE.txt": "/said_it/static/js/2.a3c51616.chunk.js.LICENSE.txt",
+    "static/media/HomePage.css": "/said_it/static/media/snoo-home.f11945c8.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.708c25ce.js",
+    "static/js/2.a3c51616.chunk.js",
+    "static/css/main.9e030a7c.chunk.css",
+    "static/js/main.939cf947.chunk.js"
+  ]
+}

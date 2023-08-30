@@ -41,5 +41,5 @@
     ]
   },
   "proxy": "http://localhost:5000",
-  "homepage": "/said_it/"
+  "homepage": "http://www.jessechristensen.dev/said_it"
 }
